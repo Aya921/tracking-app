@@ -1,2 +1,2 @@
 enum AddressType { user, store, driver }
-enum OrderStates { inProgress, pending, canceled,completed }
+enum OrderState { inProgress, pending, canceled,completed }
