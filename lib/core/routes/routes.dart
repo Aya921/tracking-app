@@ -15,6 +15,7 @@ import 'package:tracking_app/feature/profile/presentation/views/screens/profile_
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
 import '../../feature/order/presentation/view/page/order_details_screen.dart';
+import '../../feature/order/presentation/view/page/order_driver_details.dart';
 import '../../feature/profile/presentation/views/screens/change_password.dart';
 
 
@@ -107,6 +108,11 @@ abstract class Routes {
             builder: (context) {
               return OrderDetailsScreen(orderId: orderId);
             },);
+      case AppRoute.orderDriverDetails:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const OrderDriverDetails();
+          },);
 
       default:
         return MaterialPageRoute(

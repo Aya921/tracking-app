@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
+import 'package:tracking_app/core/routes/app_route.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_model/order_bloc.dart';
 import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_model/order_states.dart';
@@ -27,7 +28,7 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.loc.orders, style: TextStyle(color: Colors.black, fontSize: context.setSp(FontSize.s20))),
+        title: Text("My orders", style: TextStyle(color: Colors.black, fontSize: context.setSp(FontSize.s20))),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -64,14 +65,24 @@ class _OrderPageState extends State<OrderPage> {
                     ),
                     SizedBox(height: context.setHight(24)),
                     Text(
-                      context.loc.orders,
+                      "Recent orders",
                       style: TextStyle(
                         fontSize: context.setSp(FontSize.s18),
                         color: Colors.black87,
                       ),
                     ),
-                    SizedBox(height: context.setHight(16)),
-                    ...orders.map(_buildOrderCard),
+                    SizedBox(height: context.setHight(4)),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, AppRoute.orderDriverDetails);
+                      },
+                      child: Column(
+                        children: [
+                          ...orders.map(_buildOrderCard)
+                        ],
+                      ),
+                    )
+                    ,
                   ],
                 ),
               );
@@ -140,7 +151,6 @@ class _OrderPageState extends State<OrderPage> {
 
     final storeName = order.store.name;
     final storeAddress = order.store.address;
-    final totalPrice = order.orderInfoEntity.totalPrice.toString();
 
     return Builder(
       builder: (context) {
@@ -148,17 +158,18 @@ class _OrderPageState extends State<OrderPage> {
           margin: EdgeInsets.only(bottom: context.setHight(16)),
           padding: EdgeInsets.all(context.setWidth(16)),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: const Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(context.setWidth(16)),
             boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: context.setWidth(10), offset: Offset(0, context.setHight(2))),
+              BoxShadow(color: const Color(0xffF9F9F9), blurRadius: context.setWidth(10),
+                  offset: Offset(0, context.setHight(2))),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(context.loc.flowerOrder, style: TextStyle(fontSize: context.setSp(FontSize.s18), color: Colors.black87)),
-              SizedBox(height: context.setHight(8)),
+              SizedBox(height: context.setHight(10)),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,11 +184,12 @@ class _OrderPageState extends State<OrderPage> {
                   Text('#${order.orderInfoEntity.orderNumber}', style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
                 ],
               ),
-              SizedBox(height: context.setHight(16)),
-              Divider(height: context.setHight(1), color: Colors.grey),
-              SizedBox(height: context.setHight(16)),
+              SizedBox(height: context.setHight(8)),
 
-              Text(context.loc.pickupAddress, style: getRegularStyle(fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
+              Text(context.loc.pickupAddress,
+                  style: getRegularStyle(
+                      fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
+
               _buildAddressCard(
                   context: context,
                   title: storeName,
@@ -187,13 +199,15 @@ class _OrderPageState extends State<OrderPage> {
                     radius: context.setWidth(20),
                     backgroundColor: const Color(0xffE9406B),
                     child: Icon(
-                      Icons.store, // استخدام أيقونة المتجر
+                      Icons.store,
                       color: Colors.white,
                       size: context.setSp(20),
                     ),
                   )),
-              SizedBox(height: context.setHight(16)),
-              Text(context.loc.userAddress, style: getRegularStyle(fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
+              SizedBox(height: context.setHight(20)),
+
+              Text(context.loc.userAddress, style: getRegularStyle(
+                  fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
               _buildAddressCard(
                 context: context,
                 title: userName.isEmpty ? context.loc.errorReset : userName,
@@ -206,13 +220,13 @@ class _OrderPageState extends State<OrderPage> {
                 ),
               ),
               SizedBox(height: context.setHight(16)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(context.loc.total, style: getSemiBoldStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
-                  Text('${context.loc.egp} $totalPrice', style: TextStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Text(context.loc.total, style: getSemiBoldStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
+              //     Text('${context.loc.egp} $totalPrice', style: TextStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
+              //   ],
+              // ),
             ],
           ),
         );
@@ -228,33 +242,42 @@ class _OrderPageState extends State<OrderPage> {
     required Widget leadingWidget,
   }) {
     return Container(
-      margin: EdgeInsets.only(top: context.setHight(8)),
-      padding: EdgeInsets.all(context.setWidth(12)),
       decoration: BoxDecoration(
-        color: const Color(0xffF7F7F7),
+        color: const Color(0xffFFFFFF),
         borderRadius: BorderRadius.circular(context.setWidth(12)),
       ),
-      child: Row(
-        children: [
-          leadingWidget,
-          SizedBox(width: context.setWidth(12)),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title, style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
-                SizedBox(height: context.setHight(4)),
-                Row(
-                  children: [
-                    Icon(icon, color: Colors.black54, size: context.setSp(16)),
-                    SizedBox(width: context.setWidth(4)),
-                    Expanded(child: Text(subtitle, style: getRegularStyle(color: Colors.black54, fontSize: context.setSp(FontSize.s14)))),
-                  ],
-                ),
-              ],
+      child: Container(
+    margin: EdgeInsets.only(top: context.setHight(12)),
+    padding: EdgeInsets.all(context.setWidth(16)),
+    decoration: BoxDecoration(
+    color: const Color(0xffFFFFFF),
+    borderRadius: BorderRadius.circular(context.setWidth(12)),
+      boxShadow: [
+        BoxShadow(color:  Colors.grey, blurRadius: context.setWidth(5),
+            offset: Offset(0, context.setHight(2))),
+      ], ),
+        child: Row(
+          children: [
+            leadingWidget,
+            SizedBox(width: context.setWidth(12)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
+                  SizedBox(height: context.setHight(6)),
+                  Row(
+                    children: [
+                      Icon(icon, color: Colors.black54, size: context.setSp(16)),
+                      SizedBox(width: context.setWidth(4)),
+                      Expanded(child: Text(subtitle, style: getRegularStyle(color: Colors.black54, fontSize: context.setSp(FontSize.s14)))),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

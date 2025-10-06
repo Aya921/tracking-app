@@ -17,6 +17,8 @@ abstract class AppRoute {
 // Order
   static const String orderDetails="orderDetails";
   static const String orderPage="orderPage";
+  static const String orderDriverDetails="orderDriverDetails";
+
 
 
 
