@@ -79,6 +79,7 @@ class OrderPage extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('$count', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const SizedBox(height: 4),
@@ -87,7 +88,7 @@ class OrderPage extends StatelessWidget {
             children: [
               Icon(icon, color: color, size: 20),
               const SizedBox(width: 4),
-              Text(label, style: TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(label, style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
             ],
           ),
         ],
