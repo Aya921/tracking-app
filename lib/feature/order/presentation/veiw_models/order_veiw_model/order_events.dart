@@ -8,9 +8,21 @@ abstract class OrderEvent extends Equatable {
 }
 
 class GetDriverOrdersEvent extends OrderEvent {
-  const GetDriverOrdersEvent();
+  final int page;
+  final int limit;
+
+  const GetDriverOrdersEvent({
+    this.page = 1,
+    this.limit = 10,
+  });
+
+  @override
+  List<Object?> get props => [page, limit];
 }
 
 class RefreshDriverOrdersEvent extends OrderEvent {
   const RefreshDriverOrdersEvent();
+
+  @override
+  List<Object?> get props => [];
 }

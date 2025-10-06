@@ -22,6 +22,7 @@ abstract class Routes {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
+
   static Route onGenerate(RouteSettings settings) {
     final url = Uri.parse(settings.name ?? '/');
 

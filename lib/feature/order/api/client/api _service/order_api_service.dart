@@ -13,5 +13,9 @@ abstract class OrderApiService {
   factory OrderApiService(Dio dio) = _OrderApiService;
 
   @GET(EndPointsConstants.getAllDriverOrders)
-  Future<OrderDriverResponse> getAllDriverOrders();
+  Future<OrderDriverResponse> getAllDriverOrders(
+      @Query("page") int page,
+      @Query("limit") int limit,
+      );
+
 }

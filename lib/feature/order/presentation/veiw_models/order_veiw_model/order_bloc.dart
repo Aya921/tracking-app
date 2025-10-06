@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_driver_entity.dart';
-import '../../../domain/repository/order_repository.dart';
+import 'package:tracking_app/feature/order/domain/repository/order_repository.dart';
 import '../../../domain/usecase/get_all_driver_orders.dart';
 import 'order_events.dart';
 import 'order_states.dart';
@@ -11,10 +11,9 @@ import 'order_states.dart';
 @singleton
 class OrderBloc extends Bloc<OrderEvent, OrderStates> {
   final GetAllDriverOrdersUseCase _getDriverOrdersUseCase;
-  final OrderRepository _orderRepository;
 
 
-  OrderBloc(this._getDriverOrdersUseCase, this._orderRepository) : super(const OrderStates()) {
+  OrderBloc(this._getDriverOrdersUseCase, OrderRepository orderRepository) : super(const OrderStates()) {
     on<GetDriverOrdersEvent>(_getDriverOrders);
     on<RefreshDriverOrdersEvent>(_refreshOrders);
   }
@@ -25,17 +24,23 @@ class OrderBloc extends Bloc<OrderEvent, OrderStates> {
       ) async {
     emit(state.copyWith(requestState: RequestState.loading));
 
-    final result = await _getDriverOrdersUseCase.getAllDriverOrders();
+    final result = await _getDriverOrdersUseCase.call(
+      page: 1,
+      limit: 10,
+    );
 
     switch (result) {
       case SucessResult<OrderDriverEntity>():
+        print('Parsed Orders: ${result.sucessResult.orders.length}');
+        for (var order in result.sucessResult.orders) {
+          print('Order: ${order.user.firstName}, Store: ${order.store.name}, Price: ${order.orderInfoEntity.totalPrice}');
+        }
         emit(
           state.copyWith(
             requestState: RequestState.success,
             orders: result.sucessResult,
           ),
         );
-
       case FailedResult<OrderDriverEntity>():
         emit(
           state.copyWith(
@@ -50,6 +55,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderStates> {
       RefreshDriverOrdersEvent event,
       Emitter<OrderStates> emit,
       ) async {
-    await _getDriverOrders(const GetDriverOrdersEvent(), emit);
+    await _getDriverOrders(const GetDriverOrdersEvent(page: 1, limit: 10), emit);
   }
 }

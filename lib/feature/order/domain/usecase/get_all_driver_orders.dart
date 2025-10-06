@@ -9,8 +9,13 @@ class GetAllDriverOrdersUseCase {
 
   GetAllDriverOrdersUseCase(this._orderRepository);
 
-  Future<Result<OrderDriverEntity>> getAllDriverOrders() async {
-    return await _orderRepository.getAllDriverOrders();
+  Future<Result<OrderDriverEntity>> call({
+    required int page,
+    required int limit,
+  }) async {
+    return await _orderRepository.getDriverOrders(
+      page: page,
+      limit: limit,
+    );
   }
-
 }

@@ -12,11 +12,15 @@ class OrderRemoteDataSourceImp implements OrderRemoteDataSource {
   OrderRemoteDataSourceImp(this._orderApiService);
 
   @override
-  Future<Result<OrderDriverEntity>> getAllDriverOrders() {
+  Future<Result<OrderDriverEntity>> getDriverOrders({
+    required int page,
+    required int limit,
+  }) {
     return safeCall(() async {
-      final driverOrdersResponse = await _orderApiService.getAllDriverOrders();
+      final driverOrdersResponse = await _orderApiService.getAllDriverOrders(page, limit);
       return driverOrdersResponse.toEntity();
     });
   }
+
 
 }

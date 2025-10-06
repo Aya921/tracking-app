@@ -13,7 +13,10 @@ class OrderRepositoryImp implements OrderRepository {
   OrderRepositoryImp(this._orderRemoteDataSource);
 
   @override
-  Future<Result<OrderDriverEntity>> getAllDriverOrders() {
-    return _orderRemoteDataSource.getAllDriverOrders();
+  Future<Result<OrderDriverEntity>> getDriverOrders({
+    required int page,
+    required int limit,
+  }) {
+    return _orderRemoteDataSource.getDriverOrders(page: page, limit: limit);
   }
 }
