@@ -27,7 +27,7 @@ class OrderDetailsScreen extends StatefulWidget {
 }
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
-  int currentStep = 0;
+  int currentStep = -1;
 
   late final List<String> buttonLabels;
 
@@ -50,40 +50,50 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
       // update state in firebase
       final newState = _mapStepToState(currentStep);
-      await getIt<HomeFirebaseService>().updateOrderState(widget.orderId, newState);
+      await getIt<HomeFirebaseService>().updateOrderState(
+        widget.orderId,
+        newState,
+      );
     }
   }
+
   @override
   void initState() {
     super.initState();
-    getIt<HomeFirebaseService>()
-        .getDataFromRemote(widget.orderId)
-        .listen((data) {
+    getIt<HomeFirebaseService>().getDataFromRemote(widget.orderId).listen((
+      data,
+    ) {
       setState(() {
         currentStep = _mapStateToStep(data.orderDeliveryStatus ?? 'waiting');
       });
     });
   }
+
   int _mapStateToStep(String state) {
     switch (state) {
-      case 'Accepted': return 0;
-      case 'Picked': return 1;
-      case 'Out for delivery': return 2;
-      case 'Delivered': return 3;
-      default: return 0;
+      case 'Arrived at Pickup point':
+        return 0;
+      case 'Start deliver':
+        return 1;
+      case 'Arrived to the user':
+        return 2;
+      case 'Delivered to the user':
+        return 3;
+      default:
+        return -1;
     }
   }
 
   String _mapStepToState(int step) {
     switch (step) {
       case 0:
-        return 'Accepted';
+        return 'Arrived at Pickup point';
       case 1:
-        return 'Picked';
+        return 'Start deliver';
       case 2:
-        return 'Out for delivery';
+        return 'Arrived to the user';
       case 3:
-        return 'Delivered';
+        return 'Delivered to the user';
       default:
         return 'Placed';
     }
@@ -103,18 +113,19 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         ),
       ),
       body: BlocProvider.value(
-        value: getIt<HomeViewModel>()..add(GetDataFromRemoteEvent(widget.orderId)),
+        value: getIt<HomeViewModel>()
+          ..add(GetDataFromRemoteEvent(widget.orderId)),
         child: BlocConsumer<HomeViewModel, HomeStates>(
           listener: (context, state) {
             if (state.errorMessage != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage!)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
             }
           },
           builder: (context, state) {
             if (state.isLoading) {
-              return  const CommonLoading();
+              return const CommonLoading();
             }
 
             if (state.remoteData == null) {
@@ -195,14 +206,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         TotalAndPaymentContainer(
                           containerName: context.loc.total,
                           containerValue:
-                          "${context.loc.egp} ${order.orderInfoEntity.totalPrice.toString()}",
+                              "${context.loc.egp} ${order.orderInfoEntity.totalPrice.toString()}",
                         ),
                         SizedBox(height: context.setHight(15)),
 
                         TotalAndPaymentContainer(
                           containerName: context.loc.paymentMethod,
-                          containerValue:
-                          order.paymentInfoEntity.paymentType,
+                          containerValue: order.paymentInfoEntity.paymentType,
                         ),
 
                         ElevatedButton(
@@ -212,12 +222,20 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               fontSize: context.setSp(FontSize.s16),
                             ),
                             backgroundColor:
-                            currentStep == buttonLabels.length - 1
+                                currentStep == buttonLabels.length - 1
                                 ? AppColors.gray
                                 : AppColors.pink,
                           ),
-                          onPressed: _nextStep,
-                          child: Text(buttonLabels[currentStep]),
+                          onPressed: currentStep == buttonLabels.length - 1
+                              ? null 
+                              : _nextStep,
+                          child: Text(
+                            currentStep == -1
+                                ? context
+                                      .loc
+                                      .arrivedAtPickupPoint 
+                                : buttonLabels[currentStep],
+                          ),
                         ),
                       ],
                     ),
