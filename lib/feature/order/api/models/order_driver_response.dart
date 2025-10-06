@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/feature/order/api/models/remote_driver_order_container.dart';
-import 'package:tracking_app/feature/order/api/models/remote_order_model.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_driver_entity.dart';
 import '../../../../core/constants/json_serlization_constants.dart';
 import '../../../home/api/models/metadata_model.dart';

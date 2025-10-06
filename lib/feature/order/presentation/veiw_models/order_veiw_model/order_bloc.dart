@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
@@ -31,9 +32,13 @@ class OrderBloc extends Bloc<OrderEvent, OrderStates> {
 
     switch (result) {
       case SucessResult<OrderDriverEntity>():
-        print('Parsed Orders: ${result.sucessResult.orders.length}');
-        for (var order in result.sucessResult.orders) {
-          print('Order: ${order.user.firstName}, Store: ${order.store.name}, Price: ${order.orderInfoEntity.totalPrice}');
+        if (kDebugMode) {
+          print('Parsed Orders: ${result.sucessResult.orders.length}');
+        }
+        for (final order in result.sucessResult.orders) {
+          if (kDebugMode) {
+            print('Order: ${order.user.firstName}, Store: ${order.store.name}, Price: ${order.orderInfoEntity.totalPrice}');
+          }
         }
         emit(
           state.copyWith(
