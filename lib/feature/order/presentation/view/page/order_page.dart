@@ -4,7 +4,10 @@ import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_model/order_bloc.dart';
 import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_model/order_states.dart';
-
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
+import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/theme/font_manger.dart';
+import 'package:tracking_app/core/theme/font_style_manger.dart';
 import '../../veiw_models/order_veiw_model/order_events.dart';
 
 class OrderPage extends StatefulWidget {
@@ -24,7 +27,7 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My orders"),
+        title: Text(context.loc.orders, style: TextStyle(color: Colors.black, fontSize: context.setSp(FontSize.s20))),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -35,40 +38,39 @@ class _OrderPageState extends State<OrderPage> {
             case RequestState.loading:
               return const Center(child: CircularProgressIndicator());
             case RequestState.error:
-              return Center(child: Text(state.errorMessage ?? "Error occurred"));
+              return Center(child: Text(state.errorMessage ?? context.loc.error));
             case RequestState.success:
               final orders = state.orders?.orders ?? [];
 
               if (orders.isEmpty) {
-                return const Center(child: Text("No orders found"));
+                return Center(child: Text(context.loc.noOrdersFound));
               }
 
               final cancelledCount = orders.where((o) => o.orderInfoEntity.state == 'Cancelled').length;
               final completedCount = orders.where((o) => o.orderInfoEntity.state == 'Completed').length;
 
               return SingleChildScrollView(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(context.setWidth(16)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildStatusChip(cancelledCount, 'Cancelled', Icons.error_outline, Colors.red),
-                        const SizedBox(width: 16),
-                        _buildStatusChip(completedCount, 'Completed', Icons.check_circle_outline, Colors.green),
+                        _buildStatusChip(context, cancelledCount, "Cancelled", Icons.error_outline, Colors.red),
+                        SizedBox(width: context.setWidth(16)),
+                        _buildStatusChip(context, completedCount, "Completed", Icons.check_circle_outline, Colors.green),
                       ],
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'Recent orders',
+                    SizedBox(height: context.setHight(24)),
+                    Text(
+                      context.loc.orders,
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontSize: context.setSp(FontSize.s18),
                         color: Colors.black87,
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: context.setHight(16)),
                     ...orders.map(_buildOrderCard),
                   ],
                 ),
@@ -81,26 +83,27 @@ class _OrderPageState extends State<OrderPage> {
     );
   }
 
-  Widget _buildStatusChip(int count, String label, IconData icon, Color color) {
+  Widget _buildStatusChip(BuildContext context, int count, String label, IconData icon, Color color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+      width: context.setWidth(160),
+      padding: EdgeInsets.symmetric(horizontal: context.setWidth(10), vertical: context.setHight(24)),
       decoration: BoxDecoration(
         color: const Color(0xffF9ECF0),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xffF9ECF0), width: 1),
+        borderRadius: BorderRadius.circular(context.setWidth(20)),
+        border: Border.all(color: const Color(0xffF9ECF0), width: context.setWidth(1)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$count', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 4),
+          Text('$count', style: TextStyle(fontSize: context.setSp(FontSize.s20), color: Colors.black)),
+          SizedBox(height: context.setHight(4)),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: color, size: 20),
-              const SizedBox(width: 4),
-              Text(label, style: const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
+              Icon(icon, color: color, size: context.setSp(20)),
+              SizedBox(width: context.setWidth(4)),
+              Text(label, style: TextStyle(color: Colors.black, fontSize: context.setSp(FontSize.s18))),
             ],
           ),
         ],
@@ -137,103 +140,115 @@ class _OrderPageState extends State<OrderPage> {
 
     final storeName = order.store.name;
     final storeAddress = order.store.address;
+    final totalPrice = order.orderInfoEntity.totalPrice.toString();
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 2)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Flower order', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
-          const SizedBox(height: 8),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(statusIcon, color: statusColor, size: 24),
-                  const SizedBox(width: 8),
-                  Text(status, style: TextStyle(color: statusColor, fontSize: 18, fontWeight: FontWeight.bold)),
-                ],
-              ),
-              Text('#${order.orderInfoEntity.orderNumber}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+    return Builder(
+      builder: (context) {
+        return Container(
+          margin: EdgeInsets.only(bottom: context.setHight(16)),
+          padding: EdgeInsets.all(context.setWidth(16)),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(context.setWidth(16)),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: context.setWidth(10), offset: Offset(0, context.setHight(2))),
             ],
           ),
-          const SizedBox(height: 16),
-          const Divider(height: 1, color: Colors.grey),
-          const SizedBox(height: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(context.loc.flowerOrder, style: TextStyle(fontSize: context.setSp(FontSize.s18), color: Colors.black87)),
+              SizedBox(height: context.setHight(8)),
 
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(statusIcon, color: statusColor, size: context.setSp(24)),
+                      SizedBox(width: context.setWidth(8)),
+                      Text(status, style: TextStyle(color: statusColor, fontSize: context.setSp(FontSize.s18))),
+                    ],
+                  ),
+                  Text('#${order.orderInfoEntity.orderNumber}', style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
+                ],
+              ),
+              SizedBox(height: context.setHight(16)),
+              Divider(height: context.setHight(1), color: Colors.grey),
+              SizedBox(height: context.setHight(16)),
 
-          const Text('Pickup address', style: TextStyle(fontSize: 16, color: Colors.grey)),
-          _buildAddressCard(
-              title: storeName,
-              subtitle: storeAddress,
-              icon: Icons.location_on,
-              leadingWidget: const CircleAvatar(
-                radius: 20,
-                backgroundColor: Color(0xffE9406B),
-                child: Icon(
-                  Icons.local_florist,
-                  color: Colors.white,
-                  size: 20,
+              Text(context.loc.pickupAddress, style: getRegularStyle(fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
+              _buildAddressCard(
+                  context: context,
+                  title: storeName,
+                  subtitle: storeAddress,
+                  icon: Icons.location_on,
+                  leadingWidget: CircleAvatar(
+                    radius: context.setWidth(20),
+                    backgroundColor: const Color(0xffE9406B),
+                    child: Icon(
+                      Icons.store, // استخدام أيقونة المتجر
+                      color: Colors.white,
+                      size: context.setSp(20),
+                    ),
+                  )),
+              SizedBox(height: context.setHight(16)),
+              Text(context.loc.userAddress, style: getRegularStyle(fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
+              _buildAddressCard(
+                context: context,
+                title: userName.isEmpty ? context.loc.errorReset : userName,
+                subtitle: userAddress.isEmpty ? context.loc.userAddress : userAddress,
+                icon: Icons.location_on,
+                leadingWidget: CircleAvatar(
+                  radius: context.setWidth(20),
+                  backgroundImage: userPhotoUrl.isNotEmpty ? NetworkImage(finalUserImageUrl) : null,
+                  child: userPhotoUrl.isEmpty ? const Icon(Icons.person) : null,
                 ),
-              )
+              ),
+              SizedBox(height: context.setHight(16)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(context.loc.total, style: getSemiBoldStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
+                  Text('${context.loc.egp} $totalPrice', style: TextStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
+                ],
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-
-
-          const Text('User address', style: TextStyle(fontSize: 16, color: Colors.grey)),
-          _buildAddressCard(
-            title: userName.isEmpty ? 'Unknown User' : userName,
-            subtitle: userAddress.isEmpty ? 'Address N/A' : userAddress,
-            icon: Icons.location_on,
-            leadingWidget: CircleAvatar(
-              radius: 20,
-              backgroundImage: userPhotoUrl.isNotEmpty ? NetworkImage(finalUserImageUrl) : null,
-              child: userPhotoUrl.isEmpty ? const Icon(Icons.person) : null,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   Widget _buildAddressCard({
+    required BuildContext context,
     required String title,
     required String subtitle,
     required IconData icon,
     required Widget leadingWidget,
   }) {
     return Container(
-      margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.only(top: context.setHight(8)),
+      padding: EdgeInsets.all(context.setWidth(12)),
       decoration: BoxDecoration(
         color: const Color(0xffF7F7F7),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(context.setWidth(12)),
       ),
       child: Row(
         children: [
           leadingWidget,
-          const SizedBox(width: 12),
+          SizedBox(width: context.setWidth(12)),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 4),
+                Text(title, style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
+                SizedBox(height: context.setHight(4)),
                 Row(
                   children: [
-                    Icon(icon, color: Colors.black54, size: 16),
-                    const SizedBox(width: 4),
-                    Expanded(child: Text(subtitle, style: const TextStyle(color: Colors.black54, fontSize: 14))),
+                    Icon(icon, color: Colors.black54, size: context.setSp(16)),
+                    SizedBox(width: context.setWidth(4)),
+                    Expanded(child: Text(subtitle, style: getRegularStyle(color: Colors.black54, fontSize: context.setSp(FontSize.s14)))),
                   ],
                 ),
               ],
@@ -242,4 +257,5 @@ class _OrderPageState extends State<OrderPage> {
         ],
       ),
     );
-  }}
+  }
+}
