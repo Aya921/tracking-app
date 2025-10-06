@@ -57,7 +57,7 @@ class OrderPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ...orders.map(_buildOrderCard).toList(),
+                    ...orders.map(_buildOrderCard),
                   ],
                 ),
               );
@@ -116,9 +116,9 @@ class OrderPage extends StatelessWidget {
     }
 
     final totalPrice = order.orderInfoEntity.totalPrice.toString();
-    final storeInfo = '${order.store?.name ?? 'Unknown Store'} - ${order.store?.address ?? ''}';
-    final userName = '${order.user?.firstName ?? ''} ${order.user?.lastName ?? ''}'.trim();
-    final photoUrl = order.user?.photo ?? '';
+    final storeInfo = '${order.store.name } - ${order.store.address}';
+    final userName = '${order.user.firstName } ${order.user.lastName }'.trim();
+    final photoUrl = order.user.photo ;
     String imageUrl = photoUrl;
     if (!photoUrl.startsWith('http')) {
       imageUrl = 'https://www.elevateegy.com/$photoUrl';
@@ -147,7 +147,7 @@ class OrderPage extends StatelessWidget {
                   Text(status, style: TextStyle(color: statusColor, fontWeight: FontWeight.bold)),
                 ],
               ),
-              Text('#${order.orderInfoEntity.orderNumber ?? ''}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Text('#${order.orderInfoEntity.orderNumber }', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ],
           ),
           const SizedBox(height: 8),
