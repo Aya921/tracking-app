@@ -5,9 +5,21 @@ import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_model/order_bloc.dart';
 import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_model/order_states.dart';
 
-class OrderPage extends StatelessWidget {
+import '../../veiw_models/order_veiw_model/order_events.dart';
+
+class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
 
+  @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<OrderBloc>().add(const GetDriverOrdersEvent());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,11 +108,11 @@ class OrderPage extends StatelessWidget {
     );
   }
 
+
   Widget _buildOrderCard(OrderEntity order) {
     final status = order.orderInfoEntity.state;
     Color statusColor = Colors.grey;
     IconData statusIcon = Icons.help;
-
     if (status == 'Pending') {
       statusColor = Colors.orange;
       statusIcon = Icons.pending;
@@ -109,27 +121,29 @@ class OrderPage extends StatelessWidget {
       statusIcon = Icons.close;
     } else if (status == 'Completed') {
       statusColor = Colors.green;
-      statusIcon = Icons.check;
+      statusIcon = Icons.check_circle;
     } else if (status == 'inProgress') {
       statusColor = Colors.blue;
       statusIcon = Icons.play_arrow;
     }
 
-    final totalPrice = order.orderInfoEntity.totalPrice.toString();
-    final storeInfo = '${order.store.name } - ${order.store.address}';
-    final userName = '${order.user.firstName } ${order.user.lastName }'.trim();
-    final photoUrl = order.user.photo ;
-    String imageUrl = photoUrl;
-    if (!photoUrl.startsWith('http')) {
-      imageUrl = 'https://www.elevateegy.com/$photoUrl';
+    final userName = '${order.user.firstName} ${order.user.lastName}'.trim();
+    final userAddress = order.shippingAddress.city;
+    final userPhotoUrl = order.user.photo;
+    String finalUserImageUrl = userPhotoUrl;
+    if (!userPhotoUrl.startsWith('http')) {
+      finalUserImageUrl = 'https://www.elevateegy.com/$userPhotoUrl';
     }
+
+    final storeName = order.store.name;
+    final storeAddress = order.store.address;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 2)),
         ],
@@ -137,37 +151,95 @@ class OrderPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Text('Flower order', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
+          const SizedBox(height: 8),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Icon(statusIcon, color: statusColor, size: 20),
-                  const SizedBox(width: 4),
-                  Text(status, style: TextStyle(color: statusColor, fontWeight: FontWeight.bold)),
+                  Icon(statusIcon, color: statusColor, size: 24),
+                  const SizedBox(width: 8),
+                  Text(status, style: TextStyle(color: statusColor, fontSize: 18, fontWeight: FontWeight.bold)),
                 ],
               ),
-              Text('#${order.orderInfoEntity.orderNumber }', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Text('#${order.orderInfoEntity.orderNumber}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ],
           ),
-          const SizedBox(height: 8),
-          Text('Total: EGP $totalPrice', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          const SizedBox(height: 8),
-          Text(storeInfo, style: const TextStyle(fontSize: 14, color: Colors.grey)),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              CircleAvatar(
+          const SizedBox(height: 16),
+          const Divider(height: 1, color: Colors.grey),
+          const SizedBox(height: 16),
+
+
+          const Text('Pickup address', style: TextStyle(fontSize: 16, color: Colors.grey)),
+          _buildAddressCard(
+              title: storeName,
+              subtitle: storeAddress,
+              icon: Icons.location_on,
+              leadingWidget: const CircleAvatar(
                 radius: 20,
-                backgroundImage: photoUrl.isNotEmpty ? NetworkImage(imageUrl) : null,
-                child: photoUrl.isEmpty ? const Icon(Icons.person) : null,
-              ),
-              const SizedBox(width: 12),
-              Expanded(child: Text(userName.isEmpty ? 'Unknown User' : userName, style: const TextStyle(fontSize: 14))),
-            ],
+                backgroundColor: Color(0xffE9406B),
+                child: Icon(
+                  Icons.local_florist,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              )
+          ),
+          const SizedBox(height: 16),
+
+
+          const Text('User address', style: TextStyle(fontSize: 16, color: Colors.grey)),
+          _buildAddressCard(
+            title: userName.isEmpty ? 'Unknown User' : userName,
+            subtitle: userAddress.isEmpty ? 'Address N/A' : userAddress,
+            icon: Icons.location_on,
+            leadingWidget: CircleAvatar(
+              radius: 20,
+              backgroundImage: userPhotoUrl.isNotEmpty ? NetworkImage(finalUserImageUrl) : null,
+              child: userPhotoUrl.isEmpty ? const Icon(Icons.person) : null,
+            ),
           ),
         ],
       ),
     );
   }
-}
+
+  Widget _buildAddressCard({
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Widget leadingWidget,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xffF7F7F7),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          leadingWidget,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(icon, color: Colors.black54, size: 16),
+                    const SizedBox(width: 4),
+                    Expanded(child: Text(subtitle, style: const TextStyle(color: Colors.black54, fontSize: 14))),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }}
