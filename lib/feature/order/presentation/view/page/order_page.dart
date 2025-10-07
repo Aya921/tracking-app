@@ -9,6 +9,7 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
+import '../../../../profile/presentation/views/widgets/profile_container.dart';
 import '../../veiw_models/order_veiw_model/order_events.dart';
 
 class OrderPage extends StatefulWidget {
@@ -24,11 +25,18 @@ class _OrderPageState extends State<OrderPage> {
     super.initState();
     context.read<OrderBloc>().add(const GetDriverOrdersEvent());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My orders", style: TextStyle(color: Colors.black, fontSize: context.setSp(FontSize.s20))),
+        title: Text(
+          "My orders",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: context.setSp(FontSize.s20),
+          ),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -39,17 +47,20 @@ class _OrderPageState extends State<OrderPage> {
             case RequestState.loading:
               return const Center(child: CircularProgressIndicator());
             case RequestState.error:
-              return Center(child: Text(state.errorMessage ?? context.loc.error));
+              return Center(
+                child: Text(state.errorMessage ?? context.loc.error),
+              );
             case RequestState.success:
               final orders = state.orders?.orders ?? [];
-
               if (orders.isEmpty) {
                 return Center(child: Text(context.loc.noOrdersFound));
               }
-
-              final cancelledCount = orders.where((o) => o.orderInfoEntity.state == 'Cancelled').length;
-              final completedCount = orders.where((o) => o.orderInfoEntity.state == 'Completed').length;
-
+              final cancelledCount = orders
+                  .where((o) => o.orderInfoEntity.state == 'Cancelled')
+                  .length;
+              final completedCount = orders
+                  .where((o) => o.orderInfoEntity.state == 'Completed')
+                  .length;
               return SingleChildScrollView(
                 padding: EdgeInsets.all(context.setWidth(16)),
                 child: Column(
@@ -58,9 +69,21 @@ class _OrderPageState extends State<OrderPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildStatusChip(context, cancelledCount, "Cancelled", Icons.error_outline, Colors.red),
+                        _buildStatusChip(
+                          context,
+                          cancelledCount,
+                          "Cancelled",
+                          Icons.error_outline,
+                          Colors.red,
+                        ),
                         SizedBox(width: context.setWidth(16)),
-                        _buildStatusChip(context, completedCount, "Completed", Icons.check_circle_outline, Colors.green),
+                        _buildStatusChip(
+                          context,
+                          completedCount,
+                          "Completed",
+                          Icons.check_circle_outline,
+                          Colors.green,
+                        ),
                       ],
                     ),
                     SizedBox(height: context.setHight(24)),
@@ -72,17 +95,22 @@ class _OrderPageState extends State<OrderPage> {
                       ),
                     ),
                     SizedBox(height: context.setHight(4)),
-                    InkWell(
-                      onTap: (){
-                        Navigator.pushNamed(context, AppRoute.orderDriverDetails);
-                      },
-                      child: Column(
-                        children: [
-                          ...orders.map(_buildOrderCard)
-                        ],
-                      ),
-                    )
-                    ,
+                    Column(
+                      children: [
+                        ...orders.map((order) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoute.orderDriverDetails,
+                                arguments: order,
+                              );
+                            },
+                            child: _buildOrderCard(order),
+                          );
+                        }).toList(),
+                      ],
+                    ),
                   ],
                 ),
               );
@@ -94,34 +122,57 @@ class _OrderPageState extends State<OrderPage> {
     );
   }
 
-  Widget _buildStatusChip(BuildContext context, int count, String label, IconData icon, Color color) {
+  Widget _buildStatusChip(
+    BuildContext context,
+    int count,
+    String label,
+    IconData icon,
+    Color color,
+  ) {
     return Container(
       width: context.setWidth(160),
-      padding: EdgeInsets.symmetric(horizontal: context.setWidth(10), vertical: context.setHight(24)),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.setWidth(10),
+        vertical: context.setHight(24),
+      ),
       decoration: BoxDecoration(
         color: const Color(0xffF9ECF0),
         borderRadius: BorderRadius.circular(context.setWidth(20)),
-        border: Border.all(color: const Color(0xffF9ECF0), width: context.setWidth(1)),
+        border: Border.all(
+          color: const Color(0xffF9ECF0),
+          width: context.setWidth(1),
+        ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$count', style: TextStyle(fontSize: context.setSp(FontSize.s20), color: Colors.black)),
+          Text(
+            '$count',
+            style: TextStyle(
+              fontSize: context.setSp(FontSize.s20),
+              color: Colors.black,
+            ),
+          ),
           SizedBox(height: context.setHight(4)),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(icon, color: color, size: context.setSp(20)),
               SizedBox(width: context.setWidth(4)),
-              Text(label, style: TextStyle(color: Colors.black, fontSize: context.setSp(FontSize.s18))),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: context.setSp(FontSize.s18),
+                ),
+              ),
             ],
           ),
         ],
       ),
     );
   }
-
 
   Widget _buildOrderCard(OrderEntity order) {
     final status = order.orderInfoEntity.state;
@@ -161,14 +212,23 @@ class _OrderPageState extends State<OrderPage> {
             color: const Color(0xffFFFFFF),
             borderRadius: BorderRadius.circular(context.setWidth(16)),
             boxShadow: [
-              BoxShadow(color: const Color(0xffF9F9F9), blurRadius: context.setWidth(10),
-                  offset: Offset(0, context.setHight(2))),
+              BoxShadow(
+                color: const Color(0xffF9F9F9),
+                blurRadius: context.setWidth(10),
+                offset: Offset(0, context.setHight(2)),
+              ),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(context.loc.flowerOrder, style: TextStyle(fontSize: context.setSp(FontSize.s18), color: Colors.black87)),
+              Text(
+                context.loc.flowerOrder,
+                style: TextStyle(
+                  fontSize: context.setSp(FontSize.s18),
+                  color: Colors.black87,
+                ),
+              ),
               SizedBox(height: context.setHight(10)),
 
               Row(
@@ -176,46 +236,76 @@ class _OrderPageState extends State<OrderPage> {
                 children: [
                   Row(
                     children: [
-                      Icon(statusIcon, color: statusColor, size: context.setSp(24)),
+                      Icon(
+                        statusIcon,
+                        color: statusColor,
+                        size: context.setSp(24),
+                      ),
                       SizedBox(width: context.setWidth(8)),
-                      Text(status, style: TextStyle(color: statusColor, fontSize: context.setSp(FontSize.s18))),
+                      Text(
+                        status,
+                        style: TextStyle(
+                          color: statusColor,
+                          fontSize: context.setSp(FontSize.s18),
+                        ),
+                      ),
                     ],
                   ),
-                  Text('#${order.orderInfoEntity.orderNumber}', style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
+                  Text(
+                    '#${order.orderInfoEntity.orderNumber}',
+                    style: TextStyle(
+                      fontWeight: FontWeightManager.bold,
+                      fontSize: context.setSp(FontSize.s16),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: context.setHight(8)),
 
-              Text(context.loc.pickupAddress,
-                  style: getRegularStyle(
-                      fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
+              Text(
+                context.loc.pickupAddress,
+                style: getRegularStyle(
+                  fontSize: context.setSp(FontSize.s16),
+                  color: Colors.grey,
+                ),
+              ),
 
-              _buildAddressCard(
-                  context: context,
-                  title: storeName,
-                  subtitle: storeAddress,
-                  icon: Icons.location_on,
-                  leadingWidget: CircleAvatar(
-                    radius: context.setWidth(20),
-                    backgroundColor: const Color(0xffE9406B),
-                    child: Icon(
-                      Icons.store,
-                      color: Colors.white,
-                      size: context.setSp(20),
-                    ),
-                  )),
-              SizedBox(height: context.setHight(20)),
-
-              Text(context.loc.userAddress, style: getRegularStyle(
-                  fontSize: context.setSp(FontSize.s16), color: Colors.grey)),
               _buildAddressCard(
                 context: context,
-                title: userName.isEmpty ? context.loc.errorReset : userName,
-                subtitle: userAddress.isEmpty ? context.loc.userAddress : userAddress,
+                title: storeName,
+                subtitle: storeAddress,
                 icon: Icons.location_on,
                 leadingWidget: CircleAvatar(
                   radius: context.setWidth(20),
-                  backgroundImage: userPhotoUrl.isNotEmpty ? NetworkImage(finalUserImageUrl) : null,
+                  backgroundColor: const Color(0xffE9406B),
+                  child: Icon(
+                    Icons.store,
+                    color: Colors.white,
+                    size: context.setSp(20),
+                  ),
+                ),
+              ),
+              SizedBox(height: context.setHight(20)),
+
+              Text(
+                context.loc.userAddress,
+                style: getRegularStyle(
+                  fontSize: context.setSp(FontSize.s16),
+                  color: Colors.grey,
+                ),
+              ),
+              _buildAddressCard(
+                context: context,
+                title: userName.isEmpty ? context.loc.errorReset : userName,
+                subtitle: userAddress.isEmpty
+                    ? context.loc.userAddress
+                    : userAddress,
+                icon: Icons.location_on,
+                leadingWidget: CircleAvatar(
+                  radius: context.setWidth(20),
+                  backgroundImage: userPhotoUrl.isNotEmpty
+                      ? NetworkImage(finalUserImageUrl)
+                      : null,
                   child: userPhotoUrl.isEmpty ? const Icon(Icons.person) : null,
                 ),
               ),
@@ -247,15 +337,19 @@ class _OrderPageState extends State<OrderPage> {
         borderRadius: BorderRadius.circular(context.setWidth(12)),
       ),
       child: Container(
-    margin: EdgeInsets.only(top: context.setHight(12)),
-    padding: EdgeInsets.all(context.setWidth(16)),
-    decoration: BoxDecoration(
-    color: const Color(0xffFFFFFF),
-    borderRadius: BorderRadius.circular(context.setWidth(12)),
-      boxShadow: [
-        BoxShadow(color:  Colors.grey, blurRadius: context.setWidth(5),
-            offset: Offset(0, context.setHight(2))),
-      ], ),
+        margin: EdgeInsets.only(top: context.setHight(12)),
+        padding: EdgeInsets.all(context.setWidth(16)),
+        decoration: BoxDecoration(
+          color: const Color(0xffFFFFFF),
+          borderRadius: BorderRadius.circular(context.setWidth(12)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: context.setWidth(5),
+              offset: Offset(0, context.setHight(2)),
+            ),
+          ],
+        ),
         child: Row(
           children: [
             leadingWidget,
@@ -264,13 +358,31 @@ class _OrderPageState extends State<OrderPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeightManager.bold, fontSize: context.setSp(FontSize.s16))),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeightManager.bold,
+                      fontSize: context.setSp(FontSize.s16),
+                    ),
+                  ),
                   SizedBox(height: context.setHight(6)),
                   Row(
                     children: [
-                      Icon(icon, color: Colors.black54, size: context.setSp(16)),
+                      Icon(
+                        icon,
+                        color: Colors.black54,
+                        size: context.setSp(16),
+                      ),
                       SizedBox(width: context.setWidth(4)),
-                      Expanded(child: Text(subtitle, style: getRegularStyle(color: Colors.black54, fontSize: context.setSp(FontSize.s14)))),
+                      Expanded(
+                        child: Text(
+                          subtitle,
+                          style: getRegularStyle(
+                            color: Colors.black54,
+                            fontSize: context.setSp(FontSize.s14),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -281,4 +393,5 @@ class _OrderPageState extends State<OrderPage> {
       ),
     );
   }
+
 }

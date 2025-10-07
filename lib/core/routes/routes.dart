@@ -14,6 +14,7 @@ import 'package:tracking_app/feature/profile/presentation/views/screens/edit_veh
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
+import '../../feature/order/domain/entity/order_entity.dart';
 import '../../feature/order/presentation/view/page/order_details_screen.dart';
 import '../../feature/order/presentation/view/page/order_driver_details.dart';
 import '../../feature/profile/presentation/views/screens/change_password.dart';
@@ -109,9 +110,10 @@ abstract class Routes {
               return OrderDetailsScreen(orderId: orderId);
             },);
       case AppRoute.orderDriverDetails:
+        final order = settings.arguments as OrderEntity;
         return MaterialPageRoute(
           builder: (context) {
-            return const OrderDriverDetails();
+            return OrderDriverDetails(order: order);
           },);
 
       default:

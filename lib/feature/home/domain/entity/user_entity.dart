@@ -16,4 +16,10 @@ class UserEntity {
     required this.phone,
     required this.photo,
   });
+  String get fullPhotoUrl {
+    if (photo.startsWith('http')) {
+      return photo;
+    }
+    return 'https://www.elevateegy.com/uploads/$photo';
+  }
 }

@@ -10,7 +10,7 @@ class ProductEntity {
     int quantity;
     String category;
     String occasion;
-  
+
 
     ProductEntity({
         required this.id,
@@ -24,10 +24,17 @@ class ProductEntity {
         required this.quantity,
         required this.category,
         required this.occasion,
-       
+
     });
 
-  
-
-
+    String get firstImageUrl {
+        if (images.isNotEmpty) {
+            final fileName = images.first;
+            if (fileName.startsWith('http')) {
+                return fileName;
+            }
+            return 'https://www.elevateegy.com/uploads/$fileName';
+        }
+        return '';
+    }
 }
