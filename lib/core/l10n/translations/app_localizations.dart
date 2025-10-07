@@ -614,6 +614,18 @@ abstract class AppLocalizations {
   /// **'Order ID :'**
   String get orderIdLabel;
 
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order details '**
+  String get orderDetails;
+
+  /// No description provided for @myOrder.
+  ///
+  /// In en, this message translates to:
+  /// **' My orders  '**
+  String get myOrder;
+
   /// No description provided for @editProfileTitle.
   ///
   /// In en, this message translates to:

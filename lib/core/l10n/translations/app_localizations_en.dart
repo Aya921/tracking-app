@@ -271,6 +271,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get orderIdLabel => 'Order ID :';
 
   @override
+  String get orderDetails => 'Order details ';
+
+  @override
+  String get myOrder => ' My orders  ';
+
+  @override
   String get editProfileTitle => 'Edit profile';
 
   @override

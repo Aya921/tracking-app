@@ -91,6 +91,8 @@
   "paymentMethod": "طريقة الدفع",
    "statusLabel": "الحالة :",
     "orderIdLabel": "رقم الطلب :",
+    "orderDetails": "تفاصيل الطلب  ",
+    "myOrder": " طلبي  ",
 
 
 

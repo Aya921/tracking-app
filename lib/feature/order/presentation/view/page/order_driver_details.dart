@@ -32,7 +32,10 @@ class OrderDriverDetails extends StatelessWidget {
       statusIcon = Icons.error_outline;
     }
 
+    final totalPrice = order.orderInfoEntity.totalPrice.toString();
     final orderNumber = order.orderInfoEntity.orderNumber;
+    final paymentType = order.paymentInfoEntity.paymentType;
+
 
     final userName = '${order.user.firstName} ${order.user.lastName}'.trim();
     final userAddress = order.shippingAddress.city;
@@ -43,7 +46,8 @@ class OrderDriverDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.loc.orderDetailsTitle, style: getBoldStyle(color: Colors.black, fontSize: context.setSp(FontSize.s20))),
+        title: Text(
+            context.loc.orderDetailsTitle, style: getBoldStyle(color: Colors.black, fontSize: context.setSp(FontSize.s20))),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -96,6 +100,24 @@ class OrderDriverDetails extends StatelessWidget {
             ...order.orderItems.map((item) {
               return _buildOrderItemCard(context, item);
             }).toList(),
+
+            SizedBox(height: context.setHight(30)),
+
+            // إضافة صف Total
+            _buildDetailRow(
+              context: context,
+              title: context.loc.total,
+              value: '${context.loc.egp} $totalPrice',
+              isBold: true,
+            ),
+
+            // إضافة صف Payment Method
+            _buildDetailRow(
+              context: context,
+              title: context.loc.paymentMethod,
+              value: paymentType,
+              isBold: false,
+            ),
 
             SizedBox(height: context.setHight(40)),
           ],
@@ -160,6 +182,36 @@ class OrderDriverDetails extends StatelessWidget {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRow({
+    required BuildContext context,
+    required String title,
+    required String value,
+    required bool isBold,
+  }) {
+    final style = isBold
+        ? getBoldStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)
+        : getRegularStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black87);
+
+    return Container(
+      margin: EdgeInsets.only(bottom: context.setHight(10)),
+      padding: EdgeInsets.all(context.setWidth(16)),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(context.setWidth(12)),
+        boxShadow: [
+          BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: context.setWidth(5), offset: Offset(0, context.setHight(2))),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title, style: style),
+          Text(value, style: style),
         ],
       ),
     );

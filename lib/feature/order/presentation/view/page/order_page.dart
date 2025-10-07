@@ -9,7 +9,6 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import '../../../../profile/presentation/views/widgets/profile_container.dart';
 import '../../veiw_models/order_veiw_model/order_events.dart';
 
 class OrderPage extends StatefulWidget {
@@ -31,11 +30,7 @@ class _OrderPageState extends State<OrderPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "My orders",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: context.setSp(FontSize.s20),
-          ),
+          context.loc.myOrder,
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,

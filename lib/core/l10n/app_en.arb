@@ -108,11 +108,8 @@
      "paymentMethod": "Payment method",
      "statusLabel": "Status :",
        "orderIdLabel": "Order ID :",
-
-
-
-
-
+      "orderDetails": "Order details ",
+    "myOrder": " My orders  ",
 
 
 
