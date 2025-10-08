@@ -40,7 +40,6 @@ class OrderDriverDetails extends StatelessWidget {
     final userName = '${order.user.firstName} ${order.user.lastName}'.trim();
     final userAddress = order.shippingAddress.city;
     final finalUserImageUrl = order.user.fullPhotoUrl;
-
     final storeName = order.store.name;
     final storeAddress = order.store.address;
 
@@ -99,7 +98,7 @@ class OrderDriverDetails extends StatelessWidget {
             SizedBox(height: context.setHight(10)),
             ...order.orderItems.map((item) {
               return _buildOrderItemCard(context, item);
-            }).toList(),
+            }),
 
             SizedBox(height: context.setHight(30)),
 
@@ -217,10 +216,11 @@ class OrderDriverDetails extends StatelessWidget {
 }
 
 Widget _buildOrderItemCard(BuildContext context, OrderItemEntity item) {
-  final productName = item.product.title;
+  // final productName = item.product.title;
   final itemPrice = item.price.toString();
   final quantity = item.quantity;
   final imageUrl = item.product.firstImageUrl;
+  final orderId= item.product.id;
 
   return Padding(
     padding: EdgeInsets.only(bottom: context.setHight(10)),
@@ -261,15 +261,15 @@ Widget _buildOrderItemCard(BuildContext context, OrderItemEntity item) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productName,
+                  orderId,
                   style: getSemiBoldStyle(
-                      fontSize: context.setSp(FontSize.s16),
+                      fontSize: context.setSp(FontSize.s12),
                       color: Colors.black
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(height: context.setHight(4)),
+                SizedBox(height: context.setHight(6)),
                 Text(
                   '${context.loc.egp} $itemPrice',
                   style: getBoldStyle(
