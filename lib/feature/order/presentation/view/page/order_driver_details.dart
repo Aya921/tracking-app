@@ -26,10 +26,10 @@ class OrderDriverDetails extends StatelessWidget {
     final status = order.orderInfoEntity.state;
     Color statusColor = Colors.grey;
     IconData statusIcon = Icons.help;
-    if (status == 'Completed') {
+    if (status == context.loc.completed) {
       statusColor = Colors.green;
       statusIcon = Icons.check_circle;
-    } else if (status == 'inProgress') {
+    } else if (status == context.loc.inProgress) {
       statusColor = Colors.blue;
       statusIcon = Icons.play_arrow;
     } else {

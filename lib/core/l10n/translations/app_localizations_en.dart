@@ -277,6 +277,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myOrder => ' My orders  ';
 
   @override
+  String get completed => 'Completed';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get recentOrders => 'Recent orders';
+
+  @override
+  String get inProgress => 'InProgress';
+
+  @override
   String get editProfileTitle => 'Edit profile';
 
   @override

@@ -7,6 +7,8 @@ import 'package:tracking_app/feature/order/presentation/veiw_models/order_veiw_m
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
+import '../../../../../core/widgets/common_error.dart';
+import '../../../../../core/widgets/common_loading.dart';
 import '../../veiw_models/order_veiw_model/order_events.dart';
 import '../widget/build_order_card.dart';
 import '../widget/build_status_chip.dart';
@@ -40,21 +42,19 @@ class _OrderPageState extends State<OrderPage> {
         builder: (context, state) {
           switch (state.requestState) {
             case RequestState.loading:
-              return const Center(child: CircularProgressIndicator());
+              return const CommonLoading();
             case RequestState.error:
-              return Center(
-                child: Text(state.errorMessage ?? context.loc.error),
-              );
+              return CustumError(errorMessage: state.errorMessage!,);
             case RequestState.success:
               final orders = state.orders?.orders ?? [];
               if (orders.isEmpty) {
                 return Center(child: Text(context.loc.noOrdersFound));
               }
               final cancelledCount = orders
-                  .where((o) => o.orderInfoEntity.state == 'Cancelled')
+                  .where((o) => o.orderInfoEntity.state == context.loc.cancelled)
                   .length;
               final completedCount = orders
-                  .where((o) => o.orderInfoEntity.state == 'Completed')
+                  .where((o) => o.orderInfoEntity.state == context.loc.completed)
                   .length;
               return SingleChildScrollView(
                 padding: EdgeInsets.all(context.setWidth(16)),
@@ -67,7 +67,7 @@ class _OrderPageState extends State<OrderPage> {
                         buildStatusChip(
                           context,
                           cancelledCount,
-                          "Cancelled",
+                          context.loc.cancelled,
                           Icons.error_outline,
                           Colors.red,
                         ),
@@ -75,7 +75,7 @@ class _OrderPageState extends State<OrderPage> {
                         buildStatusChip(
                           context,
                           completedCount,
-                          "Completed",
+                          context.loc.completed,
                           Icons.check_circle_outline,
                           Colors.green,
                         ),
@@ -83,7 +83,7 @@ class _OrderPageState extends State<OrderPage> {
                     ),
                     SizedBox(height: context.setHight(24)),
                     Text(
-                      "Recent orders",
+                      context.loc.recentOrders,
                       style: TextStyle(
                         fontSize: context.setSp(FontSize.s18),
                         color: Colors.black87,

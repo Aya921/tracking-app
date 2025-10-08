@@ -93,7 +93,10 @@
     "orderIdLabel": "رقم الطلب :",
     "orderDetails": "تفاصيل الطلب  ",
     "myOrder": " طلبي  ",
-
+   "completed": "المكتمل",
+    "cancelled": "الملغيs",
+    "recentOrders": "الطلبات الاخيره",
+    "inProgress" : "قيد التقدم ",
 
 
 

@@ -110,7 +110,10 @@
        "orderIdLabel": "Order ID :",
       "orderDetails": "Order details ",
     "myOrder": " My orders  ",
-
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "recentOrders": "Recent orders",
+    "inProgress" : "InProgress",
 
 
 
