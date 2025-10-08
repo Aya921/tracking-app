@@ -103,7 +103,6 @@ class OrderDriverDetails extends StatelessWidget {
 
             SizedBox(height: context.setHight(30)),
 
-            // إضافة صف Total
             _buildDetailRow(
               context: context,
               title: context.loc.total,
@@ -111,7 +110,6 @@ class OrderDriverDetails extends StatelessWidget {
               isBold: true,
             ),
 
-            // إضافة صف Payment Method
             _buildDetailRow(
               context: context,
               title: context.loc.paymentMethod,
@@ -204,7 +202,7 @@ class OrderDriverDetails extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(context.setWidth(12)),
         boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: context.setWidth(5), offset: Offset(0, context.setHight(2))),
+          BoxShadow(color: Colors.grey, blurRadius: context.setWidth(5), offset: Offset(0, context.setHight(2))),
         ],
       ),
       child: Row(
@@ -232,7 +230,7 @@ Widget _buildOrderItemCard(BuildContext context, OrderItemEntity item) {
         color: Colors.white,
         borderRadius: BorderRadius.circular(context.setWidth(12)),
         boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: context.setWidth(5), offset: Offset(0, context.setHight(2))),
+          BoxShadow(color: Colors.grey, blurRadius: context.setWidth(5), offset: Offset(0, context.setHight(2))),
         ],
       ),
       child: Row(
