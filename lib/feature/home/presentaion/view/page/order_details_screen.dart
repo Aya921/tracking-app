@@ -30,6 +30,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   int currentStep = -1;
 
   late final List<String> buttonLabels;
+  final HomeViewModel _homeViewModel = getIt.get<HomeViewModel>();
 
   @override
   void didChangeDependencies() {
@@ -50,10 +51,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
       // update state in firebase
       final newState = _mapStepToState(currentStep);
-      await getIt<HomeFirebaseService>().updateOrderState(
-        widget.orderId,
-        newState,
-      );
+       _homeViewModel.add(UpdateOrderStateEvnet(newState: newState, orderId:widget.orderId));
+
+      
     }
   }
 
@@ -71,13 +71,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   int _mapStateToStep(String state) {
     switch (state) {
-      case 'Arrived at Pickup point':
+      case 'received':
         return 0;
-      case 'Start deliver':
+      case 'preparing':
         return 1;
-      case 'Arrived to the user':
+      case 'outForDelivery':
         return 2;
-      case 'Delivered to the user':
+      case 'delivered':
         return 3;
       default:
         return -1;
@@ -87,13 +87,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   String _mapStepToState(int step) {
     switch (step) {
       case 0:
-        return 'Arrived at Pickup point';
+        return 'received';
       case 1:
-        return 'Start deliver';
+        return 'preparing';
       case 2:
-        return 'Arrived to the user';
+        return 'outForDelivery';
       case 3:
-        return 'Delivered to the user';
+        return 'delivered';
       default:
         return 'Placed';
     }
@@ -227,13 +227,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 : AppColors.pink,
                           ),
                           onPressed: currentStep == buttonLabels.length - 1
-                              ? null 
+                              ? null
                               : _nextStep,
                           child: Text(
                             currentStep == -1
-                                ? context
-                                      .loc
-                                      .arrivedAtPickupPoint 
+                                ? context.loc.arrivedAtPickupPoint
                                 : buttonLabels[currentStep],
                           ),
                         ),

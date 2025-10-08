@@ -56,4 +56,14 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
       yield FailedResult(error.toString());
     }
   }
+
+  @override
+  Future<Result<void>> updateOrderState(String orderId, String newState) async {
+    try {
+      await _homeFirebaseService.updateOrderState(orderId, newState);
+      return SucessResult(null);
+    } catch (e) {
+      return FailedResult(e.toString());
+    }
+  }
 }

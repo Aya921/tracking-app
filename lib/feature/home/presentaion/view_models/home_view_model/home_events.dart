@@ -54,3 +54,8 @@ class WhatsAppUserEvent extends HomeEvents {
   WhatsAppUserEvent(this.phoneNumber, {this.message});
 }
 
+class UpdateOrderStateEvnet extends HomeEvents {
+  final String orderId;
+  final String newState;
+  UpdateOrderStateEvnet({required this.newState, required this.orderId});
+}

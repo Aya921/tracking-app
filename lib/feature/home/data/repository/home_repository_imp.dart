@@ -45,7 +45,12 @@ class HomeRepositoryImp implements HomeRepository {
   }
 
   @override
-   Stream<Result<RemoteDataEntity>> getOrderFromRemote(String orderId) {
+  Stream<Result<RemoteDataEntity>> getOrderFromRemote(String orderId) {
     return _homeRemoteDataSource.getOrderFromRemote(orderId);
+  }
+
+  @override
+    Future<Result<void>> updateOrderState(String orderId, String newState) async {
+    return _homeRemoteDataSource.updateOrderState(orderId, newState);
   }
 }

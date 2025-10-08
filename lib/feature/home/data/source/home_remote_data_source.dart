@@ -8,4 +8,5 @@ abstract interface class HomeRemoteDataSource {
   Future<Result<StartOrderResponseEntity>> startOrder(String orderId);
   Future<Result<void>> addDateToRemote(RemoteDataEntity remoteData);
   Stream<Result<RemoteDataEntity>> getOrderFromRemote(String orderId);
+   Future<Result<void>> updateOrderState(String orderId, String newState);
 } 
