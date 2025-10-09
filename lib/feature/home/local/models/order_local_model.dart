@@ -12,7 +12,7 @@ part 'order_local_model.g.dart';
 
 @Collection()
 class OrderLocalModel {
-  late int id = -1;
+  String get id => orderId;
   late String orderId;
   late UserLocalModel user;
   late List<OrderItemLocalModel> orderItems;
