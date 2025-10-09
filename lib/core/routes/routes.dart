@@ -43,7 +43,7 @@ abstract class Routes {
         );
       case (AppRoute.pickUpScreen):
         return MaterialPageRoute(
-          builder: (context) => const PickUpLocationScreen(
+          builder: (context) =>  PickUpLocationScreen(
           ),
         );
 

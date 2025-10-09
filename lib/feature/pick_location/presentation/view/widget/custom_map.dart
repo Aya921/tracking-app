@@ -1,64 +1,4 @@
-// import 'dart:async';
-//
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:flutter/material.dart';
-//
-// import 'package:flutter/services.dart';
-//
-// import '../../../../../core/assets_manager/assets_manger.dart';
-//
-// class CustomMap extends StatefulWidget {
-//    CustomMap({super.key,required this.mapController,
-//      required this.driverLocation});
-//    Completer<GoogleMapController> mapController;  LatLng driverLocation;
-//   @override
-//   State<CustomMap> createState() => _CustomMapState();
-// }
-//
-// class _CustomMapState extends State<CustomMap> {
-//
-//   String? _mapStyle;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//
-//     _loadMapStyle();
-//   }
-//
-//   Future<void> _loadMapStyle() async {
-//     final style = await rootBundle.loadString(ImgAssets.mapStyle);
-//     setState(() {
-//       _mapStyle = style;
-//     });
-//   }
-//
-//   void _onMapCreated(GoogleMapController controller) {
-//     widget.mapController = controller;
-//     if (_mapStyle != null) {
-//       widget.mapController.setMapStyle(_mapStyle);
-//     }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: MediaQuery.of(context).size.height * 0.6,
-//       child: GoogleMap(
-//         zoomControlsEnabled: false,
-//
-//         onMapCreated: _onMapCreated,
-//         initialCameraPosition: CameraPosition(
-//           target:widget.driverLocation,
-//           zoom: 12,
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-//
-//
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -112,11 +52,12 @@ class _CustomMapState extends State<CustomMap> {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: GoogleMap(
-        zoomControlsEnabled: false,
+       // zoomControlsEnabled: false,
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: widget.driverLocation,
           zoom: 14.0,
+
         ),
         myLocationEnabled: true,
         myLocationButtonEnabled: false,

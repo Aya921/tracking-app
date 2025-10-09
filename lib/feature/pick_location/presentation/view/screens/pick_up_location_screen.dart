@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart' hide LatLng;
 import 'package:provider/provider.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_view_model.dart';
 import 'package:tracking_app/feature/pick_location/presentation/view_model/pick_up_location_view_model.dart';
 import '../widget/custom_map.dart';
 import '../widget/custom_pop_icon.dart';
@@ -410,6 +412,7 @@ class _PickUpLocationScreenState extends State<PickUpLocationScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _provider.initMap(widget.remoteDataEntity!, widget.isStore!);
     });
+    //context.read<HomeViewModel>();
   }
 
 
@@ -418,12 +421,19 @@ class _PickUpLocationScreenState extends State<PickUpLocationScreen> {
   @override
   Widget build(BuildContext context) {
     print("gooooooooooooooooooooooooooo to user");
+final parts=
+widget.remoteDataEntity!.orderEntity.store.latLong.split(",");
 
-    return ChangeNotifierProvider.value(
+
+return
+      ChangeNotifierProvider.value(
       value: _provider,
       child: Scaffold(
         body: Consumer<MapViewModel>(
           builder: (context, provider, _) {
+           // var long=provider.driverLocation!.longitude;
+           // var lat=provider.driverLocation!.latitude;
+
             if (provider.isLoading) {
               return const Scaffold(
                 body: Center(
@@ -470,7 +480,27 @@ class _PickUpLocationScreenState extends State<PickUpLocationScreen> {
                       driverLocation: provider.driverLocation!,
                       mapController: provider.controller,
                       markers: provider.markers,
-                      polylines: provider.polylines,
+                      polylines:
+                      {
+                        Polyline(
+                            color: AppColors.pink,
+                            width: 3,
+                            polylineId:const PolylineId("polyline 11 "),
+                          points:       widget.isStore==true? [
+                         provider.driverLocation! ,
+                         LatLng(double.parse(parts[0]),
+                             double.parse(parts[1]))
+                        ]:[
+
+                            provider.driverLocation! ,
+
+                            LatLng(double.parse(widget.remoteDataEntity!.orderEntity.shippingAddress.lat),
+                                double.parse(widget.remoteDataEntity!
+                                    .orderEntity.shippingAddress.long)),
+                          ]
+                        )
+                      }
+                      ,
 
                     ),
                     Positioned(
@@ -485,8 +515,13 @@ class _PickUpLocationScreenState extends State<PickUpLocationScreen> {
                   ],
                 ),
                 Text("driver ===>  ${provider.driverLocation!.longitude} ${provider.driverLocation!.latitude}               ")
-              ,  Text("user ===>  ${provider.polylines}")
-
+              ,  Text("user ===>  ${parts[0]} ${parts[1]}"),
+                Text(widget.remoteDataEntity!
+                    .orderEntity.shippingAddress.long),
+                Text(widget.remoteDataEntity!
+                    .orderEntity.shippingAddress.lat),
+                Text(provider.markers.length.toString()),
+                Text("${provider.markers}")
               ],
             );
 

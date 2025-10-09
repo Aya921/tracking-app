@@ -1,16 +1,21 @@
 
 
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 import 'package:location/location.dart';
-import 'package:flutter/material.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/store_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/user_entity.dart';
+
 import '../../../auth/domain/entity/driver_entity.dart';
 import '../../../home/presentaion/view_models/home_view_model/home_view_model.dart';
+
+
 // @singleton
 // class MapViewModel with ChangeNotifier {
 //   final Completer<GoogleMapController> _controller = Completer();
@@ -114,7 +119,7 @@ import '../../../home/presentaion/view_models/home_view_model/home_view_model.da
 //   //   }
 //   // }
 // }
-
+//
 // import 'package:flutter/cupertino.dart';
 // import 'package:injectable/injectable.dart';
 // import 'package:location/location.dart';
@@ -260,7 +265,8 @@ import '../../../home/presentaion/view_models/home_view_model/home_view_model.da
 //         markerId: const MarkerId('driver'),
 //         position: driverLatLng,
 //         infoWindow: const InfoWindow(title: "Your Location"),
-//         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
+//         icon: BitmapDescriptor.
+//         defaultMarkerWithHue(BitmapDescriptor.hueRose),
 //       ),
 //       Marker(
 //         markerId: const MarkerId('destination'),
@@ -332,6 +338,7 @@ import '../../../home/presentaion/view_models/home_view_model/home_view_model.da
 //         : "${model.orderEntity.user.firstName} ${model.orderEntity.user.lastName}";
 //   }
 // }
+////////////////
 @singleton
 class MapViewModel with ChangeNotifier {
   final Completer<GoogleMapController> _controller = Completer();
@@ -372,7 +379,8 @@ class MapViewModel with ChangeNotifier {
           double.parse(model.orderEntity.shippingAddress.lat),
           double.parse(model.orderEntity.shippingAddress.long),
         );
-        destinationName = "${model.orderEntity.user.firstName} ${model.orderEntity.user.lastName}";
+        destinationName =
+        "${model.orderEntity.user.firstName} ${model.orderEntity.user.lastName}";
       }
 
       _addMarkers(
@@ -384,7 +392,7 @@ class MapViewModel with ChangeNotifier {
       await _drawRoute(driverLocation!, destinationLatLng);
 
       // Move camera to fit both locations
-      await _moveCameraToFitBothLocations(driverLocation!, destinationLatLng);
+     // await _moveCameraToFitBothLocations(driverLocation!, destinationLatLng);
 
     } catch (e) {
       debugPrint("Error initializing map: $e");
@@ -549,34 +557,34 @@ class MapViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> _moveCameraToFitBothLocations(LatLng start, LatLng end) async {
-    try {
-      final controller = await _controller.future;
-
-      // Calculate bounds that include both points
-      final southwest = LatLng(
-        start.latitude < end.latitude ? start.latitude : end.latitude,
-        start.longitude < end.longitude ? start.longitude : end.longitude,
-      );
-      final northeast = LatLng(
-        start.latitude > end.latitude ? start.latitude : end.latitude,
-        start.longitude > end.longitude ? start.longitude : end.longitude,
-      );
-
-      final bounds = LatLngBounds(southwest: southwest, northeast: northeast);
-
-      await controller.animateCamera(
-        CameraUpdate.newLatLngBounds(bounds, 100.0),
-      );
-    } catch (e) {
-      debugPrint("Error moving camera: $e");
-      // Fallback to showing start point
-      final controller = await _controller.future;
-      await controller.animateCamera(
-        CameraUpdate.newLatLngZoom(start, 14.0),
-      );
-    }
-  }
+  // Future<void> _moveCameraToFitBothLocations(LatLng start, LatLng end) async {
+  //   try {
+  //     final controller = await _controller.future;
+  //
+  //     // Calculate bounds that include both points
+  //     final southwest = LatLng(
+  //       start.latitude < end.latitude ? start.latitude : end.latitude,
+  //       start.longitude < end.longitude ? start.longitude : end.longitude,
+  //     );
+  //     final northeast = LatLng(
+  //       start.latitude > end.latitude ? start.latitude : end.latitude,
+  //       start.longitude > end.longitude ? start.longitude : end.longitude,
+  //     );
+  //
+  //     final bounds = LatLngBounds(southwest: southwest, northeast: northeast);
+  //
+  //     await controller.animateCamera(
+  //       CameraUpdate.newLatLngBounds(bounds, 100.0),
+  //     );
+  //   } catch (e) {
+  //     debugPrint("Error moving camera: $e");
+  //     // Fallback to showing start point
+  //     final controller = await _controller.future;
+  //     await controller.animateCamera(
+  //       CameraUpdate.newLatLngZoom(start, 14.0),
+  //     );
+  //   }
+  // }
 
   // Method to update driver location from Firebase stream
   void updateDriverLocationFromFirebase(LatLng newLocation) {
@@ -600,26 +608,11 @@ class MapViewModel with ChangeNotifier {
         : "${model.orderEntity.user.firstName} ${model.orderEntity.user.lastName}";
   }
 
-  // Debug method to check polyline state
-  void debugPolylineState() {
-    debugPrint("=== Polyline Debug ===");
-    debugPrint("Polylines count: ${polylines.length}");
-    if (polylines.isNotEmpty) {
-      final polyline = polylines.first;
-      debugPrint("Polyline ID: ${polyline.polylineId.value}");
-      debugPrint("Polyline points count: ${polyline.points.length}");
-      if (polyline.points.isNotEmpty) {
-        debugPrint("Start point: ${polyline.points.first}");
-        debugPrint("End point: ${polyline.points.last}");
-      }
-    }
-    debugPrint("Markers count: ${markers.length}");
-    debugPrint("Driver location: $driverLocation");
-    debugPrint("======================");
-  }
 
   // Refresh map data
   Future<void> refreshMap(RemoteDataEntity model, bool isStore) async {
     await initMap(model, isStore);
   }
 }
+
+
