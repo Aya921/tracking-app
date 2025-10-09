@@ -20,9 +20,9 @@ class RemoteDataModel {
 
   RemoteDataEntity toEntity() {
     return RemoteDataEntity(
-      driverModel!.toEntity(),
-        orderModel!.toEntity(),
-      orderDeliveryStatus ?? 'waiting',
+  driverEntity:     driverModel!.toEntity(),
+     orderEntity:    orderModel!.toEntity(),
+   orderDeliveryStatus:    orderDeliveryStatus ?? 'waiting',
     );
   }
 

@@ -17,6 +17,7 @@ import 'package:tracking_app/feature/home/presentaion/view/widgets/total_and_pay
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_states.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_view_model.dart';
+import 'package:tracking_app/feature/pick_location/presentation/view/screens/pick_up_location_screen.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   final String orderId;
@@ -50,7 +51,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
       // update state in firebase
       final newState = _mapStepToState(currentStep);
-      await getIt<HomeFirebaseService>().updateOrderState(widget.orderId, newState);
+      await getIt<HomeFirebaseService>().
+      updateOrderState(widget.orderId, newState);
     }
   }
   @override
@@ -60,7 +62,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         .getDataFromRemote(widget.orderId)
         .listen((data) {
       setState(() {
-        currentStep = _mapStateToStep(data.orderDeliveryStatus ?? 'waiting');
+        currentStep = _mapStateToStep(data.orderDeliveryStatus ??
+            'waiting');
       });
     });
   }
@@ -150,12 +153,23 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             fontSize: context.setSp(FontSize.s18),
                           ),
                         ),
-                        AddressContainer(
+                          AddressContainer(
+                            onTap: (){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context)=>
+
+                                      PickUpLocationScreen(
+                                        isStore: true,
+                                        remoteDataEntity: state.remoteData,
+                                      )));
+                            },
                           addressType: AddressType.store,
                           orderEntity: order,
                           phoneNum: order.store.phoneNumber,
                           fromOrderDetails: true,
                         ),
+
+
                         SizedBox(height: context.setHight(15)),
 
                         Text(
@@ -165,12 +179,25 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             fontSize: context.setSp(FontSize.s18),
                           ),
                         ),
-                        AddressContainer(
-                          addressType: AddressType.user,
-                          orderEntity: order,
-                          phoneNum: driver.phone,
-                          fromOrderDetails: true,
-                        ),
+
+                      AddressContainer(
+                            onTap: (){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context)=>
+
+                                      PickUpLocationScreen(
+                                        isStore: false,
+                                        remoteDataEntity: state.remoteData,
+                                      )));
+                              print("go to user");
+                            },
+                            addressType: AddressType.user,
+                            orderEntity: order,
+                            phoneNum: driver.phone,
+                            fromOrderDetails: true,
+                          ),
+
+
                         SizedBox(height: context.setHight(15)),
 
                         Text(

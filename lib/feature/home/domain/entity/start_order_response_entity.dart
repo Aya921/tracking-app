@@ -11,7 +11,9 @@ class StartOrderResponseEntity {
   String state;
   String orderNumber;
 
-  StartOrderResponseEntity({
+  StartOrderResponseEntity
+
+      ({
     required this.id,
     required this.user,
     required this.orderItems,

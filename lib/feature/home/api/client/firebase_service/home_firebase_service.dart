@@ -15,7 +15,8 @@ class HomeFirebaseService {
     _collectionReference = _firestore
         .collection(Constants.orderRef)
         .withConverter<RemoteDataModel>(
-          fromFirestore: (snap, _) => RemoteDataModel.fromJson(snap.data()!),
+          fromFirestore: (snap, _) =>
+              RemoteDataModel.fromJson(snap.data()!),
           toFirestore: (remoteData, _) => remoteData.toJson(),
         );
   }

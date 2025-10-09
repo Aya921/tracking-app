@@ -15,7 +15,9 @@ String? city;
 @JsonKey(name: JsonSerlizationConstants.phone)
 String? phone;
 
-@JsonKey(name: JsonSerlizationConstants.lat)
+@JsonKey(
+
+    name: JsonSerlizationConstants.lat)
 String? lat;
 
 @JsonKey(name: JsonSerlizationConstants.long)
@@ -44,8 +46,8 @@ String? long;
         street: "Zagazig",
         city: "Sharkia",
         phone: "01010518802",
-        lat: "31.7195459",
-        long: "31.7195459",
+        lat: "30.3232786",
+        long: "31.8707058",
       );
     }
 

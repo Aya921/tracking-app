@@ -59,7 +59,8 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   Future<void> _startOrderProcess(
     StartProgressEvnet event,
     Emitter<HomeStates> emit,
-  ) async {
+  )
+  async {
     emit(state.copyWith(isLoading: true));
 
     final res = await _addDataToRemoteUseCase.addDateToRemote(

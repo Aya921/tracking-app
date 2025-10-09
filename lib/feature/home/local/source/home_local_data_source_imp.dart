@@ -11,7 +11,8 @@ class HomeLocalDataSourceImp implements HomeLocalDataSource {
   HomeLocalDataSourceImp(this._isar);
 
   @override
-  Future<Result<void>> saveDataToLocalStorage(List<OrderEntity>? orders) async {
+  Future<Result<void>> saveDataToLocalStorage(List<OrderEntity>? orders)
+  async {
     try {
       await _isar.writeTxn(() async {
         await _isar.orderLocalModels.clear();
@@ -36,7 +37,7 @@ class HomeLocalDataSourceImp implements HomeLocalDataSource {
    
     final entities = orders.map((e) => e.toEntity()).toList();
 
-   
+
     return SucessResult(entities);
     }
    catch (e) {
@@ -70,7 +71,7 @@ class HomeLocalDataSourceImp implements HomeLocalDataSource {
     }
   }
 
-    
+
   
 }
 

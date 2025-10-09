@@ -50,7 +50,7 @@ class CustumBtn extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               final fakeRemoteDataEntity = RemoteDataEntity(
-                const DriverEntity(
+                driverEntity:  DriverEntity(
                   id: "driver_123",
                   country: "Egypt",
                   firstName: "Omar",
@@ -67,8 +67,9 @@ class CustumBtn extends StatelessWidget {
                   role: "driver",
                   createdAt: "2025-01-01T10:00:00.000Z",
                 ),
-                order.copyWith(orderInfoEntity: order.orderInfoEntity.copyWith(state: OrderStates.inProgress.name)),
-                  'waiting'
+       orderEntity:          order.copyWith(orderInfoEntity:
+       order.orderInfoEntity.copyWith(state: OrderStates.inProgress.name)),
+              orderDeliveryStatus:     'waiting'
               );
 
               _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));
