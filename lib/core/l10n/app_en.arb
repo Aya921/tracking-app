@@ -127,5 +127,10 @@
       "changePassword": "Change password",
       "noImageSelected": "No image selected",
       "failedToPickImage": "Failed to pick image",
-        "updateVehicleInformation": "✅ update Vehicle Information"
+        "updateVehicleInformation": "✅ update Vehicle Information",
+        "thanku":"Thank You!!",
+        "orderCompleted":"The order delivered successfully",
+        "done":"Done"
+
+
 }

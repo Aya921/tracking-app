@@ -117,5 +117,8 @@
      "failedToPickImage": "فشل في اختيار الصورة",
   "vehicleNumberRequired": "مطلوب رقم المركبة ",
   "vehicleLicense": "رخصة القيادة ",
-    "updateVehicleInformation": "✅ تم تحديث معلومات المركبه"
+    "updateVehicleInformation": "✅ تم تحديث معلومات السياره",
+    "thanku": "شكرًا لك!!",
+     "orderCompleted": "تم تسليم الطلب بنجاح",
+      "done":"تم"
 }

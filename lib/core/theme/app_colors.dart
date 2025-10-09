@@ -8,6 +8,7 @@ abstract class AppColors {
   static const Color lightGray=Color(0xFFA6A6A6);
   static const Color lightGray30 = Color(0x4DD3D3D3); 
   static const Color midGray=Color(0xFF878787);
+  static const Color midgreen=Color(0xffE0FDE1);
 
   static const MaterialColor pink=MaterialColor
     (0xFFD21E6A, <int , Color>{
