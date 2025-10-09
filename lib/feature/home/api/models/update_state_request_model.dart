@@ -22,7 +22,7 @@ class UpdateStateRequestModel {
   Map<String, dynamic> toJson() => _$UpdateStateRequestModelToJson(this);
 
   static UpdateStateRequestModel entityToModel(
-    StrartOrderRequestEntity entity,
+    UpdateOrderRequestEntity entity,
   ) {
     return UpdateStateRequestModel(state: entity.orderState);
   }

@@ -1,9 +1,9 @@
-import 'package:tracking_app/feature/home/domain/entity/start_order_item_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/update_order_item_entity.dart';
 
-class StartOrderResponseEntity {
+class OrderResponseEntity {
   String id;
   String user;
-  List<StartOrderItemEntity> orderItems;
+  List<OrderItemResponseEntity> orderItems;
   int totalPrice;
   String paymentType;
   bool isPaid;
@@ -11,7 +11,7 @@ class StartOrderResponseEntity {
   String state;
   String orderNumber;
 
-  StartOrderResponseEntity({
+  OrderResponseEntity({
     required this.id,
     required this.user,
     required this.orderItems,

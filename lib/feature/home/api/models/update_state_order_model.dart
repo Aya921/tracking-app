@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/api/models/update_state_order_items.dart';
-import 'package:tracking_app/feature/home/domain/entity/start_order_response_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/update_order_response_entity.dart';
 
 part 'update_state_order_model.g.dart';
 
 @JsonSerializable()
 class UpdateStateOrderModel {
- @JsonKey(name: JsonSerlizationConstants.id)
+  @JsonKey(name: JsonSerlizationConstants.id)
   final String id;
 
   @JsonKey(name: JsonSerlizationConstants.user)
@@ -63,8 +63,8 @@ class UpdateStateOrderModel {
 
   Map<String, dynamic> toJson() => _$UpdateStateOrderModelToJson(this);
 
-  StartOrderResponseEntity toEntity() {
-    return StartOrderResponseEntity(
+  OrderResponseEntity toEntity() {
+    return OrderResponseEntity(
       id: id,
       user: user,
       orderItems: orderItems.map((model) => model.toEntity()).toList(),

@@ -9,6 +9,7 @@ class HomeStates {
   bool? addedToRemote;
   bool? processCompleted;
   RemoteDataEntity? remoteData;
+  bool? updateState;
 
   HomeStates({
     this.isLoading = true,
@@ -17,7 +18,8 @@ class HomeStates {
     this.orderStarted = false,
     this.addedToRemote = false,
     this.processCompleted = false,
-    this.remoteData ,
+    this.remoteData,
+    this.updateState
 
   });
 
@@ -29,6 +31,7 @@ class HomeStates {
     bool? addedToRemote,
     bool? processCompleted,
     RemoteDataEntity? remoteData,
+    bool? updateState
   }) {
     return HomeStates(
       isLoading: isLoading ?? this.isLoading,
@@ -38,6 +41,7 @@ class HomeStates {
       addedToRemote: addedToRemote, // update to be false
       processCompleted: processCompleted, // update to be false
       remoteData: remoteData,
+      updateState: updateState
     );
   }
 }

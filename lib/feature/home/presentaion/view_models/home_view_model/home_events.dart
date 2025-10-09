@@ -1,5 +1,6 @@
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/start_order_request_entity.dart';
 
 abstract class HomeEvents {}
 
@@ -28,6 +29,13 @@ class StartOrderEvent extends HomeEvents {
   StartOrderEvent(this.orderId);
 }
 
+class UpdateOrderEvent extends HomeEvents {
+  String orderId;
+  UpdateOrderRequestEntity req;
+
+  UpdateOrderEvent(this.orderId, this.req);
+}
+
 class AddDataToRemoteEvent extends HomeEvents {
   RemoteDataEntity remoteDataEntity;
   AddDataToRemoteEvent(this.remoteDataEntity);
@@ -53,4 +61,3 @@ class WhatsAppUserEvent extends HomeEvents {
   final String? message;
   WhatsAppUserEvent(this.phoneNumber, {this.message});
 }
-
