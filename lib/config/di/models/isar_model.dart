@@ -9,6 +9,11 @@ abstract class IsarModel {
   @preResolve
   Future<Isar> provideIsar() async {
     final dir = await getApplicationDocumentsDirectory();
-    return await Isar.open([OrderLocalModelSchema], directory: dir.path);
+    final isar = Isar.open(
+      schemas: [OrderLocalModelSchema],
+      directory: dir.path,
+      engine: IsarEngine.sqlite,
+    );
+    return isar;
   }
 }
