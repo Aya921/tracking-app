@@ -15,5 +15,6 @@ static const String orderDetails="orderDetails";
   static const editProfileScreen="editProfile";
   static const editVechicalScreen="editVehical";
   static const changePasswordScreen="changePassword";
+  static const thanksPage="thanksPage";
 
 }
