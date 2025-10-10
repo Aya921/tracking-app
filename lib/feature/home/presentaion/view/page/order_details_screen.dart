@@ -189,7 +189,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                         isStore: false,
                                         remoteDataEntity: state.remoteData,
                                       )));
-                              print("go to user");
                             },
                             addressType: AddressType.user,
                             orderEntity: order,

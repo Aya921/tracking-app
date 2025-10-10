@@ -10,6 +10,7 @@ analyzer:
   errors:
     unused_import: warning
     dead_code: warning
+    deprecated_member_use: ignore
 linter:
   rules:
     # ==== CONST RULES ====

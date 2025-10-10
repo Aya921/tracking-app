@@ -69,11 +69,7 @@ import '../../../../../core/assets_manager/assets_manger.dart';
 //     );
 //   }
 // }
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:tracking_app/core/theme/app_colors.dart';
+
 
 class CustomMap extends StatefulWidget {
   const CustomMap({
@@ -81,11 +77,14 @@ class CustomMap extends StatefulWidget {
     required this.mapController,
     required this.driverLocation,
     required this.polylines,
+   // required this.markers,
+
   });
 
   final Completer<GoogleMapController> mapController;
   final LatLng driverLocation;
   final Set<Polyline> polylines;
+  //final Set<Marker> markers;
 
   @override
   State<CustomMap> createState() => _CustomMapState();
@@ -119,15 +118,15 @@ class _CustomMapState extends State<CustomMap> {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       child: GoogleMap(
+        //markers:widget.markers,
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: widget.driverLocation,
-          zoom: 6,
+          zoom: 14,
         ),
-       myLocationEnabled: true,
-
+        myLocationEnabled: true,
         myLocationButtonEnabled: false,
-       compassEnabled: true,
+        compassEnabled: true,
         rotateGesturesEnabled: true,
         scrollGesturesEnabled: true,
         zoomGesturesEnabled: true,

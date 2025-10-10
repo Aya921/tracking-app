@@ -1,12 +1,10 @@
-import 'dart:ui_web';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:lottie/lottie.dart';
+import 'package:lottie/lottie.dart' hide Marker;
 import 'package:provider/provider.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/enums/address_type.dart';
-import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
 import 'package:tracking_app/feature/pick_location/presentation/view/widget/address_detials_widget.dart';
@@ -50,7 +48,6 @@ class _PickUpLocationScreenState extends State<PickUpLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("gooooooooooooooooooooooooooo to user");
 final parts=
 widget.remoteDataEntity!.orderEntity.store.latLong.split(",");
 
@@ -70,12 +67,12 @@ return
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                     Lottie.asset(ImgAssets.loading,
-                    width: context.setWidth(100),
-                      height: context.setHight(120),
+                    width: context.setWidth(150),
+                      height: context.setHight(200),
                       fit: BoxFit.cover
                     ),
                       SizedBox(height: context.setHight(16)),
-                      Text(context.loc.loadingMap),
+                    //  Text(context.loc.loadingMap),
                     ],
                   ),
                 ),
@@ -113,11 +110,15 @@ return
                       CustomMap(
                         driverLocation: provider.driverLocation!,
                         mapController: provider.controller,
-
+// markers: {
+//
+// },
                         polylines:
                         {
                           Polyline(
+
                               color: AppColors.pink,
+
                               width: 3,
                               polylineId:const PolylineId("polyline 11 "),
                               points:       widget.isStore==true? [

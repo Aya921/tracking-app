@@ -6,7 +6,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:location/location.dart' ;
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
-import '../../../auth/domain/entity/driver_entity.dart';
 import '../../../home/presentaion/view_models/home_view_model/home_view_model.dart';
 
 
@@ -15,7 +14,7 @@ class MapViewModel with ChangeNotifier {
   final Completer<GoogleMapController> _controller = Completer();
   Completer<GoogleMapController> get controller => _controller;
   final HomeViewModel homeViewModel;
-  MapViewModel(this.homeViewModel);
+   MapViewModel(this.homeViewModel);
 
 
   final Location location = Location();
@@ -31,23 +30,6 @@ class MapViewModel with ChangeNotifier {
       notifyListeners();
 
       await _setDriverLocation(model,isStore);
-
-      LatLng destinationLatLng;
-      String destinationName;
-
-      if (isStore) {
-        // For store location
-        destinationLatLng = _parseLatLng(model.orderEntity.store.latLong);
-        destinationName = model.orderEntity.store.name;
-      } else {
-        // For customer location - use shipping address coordinates
-        destinationLatLng = LatLng(
-          double.parse(model.orderEntity.shippingAddress.lat),
-          double.parse(model.orderEntity.shippingAddress.long),
-        );
-        destinationName =
-        "${model.orderEntity.user.firstName} ${model.orderEntity.user.lastName}";
-      }
 
 
 
@@ -81,7 +63,7 @@ class MapViewModel with ChangeNotifier {
       }
 
       // Get current location
-      LocationData currentLocation = await location.getLocation();
+   final   LocationData currentLocation = await location.getLocation();
       driverLocation = LatLng(
         currentLocation.latitude ?? 0.0,
         currentLocation.longitude ?? 0.0,

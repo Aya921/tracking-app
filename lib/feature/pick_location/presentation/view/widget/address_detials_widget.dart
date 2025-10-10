@@ -11,7 +11,7 @@ import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart'
 import '../../../../../core/enums/address_type.dart';
 
 class AddressDetialsWidget extends StatelessWidget {
-  AddressDetialsWidget({
+  const AddressDetialsWidget({
     super.key,
     required this.remoteDataEntity,
     required this.addressType,
@@ -23,45 +23,39 @@ class AddressDetialsWidget extends StatelessWidget {
   final bool isPickedAddress;
   final RemoteDataEntity remoteDataEntity;
   final AddressType addressType;
-  void Function()? onPressedPhone;
+ final void Function()? onPressedPhone;
 
-  void Function()? onPressedWhatsApp;
+  final void Function()? onPressedWhatsApp;
 
   @override
   Widget build(BuildContext context) {
     String image = "";
     String address = "";
     String name = "";
-    String phone = "";
 
     switch (addressType) {
       case AddressType.driver:
         name =
             remoteDataEntity.driverEntity.firstName +
-                remoteDataEntity.driverEntity.lastName ??
-            "";
-        image = remoteDataEntity.driverEntity.nidImg ?? "";
-        address = remoteDataEntity.driverEntity.country ?? "";
-        phone = remoteDataEntity.driverEntity.phone ?? "";
+                remoteDataEntity.driverEntity.lastName ;
+        image = remoteDataEntity.driverEntity.nidImg ;
+        address = remoteDataEntity.driverEntity.country ;
         break;
       case AddressType.user:
         name =
             (remoteDataEntity.orderEntity.user.firstName +
-                remoteDataEntity.orderEntity.user.lastName) ??
-            "user name";
+                remoteDataEntity.orderEntity.user.lastName) ;
         address =
             (remoteDataEntity.orderEntity.shippingAddress.city +
-                remoteDataEntity.orderEntity.shippingAddress.street) ??
-            "benha";
-        image = remoteDataEntity.orderEntity.user.photo ?? "";
-        phone = remoteDataEntity.orderEntity.user.phone;
+                remoteDataEntity.orderEntity.shippingAddress.street) ;
+        image = remoteDataEntity.orderEntity.user.photo ;
 
         break;
 
       case AddressType.store:
-        name = remoteDataEntity.orderEntity.store.name ?? "";
-        image = remoteDataEntity.orderEntity.store.image ?? "";
-        address = remoteDataEntity.orderEntity.store.address ?? "";
+        name = remoteDataEntity.orderEntity.store.name ;
+        image = remoteDataEntity.orderEntity.store.image ;
+        address = remoteDataEntity.orderEntity.store.address ;
         break;
     }
     return Padding(
@@ -109,7 +103,7 @@ class AddressDetialsWidget extends StatelessWidget {
 
                     children: [
                       Text(
-                        name ?? "rana",
+                        name ,
                         style: getMediumStyle(
                           color: AppColors.midGray,
                           fontSize: context.setSp(13),
@@ -118,7 +112,7 @@ class AddressDetialsWidget extends StatelessWidget {
                       SizedBox(height: context.setHight(10)),
 
                       Text(
-                        address ?? "benha",
+                        address ,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: getMediumStyle(

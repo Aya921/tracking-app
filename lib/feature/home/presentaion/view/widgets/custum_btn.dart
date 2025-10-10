@@ -50,7 +50,7 @@ class CustumBtn extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               final fakeRemoteDataEntity = RemoteDataEntity(
-                driverEntity:  DriverEntity(
+                driverEntity:  const DriverEntity(
                   id: "driver_123",
                   country: "Egypt",
                   firstName: "Omar",
