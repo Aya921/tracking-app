@@ -14,7 +14,9 @@
       "resetPasswordTitle": "إعادة تعيين كلمة المرور",
       "resetPasswordSubtitle": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل مع حرف كبير ورقم واحد على الأقل.",
       "newPassword": "كلمة المرور الجديدة",
-      "enterNewPassword": "أدخل كلمة المرور الجديدة",
+  "loadingMap": "تحميل الخريطة ...",
+
+  "enterNewPassword": "أدخل كلمة المرور الجديدة",
       "confirmPassword": "تأكيد كلمة المرور",
       "successReset": "تم إعادة تعيين كلمة المرور بنجاح",
       "errorReset": "حدث خطأ ما",

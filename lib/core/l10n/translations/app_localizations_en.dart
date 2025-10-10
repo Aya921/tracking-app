@@ -46,6 +46,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get error => 'Error ❌';
 
   @override
+  String get loadingMap => 'Loading map...';
+
+  @override
   String get resetPasswordTitle => 'Reset password';
 
   @override

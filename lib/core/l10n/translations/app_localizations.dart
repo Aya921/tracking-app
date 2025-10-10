@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'Error ❌'**
   String get error;
 
+  /// No description provided for @loadingMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading map...'**
+  String get loadingMap;
+
   /// No description provided for @resetPasswordTitle.
   ///
   /// In en, this message translates to:

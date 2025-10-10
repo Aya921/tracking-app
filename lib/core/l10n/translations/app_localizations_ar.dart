@@ -46,6 +46,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get error => 'خطأ :x:';
 
   @override
+  String get loadingMap => 'تحميل الخريطة ...';
+
+  @override
   String get resetPasswordTitle => 'إعادة تعيين كلمة المرور';
 
   @override
