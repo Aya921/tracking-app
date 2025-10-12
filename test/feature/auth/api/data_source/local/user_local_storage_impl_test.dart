@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/feature/auth/api/data_source/local/user_local_storage_impl.dart';
-import 'user_local_storage_impl_test.mocks.dart';
+//import 'user_local_storage_impl_test.mocks.dart';
 //
 // @GenerateMocks([FlutterSecureStorage])
 // void main() {
