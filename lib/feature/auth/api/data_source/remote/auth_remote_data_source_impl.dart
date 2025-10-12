@@ -28,7 +28,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Result<LoginResponse>> login(LoginRequest request) async {
     try {
       final response = await _authApiServices.login(request);
-      await UserLocalStorageImpl().saveToken(response.token!);
       return SucessResult(response);
     } catch (error) {
       if (error is DioException) {

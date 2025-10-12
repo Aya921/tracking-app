@@ -8,6 +8,7 @@ abstract class Constants {
       "assets/images/delivery-service-delivery-man-3qnPlWnOuR.png";
   static const String approveImageUrl = "assets/images/wave.png";
   static const String token = "token";
+  static const String rememberMe = 'remember_me';
   static const String email = "email";
   static const String newPassword = "newPassword";
   static const String unknownError = "Unknown error";
