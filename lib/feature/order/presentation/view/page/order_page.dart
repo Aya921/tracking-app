@@ -31,12 +31,13 @@ class _OrderPageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          context.loc.myOrder,
+        title: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: context.setWidth(18)),
+          child: Text(
+            context.loc.myOrder,
+            
+          ),
         ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
       ),
       body: BlocBuilder<OrderBloc, OrderStates>(
         builder: (context, state) {
@@ -103,7 +104,7 @@ class _OrderPageState extends State<OrderPage> {
                             },
                             child: buildOrderCard(order),
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ],

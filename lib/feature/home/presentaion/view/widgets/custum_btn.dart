@@ -27,7 +27,10 @@ class CustumBtn extends StatelessWidget {
         children: [
           Text(
             " ${context.loc.egp} ${order.orderInfoEntity.totalPrice}",
-            style: getBoldStyle(color: AppColors.black, fontSize: context.setSp(FontSize.s18)),
+            style: getBoldStyle(
+              color: AppColors.black,
+              fontSize: context.setSp(FontSize.s18),
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -36,8 +39,7 @@ class CustumBtn extends StatelessWidget {
             ),
 
             onPressed: () {
-            
-               _homeViewModel.add(DeleteOrderLocalyEvent(order.id));
+              _homeViewModel.add(DeleteOrderLocalyEvent(order.id));
             },
             child: Text(
               context.loc.reject,
@@ -67,14 +69,20 @@ class CustumBtn extends StatelessWidget {
                   role: "driver",
                   createdAt: "2025-01-01T10:00:00.000Z",
                 ),
-                order.copyWith(orderInfoEntity: order.orderInfoEntity.copyWith(
-                    state: OrderState.inProgress.name)),
+                order.copyWith(
+                  orderInfoEntity: order.orderInfoEntity.copyWith(
+                    state: OrderState.inProgress.name,
+                  ),
+                ),
+                "Accepted",
               );
+
+           
 
               _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));
               // _homeViewModel.add(StartOrderEvent(order.id));
             },
-            child:Text(
+            child: Text(
               context.loc.accept,
               style: getRegularStyle(
                 color: AppColors.white,

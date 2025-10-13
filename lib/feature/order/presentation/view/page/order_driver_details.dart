@@ -3,6 +3,7 @@ import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
+import 'package:tracking_app/core/widgets/cache_image.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 
@@ -85,11 +86,7 @@ class OrderDriverDetails extends StatelessWidget {
               title: userName.isEmpty ? context.loc.userAddress : userName,
               subtitle: userAddress.isEmpty ? context.loc.accept : userAddress,
               icon: Icons.location_on,
-              leadingWidget: CircleAvatar(
-                radius: context.setWidth(20),
-                backgroundImage: finalUserImageUrl.isNotEmpty ? NetworkImage(finalUserImageUrl) : null,
-                child: finalUserImageUrl.isEmpty ? const Icon(Icons.person) : null,
-              ),
+              leadingWidget: CacheImage(imageUrl: finalUserImageUrl,)
             ),
 
             SizedBox(height: context.setHight(16)),

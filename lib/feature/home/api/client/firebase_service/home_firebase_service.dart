@@ -30,4 +30,11 @@ class HomeFirebaseService {
         .snapshots()
         .map((snapshot) => snapshot.data()!);
   }
+
+  Future<void> updateOrderState(String orderId, String newState) async {
+    await _collectionReference.doc(orderId).update({
+      'orderDeliveryStatus': newState,
+    });
+  }
+
 }

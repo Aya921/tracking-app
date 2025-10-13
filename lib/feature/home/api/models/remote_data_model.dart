@@ -8,8 +8,10 @@ part 'remote_data_model.g.dart';
 class RemoteDataModel {
   final RemoteOrderModel? orderModel;
   final RemoteDriverModel? driverModel;
+  final String? orderDeliveryStatus;
 
-  RemoteDataModel({this.driverModel, this.orderModel});
+
+  RemoteDataModel({this.driverModel, this.orderModel,this.orderDeliveryStatus});
 
   factory RemoteDataModel.fromJson(Map<String, dynamic> json) =>
       _$RemoteDataModelFromJson(json);
@@ -18,7 +20,9 @@ class RemoteDataModel {
 
   RemoteDataEntity toEntity() {
     return RemoteDataEntity(
-      driverModel!.toEntity(),orderModel!.toEntity()
+      driverModel!.toEntity(),
+        orderModel!.toEntity(),
+      orderDeliveryStatus ?? 'waiting',
     );
   }
 
@@ -26,6 +30,7 @@ class RemoteDataModel {
     return RemoteDataModel(
       driverModel: RemoteDriverModel.fromEntity(entity.driverEntity),
       orderModel: RemoteOrderModel.fromEntity(entity.orderEntity),
+      orderDeliveryStatus:entity.orderDeliveryStatus,
     );
   }
 }

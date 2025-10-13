@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
+import 'package:tracking_app/core/widgets/cache_image.dart';
 
 import '../../../../../core/theme/font_manger.dart';
 import '../../../../../core/theme/font_style_manger.dart';
@@ -28,10 +29,8 @@ Widget buildOrderCard(OrderEntity order) {
   final userName = '${order.user.firstName} ${order.user.lastName}'.trim();
   final userAddress = order.shippingAddress.city;
   final userPhotoUrl = order.user.photo;
-  String finalUserImageUrl = userPhotoUrl;
-  if (!userPhotoUrl.startsWith('http')) {
-    finalUserImageUrl = 'https://www.elevateegy.com/$userPhotoUrl';
-  }
+  final String finalUserImageUrl = userPhotoUrl;
+ 
 
   final storeName = order.store.name;
   final storeAddress = order.store.address;
@@ -134,22 +133,10 @@ Widget buildOrderCard(OrderEntity order) {
                   ? context.loc.userAddress
                   : userAddress,
               icon: Icons.location_on,
-              leadingWidget: CircleAvatar(
-                radius: context.setWidth(20),
-                backgroundImage: userPhotoUrl.isNotEmpty
-                    ? NetworkImage(finalUserImageUrl)
-                    : null,
-                child: userPhotoUrl.isEmpty ? const Icon(Icons.person) : null,
-              ),
+              leadingWidget:CacheImage(imageUrl: finalUserImageUrl,)
             ),
             SizedBox(height: context.setHight(16)),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Text(context.loc.total, style: getSemiBoldStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
-            //     Text('${context.loc.egp} $totalPrice', style: TextStyle(fontSize: context.setSp(FontSize.s16), color: Colors.black)),
-            //   ],
-            // ),
+          
           ],
         ),
       );

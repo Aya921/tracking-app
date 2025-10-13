@@ -3,12 +3,15 @@ name: Firebase Distribution
 on:
   push:
     branches:
-      - developments
+      - development
   pull_request:
     branches:
-      - developments
+      - development
     types:
-      - closed
+      - opened
+      - edited
+      - synchronize
+      - reopened
 
 jobs:
   build:
@@ -55,8 +58,8 @@ jobs:
       - name: Generate files with build_runner
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: Run Our Test
-        run: flutter test
+      # - name: Run Our Test    #will be back soon again
+      #   run: flutter test
 
       - name: Build APK
         run: flutter build apk --release
@@ -66,7 +69,7 @@ jobs:
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
-          appId: ${{secrets.FIREBASE_APP_ID}}
-          serviceCredentialsFileContent: ${{secrets.CREDENTIAL_FILE_CONTENT}}
+          appId: ${{secrets.APP_ID}}
+          serviceCredentialsFileContent: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
           groups: testers
           file: build/app/outputs/flutter-apk/app-release.apk

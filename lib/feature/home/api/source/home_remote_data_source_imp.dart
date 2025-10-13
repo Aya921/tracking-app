@@ -19,7 +19,10 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
   @override
   Future<Result<List<OrderEntity>?>> getAllPendingOrders() async {
     return safeCall(() async {
+
+
       final pendingOrderResponse = await _homeApiService.getAllPendingOrders();
+
       return pendingOrderResponse.orders!
           .map((order) => order.toEntity())
           .toList();
@@ -56,5 +59,4 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
       yield FailedResult(error.toString());
     }
   }
-
 }

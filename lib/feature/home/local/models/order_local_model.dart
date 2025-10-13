@@ -10,10 +10,9 @@ import 'package:tracking_app/feature/home/local/models/user_local_model.dart';
 
 part 'order_local_model.g.dart';
 
-
 @Collection()
 class OrderLocalModel {
-  Id id = Isar.autoIncrement;
+  String get id => orderId;
   late String orderId;
   late UserLocalModel user;
   late List<OrderItemLocalModel> orderItems;
@@ -25,7 +24,7 @@ class OrderLocalModel {
   late String state;
   late String orderNumber;
   late StoreLocalModel store;
-   late String paidAt;
+  late String paidAt;
   late String createdAt;
   late String updatedAt;
   late int v;
@@ -46,8 +45,10 @@ class OrderLocalModel {
       ..isDelivered = entity.orderInfoEntity.isDelivered
       ..state = entity.orderInfoEntity.state
       ..orderNumber = entity.orderInfoEntity.orderNumber
-      ..createdAt=entity.orderInfoEntity.createdAt
-      ..updatedAt=entity.orderInfoEntity.updatedAt..v=entity.orderInfoEntity.v..paidAt=entity.paymentInfoEntity.paidAt
+      ..createdAt = entity.orderInfoEntity.createdAt
+      ..updatedAt = entity.orderInfoEntity.updatedAt
+      ..v = entity.orderInfoEntity.v
+      ..paidAt = entity.paymentInfoEntity.paidAt
       ..store = StoreLocalModel.fromEntity(entity.store);
   }
 
@@ -56,13 +57,20 @@ class OrderLocalModel {
       id: orderId,
       user: user.toEntity(),
       orderItems: orderItems.map((local) => local.toEntity()).toList(),
-      orderInfoEntity: OrderInfoEntity(isDelivered, state, orderNumber, createdAt, updatedAt, v, totalPrice),
-  
+      orderInfoEntity: OrderInfoEntity(
+        isDelivered,
+        state,
+        orderNumber,
+        createdAt,
+        updatedAt,
+        v,
+        totalPrice,
+      ),
+
       shippingAddress: shippingAddress.toEntity(),
       paymentInfoEntity: PaymentInfoEntity(paymentType, paidAt, isPaid),
-     
+
       store: store.toEntity(),
-    
     );
   }
 }
