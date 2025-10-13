@@ -29,7 +29,7 @@ class MapViewModel with ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      await _setDriverLocation(model,isStore);
+      await setDriverLocation(model,isStore);
 
 
 
@@ -42,7 +42,7 @@ class MapViewModel with ChangeNotifier {
     }
   }
 
-  Future<void> _setDriverLocation(RemoteDataEntity remote,bool isStore) async {
+  Future<void> setDriverLocation(RemoteDataEntity remote,bool isStore) async {
     try {
       // First, check if location service is enabled
       bool serviceEnabled = await location.serviceEnabled();
@@ -89,14 +89,14 @@ class MapViewModel with ChangeNotifier {
     } catch (e) {
       debugPrint("Error getting location: $e");
       // Fallback to a default location if needed
-      driverLocation = isStore?_parseLatLng(remote.orderEntity.store.latLong):
+      driverLocation = isStore? parseLatLng(remote.orderEntity.store.latLong):
       LatLng(double.parse(remote.orderEntity.shippingAddress.lat),
           double.parse(remote.orderEntity.shippingAddress.long));
       rethrow;
     }
   }
 
-  LatLng _parseLatLng(String latLngStr) {
+  LatLng parseLatLng(String latLngStr) {
     final parts = latLngStr.split(',');
     if (parts.length != 2) {
       throw FormatException('Invalid latLong format: $latLngStr');

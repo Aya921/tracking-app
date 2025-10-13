@@ -69,7 +69,8 @@ class CustumBtn extends StatelessWidget {
                 ),
        orderEntity:          order.copyWith(orderInfoEntity:
        order.orderInfoEntity.copyWith(state: OrderStates.inProgress.name)),
-              orderDeliveryStatus:     'waiting'
+              orderDeliveryStatus:
+                  'Accepted'
               );
 
               _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));

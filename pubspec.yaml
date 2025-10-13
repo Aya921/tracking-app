@@ -52,16 +52,8 @@ dependencies:
   url_launcher: ^6.2.5
 
 #isar dependecy
-  isar:
-    hosted:
-      name: isar
-      url: https://pub.isar-community.dev/
-    version: ^3.0.0
-  isar_flutter_libs:
-    hosted:
-      name: isar_flutter_libs
-      url: https://pub.isar-community.dev/
-    version: ^3.0.0
+  isar: 4.0.0-dev.10
+  isar_flutter_libs: 4.0.0-dev.10
   firebase_core: ^4.1.1
   cloud_firestore: ^6.0.2
   permission_handler: ^12.0.1
@@ -83,11 +75,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   retrofit_generator: ^8.1.0
 
-  isar_generator:
-    hosted:
-      name: isar_generator
-      url: https://pub.isar-community.dev/
-    version: ^3.0.0
+
 
   # Testing
   mockito: ^5.4.4
