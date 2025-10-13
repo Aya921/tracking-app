@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:tracking_app/feature/home/domain/entity/store_entity.dart';
-part 'store_local_model.g.dart';
+//part 'store_local_model.g.dart';
 @embedded
 class StoreLocalModel {
   late String name;

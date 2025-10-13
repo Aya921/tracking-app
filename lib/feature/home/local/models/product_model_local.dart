@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:tracking_app/feature/home/domain/entity/product_entity.dart';
-part 'product_model_local.g.dart';
+//part 'product_model_local.g.dart';
 
 @embedded
 class ProductModel {

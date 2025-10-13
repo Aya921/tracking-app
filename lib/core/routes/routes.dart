@@ -42,8 +42,9 @@ abstract class Routes {
           builder: (context) => const OnBoarddingScreen(),
         );
       case (AppRoute.thanksPage):
+        final orderId = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => const ThanksPage(),
+          builder: (context) =>  ThanksPage(orderId: orderId,),
         );
 
       case AppRoute.forgetPasswordScreen:

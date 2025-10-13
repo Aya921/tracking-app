@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:tracking_app/feature/home/domain/entity/user_entity.dart';
-part 'user_local_model.g.dart';
+//part 'user_local_model.g.dart';
 @embedded
 class UserLocalModel {
   late String id;
