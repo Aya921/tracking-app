@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../../../home/api/models/remote_shipping_address_model.dart';
+import '../../../../core/common/models/order_model/order_shipping_address_model.dart';
 import '../../../home/api/models/remote_user_model.dart';
 import '../../../../core/common/entity/order_entity/payment_info_entity.dart';
 import '../../../../core/common/entity/order_entity/order_info_entity.dart';
 import '../../../../core/common/models/order_model/order_model.dart';
-import 'package:tracking_app/feature/home/api/models/remote_store_model.dart';
+import 'package:tracking_app/core/common/models/order_model/order_store_model.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_entity.dart';
 
 part 'remote_driver_order_container.g.dart';
@@ -21,7 +21,7 @@ class RemoteDriverOrderContainer {
   OrderModel? orderDetails;
 
   @JsonKey(name: "store")
-  RemoteStoreModel? store;
+  OrderStoreModel? store;
 
   @JsonKey(name: "createdAt")
   String? createdAt;
@@ -51,14 +51,14 @@ class RemoteDriverOrderContainer {
           user: RemoteUserModel.toEntity(null),
           orderItems: [],
           orderInfoEntity: OrderInfoEntity(false, '', '', '', '', -1, 0),
-          shippingAddress: RemoteShippingAddressModel.toEntity(null),
+          shippingAddress: OrderShippingAddressModel.toEntity(null),
           paymentInfoEntity: PaymentInfoEntity('', '', false),
-          store: RemoteStoreModel.toEntity(null),
+          store: OrderStoreModel.toEntity(null),
         );
 
     return baseOrderEntity.copyWith(
       id: driverOrderId ?? baseOrderEntity.id,
-      store: RemoteStoreModel.toEntity(store),
+      store: OrderStoreModel.toEntity(store),
     );
   }
 }

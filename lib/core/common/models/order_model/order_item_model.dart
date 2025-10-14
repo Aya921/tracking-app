@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/home/api/models/remote_product_model.dart';
+import 'package:tracking_app/core/common/models/order_model/order_product_model.dart';
 
 import '../../entity/order_entity/order_item_entity.dart';
 
@@ -9,7 +9,7 @@ part 'order_item_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class OrderItemModel {
   @JsonKey(name: JsonSerlizationConstants.product)
-  RemoteProductModel? product;
+  OrderProductModel? product;
 
   @JsonKey(name: JsonSerlizationConstants.price)
   int? price;
@@ -32,7 +32,7 @@ class OrderItemModel {
       id: id ?? '',
       price: price ?? 0,
       quantity: quantity ?? 0,
-      product: RemoteProductModel.toEntity(product),
+      product: OrderProductModel.toEntity(product),
     );
   }
 
@@ -41,7 +41,7 @@ class OrderItemModel {
       id: entity.id,
       price: entity.price,
       quantity: entity.quantity,
-      product: RemoteProductModel.fromEntity(entity.product),
+      product: OrderProductModel.fromEntity(entity.product),
     );
   }
 }

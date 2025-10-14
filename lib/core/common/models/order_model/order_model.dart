@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_entity.dart';
 import 'package:tracking_app/core/common/models/order_model/order_item_model.dart';
-import 'package:tracking_app/feature/home/api/models/remote_shipping_address_model.dart';
-import 'package:tracking_app/feature/home/api/models/remote_store_model.dart';
+import 'package:tracking_app/core/common/models/order_model/order_shipping_address_model.dart';
+import 'package:tracking_app/core/common/models/order_model/order_store_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_user_model.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_info_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/payment_info_entity.dart';
@@ -24,7 +24,7 @@ class OrderModel {
   int? totalPrice;
 
   @JsonKey(name: JsonSerlizationConstants.shippingAddress)
-  RemoteShippingAddressModel? shippingAddress;
+  OrderShippingAddressModel? shippingAddress;
 
   @JsonKey(name: JsonSerlizationConstants.paymentType)
   String? paymentType;
@@ -54,7 +54,7 @@ class OrderModel {
   int? v;
 
   @JsonKey(name: JsonSerlizationConstants.store)
-  RemoteStoreModel? store;
+  OrderStoreModel? store;
 
   OrderModel({
     this.id,
@@ -93,13 +93,13 @@ class OrderModel {
         v ?? -1,
         totalPrice ?? 0,
       ),
-      shippingAddress: RemoteShippingAddressModel.toEntity(shippingAddress),
+      shippingAddress: OrderShippingAddressModel.toEntity(shippingAddress),
       paymentInfoEntity: PaymentInfoEntity(
         paymentType ?? '',
         paidAt ?? '',
         isPaid ?? false,
       ),
-      store: RemoteStoreModel.toEntity(store),
+      store: OrderStoreModel.toEntity(store),
     );
   }
 
@@ -109,7 +109,7 @@ class OrderModel {
       user: RemoteUserModel.fromEntity(entity.user),
       orderItems: entity.orderItems.map(OrderItemModel.fromEntity).toList(),
       totalPrice: entity.orderInfoEntity.totalPrice,
-      shippingAddress: RemoteShippingAddressModel.fromEntity(
+      shippingAddress: OrderShippingAddressModel.fromEntity(
         entity.shippingAddress,
       ),
       paymentType: entity.paymentInfoEntity.paymentType,
@@ -117,7 +117,7 @@ class OrderModel {
       isDelivered: entity.orderInfoEntity.isDelivered,
       state: entity.orderInfoEntity.state,
       orderNumber: entity.orderInfoEntity.orderNumber,
-      store: RemoteStoreModel.fromEntity(entity.store),
+      store: OrderStoreModel.fromEntity(entity.store),
       createdAt: entity.orderInfoEntity.createdAt,
       updatedAt: entity.orderInfoEntity.updatedAt,
       paidAt: entity.paymentInfoEntity.paidAt,

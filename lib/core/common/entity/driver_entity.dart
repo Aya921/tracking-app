@@ -31,7 +31,7 @@ class DriverEntity extends Equatable {
       ];
 }
 
-/// 🧾 معلومات التواصل والشخصية
+
 class ContactInfo extends Equatable {
   final String country;
   final String gender;
@@ -51,7 +51,7 @@ class ContactInfo extends Equatable {
   List<Object?> get props => [country, gender, email, phone, photo];
 }
 
-/// 🚗 بيانات المركبة
+
 class VehicleInfo extends Equatable {
   final String type;
   final String number;
@@ -67,7 +67,7 @@ class VehicleInfo extends Equatable {
   List<Object?> get props => [type, number, license];
 }
 
-/// 🪪 بيانات الهوية
+
 class IdentityInfo extends Equatable {
   final String nid;
   final String nidImg;
@@ -81,7 +81,7 @@ class IdentityInfo extends Equatable {
   List<Object?> get props => [nid, nidImg];
 }
 
-/// 📅 بيانات إضافية (زي الدور والتاريخ)
+
 class MetaInfo extends Equatable {
   final String role;
   final String createdAt;

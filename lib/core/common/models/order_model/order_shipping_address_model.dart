@@ -2,27 +2,26 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/core/common/entity/order_entity/shipping_address_entity.dart';
 
-part 'remote_shipping_address_model.g.dart';
+part 'order_shipping_address_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RemoteShippingAddressModel {
-@JsonKey(name: JsonSerlizationConstants.street)
-String? street;
+class OrderShippingAddressModel {
+  @JsonKey(name: JsonSerlizationConstants.street)
+  String? street;
 
-@JsonKey(name: JsonSerlizationConstants.city)
-String? city;
+  @JsonKey(name: JsonSerlizationConstants.city)
+  String? city;
 
-@JsonKey(name: JsonSerlizationConstants.phone)
-String? phone;
+  @JsonKey(name: JsonSerlizationConstants.phone)
+  String? phone;
 
-@JsonKey(name: JsonSerlizationConstants.lat)
-String? lat;
+  @JsonKey(name: JsonSerlizationConstants.lat)
+  String? lat;
 
-@JsonKey(name: JsonSerlizationConstants.long)
-String? long;
+  @JsonKey(name: JsonSerlizationConstants.long)
+  String? long;
 
-
-  RemoteShippingAddressModel({
+  OrderShippingAddressModel({
     this.street,
     this.city,
     this.phone,
@@ -30,15 +29,12 @@ String? long;
     this.long,
   });
 
-  factory RemoteShippingAddressModel.fromJson(Map<String, dynamic> json) =>
-      _$RemoteShippingAddressModelFromJson(json);
+  factory OrderShippingAddressModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderShippingAddressModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RemoteShippingAddressModelToJson(this);
+  Map<String, dynamic> toJson() => _$OrderShippingAddressModelToJson(this);
 
-
-  static ShippingAddressEntity toEntity(
-    RemoteShippingAddressModel? model,
-  ) {
+  static ShippingAddressEntity toEntity(OrderShippingAddressModel? model) {
     if (model == null) {
       return ShippingAddressEntity(
         street: "Zagazig",
@@ -58,9 +54,8 @@ String? long;
     );
   }
 
-
-  factory RemoteShippingAddressModel.fromEntity(ShippingAddressEntity entity) {
-    return RemoteShippingAddressModel(
+  factory OrderShippingAddressModel.fromEntity(ShippingAddressEntity entity) {
+    return OrderShippingAddressModel(
       street: entity.street,
       city: entity.city,
       phone: entity.phone,

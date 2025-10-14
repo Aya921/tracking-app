@@ -1,65 +1,65 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/core/common/entity/order_entity/product_entity.dart';
-part 'remote_product_model.g.dart';
+part 'order_product_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RemoteProductModel {
- @JsonKey(name: JsonSerlizationConstants.id)
-String? id;
+class OrderProductModel {
+  @JsonKey(name: JsonSerlizationConstants.id)
+  String? id;
 
-@JsonKey(name: JsonSerlizationConstants.title)
-String? title;
+  @JsonKey(name: JsonSerlizationConstants.title)
+  String? title;
 
-@JsonKey(name: JsonSerlizationConstants.slug)
-String? slug;
+  @JsonKey(name: JsonSerlizationConstants.slug)
+  String? slug;
 
-@JsonKey(name: JsonSerlizationConstants.description)
-String? description;
+  @JsonKey(name: JsonSerlizationConstants.description)
+  String? description;
 
-@JsonKey(name: JsonSerlizationConstants.imgCover)
-String? imgCover;
+  @JsonKey(name: JsonSerlizationConstants.imgCover)
+  String? imgCover;
 
-@JsonKey(name: JsonSerlizationConstants.images)
-List<String>? images;
+  @JsonKey(name: JsonSerlizationConstants.images)
+  List<String>? images;
 
-@JsonKey(name: JsonSerlizationConstants.price)
-int? price;
+  @JsonKey(name: JsonSerlizationConstants.price)
+  int? price;
 
-@JsonKey(name: JsonSerlizationConstants.priceAfterDiscount)
-int? priceAfterDiscount;
+  @JsonKey(name: JsonSerlizationConstants.priceAfterDiscount)
+  int? priceAfterDiscount;
 
-@JsonKey(name: JsonSerlizationConstants.quantity)
-int? quantity;
+  @JsonKey(name: JsonSerlizationConstants.quantity)
+  int? quantity;
 
-@JsonKey(name: JsonSerlizationConstants.category)
-String? category;
+  @JsonKey(name: JsonSerlizationConstants.category)
+  String? category;
 
-@JsonKey(name: JsonSerlizationConstants.occasion)
-String? occasion;
+  @JsonKey(name: JsonSerlizationConstants.occasion)
+  String? occasion;
 
-@JsonKey(name: JsonSerlizationConstants.createdAt)
-String? createdAt;
+  @JsonKey(name: JsonSerlizationConstants.createdAt)
+  String? createdAt;
 
-@JsonKey(name: JsonSerlizationConstants.updatedAt)
-String? updatedAt;
+  @JsonKey(name: JsonSerlizationConstants.updatedAt)
+  String? updatedAt;
 
-@JsonKey(name: JsonSerlizationConstants.v)
-int? v;
+  @JsonKey(name: JsonSerlizationConstants.v)
+  int? v;
 
-@JsonKey(name: JsonSerlizationConstants.isSuperAdmin)
-bool? isSuperAdmin;
+  @JsonKey(name: JsonSerlizationConstants.isSuperAdmin)
+  bool? isSuperAdmin;
 
-@JsonKey(name: JsonSerlizationConstants.sold)
-int? sold;
+  @JsonKey(name: JsonSerlizationConstants.sold)
+  int? sold;
 
-@JsonKey(name: JsonSerlizationConstants.rateAvg)
-int? rateAvg;
+  @JsonKey(name: JsonSerlizationConstants.rateAvg)
+  int? rateAvg;
 
-@JsonKey(name: JsonSerlizationConstants.rateCount)
-int? rateCount;
+  @JsonKey(name: JsonSerlizationConstants.rateCount)
+  int? rateCount;
 
-  RemoteProductModel({
+  OrderProductModel({
     this.id,
     this.title,
     this.slug,
@@ -80,11 +80,11 @@ int? rateCount;
     this.rateCount,
   });
 
-  factory RemoteProductModel.fromJson(Map<String, dynamic> json) =>
-      _$RemoteProductModelFromJson(json);
+  factory OrderProductModel.fromJson(Map<String, dynamic> json) =>
+      _$OrderProductModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RemoteProductModelToJson(this);
- static ProductEntity toEntity(RemoteProductModel? model) {
+  Map<String, dynamic> toJson() => _$OrderProductModelToJson(this);
+  static ProductEntity toEntity(OrderProductModel? model) {
     if (model == null) {
       return ProductEntity(
         id: '674511e790ab40a06854034b',
@@ -111,9 +111,7 @@ int? rateCount;
       slug: model.slug ?? '',
       description: model.description ?? '',
       imgCover: model.imgCover ?? '',
-      images: model.images ?? [
-          ""
-        ],
+      images: model.images ?? [""],
       price: model.price ?? 0,
       priceAfterDiscount: model.priceAfterDiscount,
       quantity: model.quantity ?? 0,
@@ -122,10 +120,8 @@ int? rateCount;
     );
   }
 
-
-
-  factory RemoteProductModel.fromEntity(ProductEntity entity) {
-    return RemoteProductModel(
+  factory OrderProductModel.fromEntity(ProductEntity entity) {
+    return OrderProductModel(
       id: entity.id,
       title: entity.title,
       slug: entity.slug,
@@ -139,6 +135,4 @@ int? rateCount;
       occasion: entity.occasion,
     );
   }
-
-
 }
