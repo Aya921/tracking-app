@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/routes/app_route.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/login_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/forget_password_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/reset_password_screen.dart';
@@ -15,7 +15,7 @@ import 'package:tracking_app/feature/profile/presentation/views/screens/edit_veh
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
-import '../../feature/order/domain/entity/order_entity.dart';
+import '../common/entity/order_entity/order_entity.dart';
 
 import '../../feature/order/presentation/view/page/order_driver_details.dart';
 import '../../feature/profile/presentation/views/screens/change_password.dart';

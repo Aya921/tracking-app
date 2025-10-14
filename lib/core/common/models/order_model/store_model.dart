@@ -1,26 +1,26 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/common/entity/order_entity/store_entity.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-part 'remote_store_model.g.dart';
+part 'store_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RemoteStoreModel {
- @JsonKey(name: JsonSerlizationConstants.name)
-String? name;
+class StoreModel {
+  @JsonKey(name: JsonSerlizationConstants.name)
+  String? name;
 
-@JsonKey(name: JsonSerlizationConstants.image)
-String? image;
+  @JsonKey(name: JsonSerlizationConstants.image)
+  String? image;
 
-@JsonKey(name: JsonSerlizationConstants.address)
-String? address;
+  @JsonKey(name: JsonSerlizationConstants.address)
+  String? address;
 
-@JsonKey(name: JsonSerlizationConstants.phoneNumber)
-String? phoneNumber;
+  @JsonKey(name: JsonSerlizationConstants.phoneNumber)
+  String? phoneNumber;
 
-@JsonKey(name: JsonSerlizationConstants.latLong)
-String? latLong;
+  @JsonKey(name: JsonSerlizationConstants.latLong)
+  String? latLong;
 
-  RemoteStoreModel({
+  StoreModel({
     this.name,
     this.image,
     this.address,
@@ -28,14 +28,14 @@ String? latLong;
     this.latLong,
   });
 
-  factory RemoteStoreModel.fromJson(Map<String, dynamic> json) =>
-      _$RemoteStoreModelFromJson(json);
+  factory StoreModel.fromJson(Map<String, dynamic> json) =>
+      _$StoreModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RemoteStoreModelToJson(this);
+  Map<String, dynamic> toJson() => _$StoreModelToJson(this);
 
-  static StoreEntity toEntity(RemoteStoreModel? model) {
+  static StoreEntity toEntity(StoreModel? model) {
     if (model == null) {
-      return  StoreEntity(
+      return StoreEntity(
         name: 'Fake Store',
         image: 'https://example.com/default-store.png',
         address: '123 Fake Street, Cairo, Egypt',
@@ -53,8 +53,8 @@ String? latLong;
     );
   }
 
-  factory RemoteStoreModel.fromEntity(StoreEntity entity) {
-    return RemoteStoreModel(
+  factory StoreModel.fromEntity(StoreEntity entity) {
+    return StoreModel(
       name: entity.name,
       image: entity.image,
       address: entity.address,

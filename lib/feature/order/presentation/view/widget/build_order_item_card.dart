@@ -4,7 +4,7 @@ import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 
 import '../../../../../core/theme/font_manger.dart';
 import '../../../../../core/theme/font_style_manger.dart';
-import '../../../domain/entity/order_item_entity.dart';
+import '../../../../../core/common/entity/order_entity/order_item_entity.dart';
 
 Widget buildOrderItemCard(BuildContext context, OrderItemEntity item) {
   // final productName = item.product.title;

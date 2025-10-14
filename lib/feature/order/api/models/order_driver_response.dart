@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/feature/order/api/models/remote_driver_order_container.dart';
 import 'package:tracking_app/feature/order/domain/entity/order_driver_entity.dart';
 import '../../../../core/constants/json_serlization_constants.dart';
-import '../../../home/api/models/metadata_model.dart';
+import '../../../../core/common/models/metadata_model.dart';
 
 part 'order_driver_response.g.dart';
 

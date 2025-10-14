@@ -6,10 +6,10 @@ import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/home/domain/enum/order_state_enum.dart';
-import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
-import 'package:tracking_app/feature/order/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/order_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_view_model.dart';
 
@@ -54,21 +54,30 @@ class CustumBtn extends StatelessWidget {
               final fakeRemoteDataEntity = RemoteDataEntity(
                 const DriverEntity(
                   id: "driver_123",
-                  country: "Egypt",
                   firstName: "Omar",
                   lastName: "Hassan",
-                  vehicleType: "Car",
-                  vehicleNumber: "EG-1234",
-                  vehicleLicense: "LIC-56789",
-                  nid: "29812345678901",
-                  nidImg: "nid-photo.png",
-                  email: "omar.hassan@example.com",
-                  gender: "male",
-                  phone: "+201000112233",
-                  photo: "driver-photo.png",
-                  role: "driver",
-                  createdAt: "2025-01-01T10:00:00.000Z",
+                  contactInfo: ContactInfo(
+                    country: "Egypt",
+                    gender: "male",
+                    email: "omar.hassan@example.com",
+                    phone: "+201000112233",
+                    photo: "driver-photo.png",
+                  ),
+                  vehicle: VehicleInfo(
+                    type: "Car",
+                    number: "EG-1234",
+                    license: "LIC-56789",
+                  ),
+                  identity: IdentityInfo(
+                    nid: "29812345678901",
+                    nidImg: "nid-photo.png",
+                  ),
+                  meta: MetaInfo(
+                    role: "driver",
+                    createdAt: "2025-01-01T10:00:00.000Z",
+                  ),
                 ),
+
                 order.copyWith(
                   orderInfoEntity: order.orderInfoEntity.copyWith(
                     state: ApiOrderStates.inProgress.name,
@@ -76,8 +85,6 @@ class CustumBtn extends StatelessWidget {
                 ),
                 "Accepted",
               );
-
-           
 
               _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));
               // _homeViewModel.add(StartOrderEvent(order.id));

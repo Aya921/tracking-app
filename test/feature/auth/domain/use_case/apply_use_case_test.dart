@@ -9,7 +9,7 @@ import 'package:tracking_app/feature/auth/api/models/apply/request/auth_info.dar
 import 'package:tracking_app/feature/auth/api/models/apply/request/location_info.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/personal_info.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/vehicle_info.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/repositry/auth_repositry.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/apply_use_case.dart';
 
@@ -23,23 +23,25 @@ void main() {
     applyUseCase=ApplyUseCase(mockAuthRepositry);
     provideDummy<Result<DriverEntity>>(FailedResult("Dummy Error"));
   });
-  const successResponse=  DriverEntity(
-      country: "Egypt",
-      firstName: "mariam1",
-      lastName: "mohmed2",
-      vehicleType: "676b31a45d05310ca82657ac",
-      vehicleNumber: "12221",
-      vehicleLicense: "fake_image.png",
-      nid: "12345678912345",
-      nidImg: "fake_image.png",
-      email: "mariammohmed5@gmail.com",
-      gender: "female",
-      phone: "+20101070082",
-      photo: "default-profile.png",
-      role: "driver",
-      id: "68d983e4dd8937e0573fea27",
-      createdAt: "2025-09-28T18:52:20.452Z"
-  );
+  const successResponse = DriverEntity(
+        id: "68d983e4dd8937e0573fea27",
+        firstName: "mariam1",
+        lastName: "mohmed2",
+        contactInfo: ContactInfo(
+          country: "Egypt",
+          gender: "female",
+          email: "mariammohmed5@gmail.com",
+          phone: "+20101070082",
+          photo: "default-profile.png",
+        ),
+        vehicle: VehicleInfo(
+          type: "676b31a45d05310ca82657ac",
+          number: "12221",
+          license: "fake_image.png",
+        ),
+        identity: IdentityInfo(nid: "12345678912345", nidImg: "fake_image.png"),
+        meta: MetaInfo(role: "driver", createdAt: "2025-09-28T18:52:20.452Z"),
+      );
 
   ApplyRequest createRequest() {
     return ApplyRequest(
@@ -48,7 +50,7 @@ void main() {
         rePassword: "Mariam257@",
       ),
       locationInfo: LocationInfo(country: "Egypt"),
-      vehicleInfo: VehicleInfo(
+      vehicleInfo: VehicleInfoModel(
         vehicleNumber: "12228",
         vehicleLicense: File("fake_image.png"),
         vehicleType: "676b31a45d05310ca82657ac",

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/home/domain/entity/product_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/product_entity.dart';
 part 'remote_product_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)

@@ -5,7 +5,7 @@ import 'package:tracking_app/core/safe_api_call/safe_api_call.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_request.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_response.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/api/client/profile_api_services.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_vehicle_request.dart';
 import 'package:tracking_app/feature/profile/data/data_source/profile_remote_data_source.dart';

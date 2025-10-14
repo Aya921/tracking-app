@@ -11,7 +11,7 @@ import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
@@ -59,9 +59,9 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
   @override
   void initState() {
     super.initState();
-    vehicleType = widget.user.vehicleType;
+    vehicleType = widget.user.vehicle.type;
     vehicleNumber =
-        TextEditingController(text: widget.user.vehicleNumber );
+        TextEditingController(text: widget.user.vehicle.number );
   }
 
   @override
@@ -156,7 +156,7 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
                   SizedBox(height: context.setHight(20)),
                   LoadImage(
                     file: vehicleLicense,
-                    networkUrl: widget.user.vehicleLicense,
+                    networkUrl: widget.user.vehicle.license,
                     onTap: () async {
                       final file = await _pickImage();
                       if (file != null) {

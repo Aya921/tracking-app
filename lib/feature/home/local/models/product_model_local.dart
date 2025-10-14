@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:tracking_app/feature/home/domain/entity/product_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/product_entity.dart';
 part 'product_model_local.g.dart';
 
 @embedded

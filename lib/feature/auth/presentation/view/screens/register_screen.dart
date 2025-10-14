@@ -62,9 +62,9 @@ class _ApplyScreenState extends State<ApplyScreen> {
   Future<File?> _pickImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
-  source: ImageSource.gallery,
-  imageQuality: 80,
-);
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
 
     if (pickedFile != null) {
       return await _saveTemporaryFile(pickedFile);
@@ -103,8 +103,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
             Expanded(
               child: file == null
                   ? Text(label, style: const TextStyle(color: Colors.grey))
-                  : Image.file(file, height: 60,
-                  fit: BoxFit.cover),
+                  : Image.file(file, height: 60, fit: BoxFit.cover),
             ),
             const Icon(Icons.upload, color: Colors.black54),
           ],
@@ -337,14 +336,12 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         file: nidImg,
                         onTap: () async {
                           final file = await _pickImage();
-                          if (file != null)
-                            {
+                          if (file != null) {
                             setState(() {
-                              nidImg=file;
-
+                              nidImg = file;
                             });
-                            }
-                        }
+                          }
+                        },
                       ),
                       SizedBox(height: sh * 0.02),
 
@@ -425,15 +422,11 @@ class _ApplyScreenState extends State<ApplyScreen> {
                             context.read<ApplyBloc>().add(
                               GetApplyEvent(
                                 ApplyRequest(
-
                                   authenticationInfo: AuthenticationInfo(
                                     password: passwordCtrl.text,
                                     rePassword: confirmPasswordCtrl.text,
                                   ),
-                                  locationInfo: LocationInfo(
-                                    country: country,
-
-                                  ),
+                                  locationInfo: LocationInfo(country: country),
                                   personalInfo: PersonalInfo(
                                     gender: gender,
                                     phone: phoneCtrl.text,
@@ -444,7 +437,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                                     firstName: firstNameCtrl.text,
                                     lastName: lastNameCtrl.text,
                                   ),
-                                  vehicleInfo: VehicleInfo(
+                                  vehicleInfo: VehicleInfoModel(
                                     vehicleType: vehicleType,
                                     vehicleNumber: vehicleNumberCtrl.text,
                                     vehicleLicense: vehicleLicenseImg,

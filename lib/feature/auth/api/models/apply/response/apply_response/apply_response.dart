@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import '../../../../../domain/entity/driver_entity.dart';
+import '../../../../../../../core/common/entity/driver_entity.dart';
 
 part 'apply_response.g.dart';
 
@@ -77,23 +77,32 @@ class Driver {
 
   Map<String, dynamic> toJson() => _$DriverToJson(this);
 
-  DriverEntity toEntity() {
-    return DriverEntity(
-      id: id??'',
-      country: country??'',
-      firstName: firstName??'',
-      lastName: lastName??'',
-      vehicleType: vehicleType??'',
-      vehicleNumber: vehicleNumber??'',
-      vehicleLicense: vehicleLicense??'',
-      nid: nId??'',
-      nidImg: nIdImg??'',
-      email: email??'',
-      gender: gender??'',
-      phone: phone??'',
-      photo: photo??'',
-      role: role??'',
-      createdAt: createdAt??'',
-    );
-  }
+ DriverEntity toEntity() {
+  return DriverEntity(
+    id: id ?? '',
+    firstName: firstName ?? '',
+    lastName: lastName ?? '',
+    contactInfo: ContactInfo(
+      country: country ?? '',
+      gender: gender ?? '',
+      email: email ?? '',
+      phone: phone ?? '',
+      photo: photo ?? '',
+    ),
+    vehicle: VehicleInfo(
+      type: vehicleType ?? '',
+      number: vehicleNumber ?? '',
+      license: vehicleLicense ?? '',
+    ),
+    identity: IdentityInfo(
+      nid: nId ?? '',
+      nidImg: nIdImg ?? '',
+    ),
+    meta: MetaInfo(
+      role: role ?? '',
+      createdAt: createdAt ?? '',
+    ),
+  );
+}
+
 }

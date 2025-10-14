@@ -1,5 +1,5 @@
 
-import 'order_entity.dart';
+import '../../../../core/common/entity/order_entity/order_entity.dart';
 
 class OrderDriverEntity {
   final List<OrderEntity> orders;

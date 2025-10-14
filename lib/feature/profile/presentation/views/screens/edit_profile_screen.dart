@@ -13,7 +13,7 @@ import 'package:tracking_app/core/theme/app_theme.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
@@ -44,9 +44,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
     _firstNameController = TextEditingController(text: widget.user.firstName);
     _lastNameController = TextEditingController(text: widget.user.lastName);
-    _emailController = TextEditingController(text: widget.user.email);
-    _phoneController = TextEditingController(text: widget.user.phone);
-    _selectedGender = widget.user.gender;
+    _emailController = TextEditingController(text: widget.user.contactInfo.email);
+    _phoneController = TextEditingController(text: widget.user.contactInfo.phone);
+    _selectedGender = widget.user.contactInfo.gender;
   }
 
   @override
@@ -61,9 +61,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   bool _hasChanges() {
     return _firstNameController.text != widget.user.firstName ||
         _lastNameController.text != widget.user.lastName ||
-        _emailController.text != widget.user.email ||
-        _phoneController.text != widget.user.phone ||
-        _selectedGender != widget.user.gender;
+        _emailController.text != widget.user.contactInfo.email ||
+        _phoneController.text != widget.user.contactInfo.phone ||
+        _selectedGender != widget.user.contactInfo.gender;
   }
 
   @override
@@ -112,7 +112,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     // ==== Profile Photo ====
                     ProfilePhotoSection(
-                      photoUrl: widget.user.photo,
+                      photoUrl: widget.user.contactInfo.photo,
                       selectedPhoto: state.selectedPhoto,
                       onPickPhoto: () {
                         context.read<EditProfileBloc>().add(

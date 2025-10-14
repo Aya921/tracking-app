@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 
-part 'remote_driver_model.g.dart';
+part 'driver_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RemoteDriverModel {
+class DriverModel {
   @JsonKey(name: JsonSerlizationConstants.country)
   final String? country;
   @JsonKey(name: JsonSerlizationConstants.firstName)
@@ -37,7 +37,7 @@ class RemoteDriverModel {
   @JsonKey(name: JsonSerlizationConstants.createdAt)
   final String? createdAt;
 
-  RemoteDriverModel({
+  DriverModel({
     this.country,
     this.firstName,
     this.lastName,
@@ -55,50 +55,50 @@ class RemoteDriverModel {
     this.createdAt,
   });
 
-  factory RemoteDriverModel.fromJson(Map<String, dynamic> json) =>
-      _$RemoteDriverModelFromJson(json);
+  factory DriverModel.fromJson(Map<String, dynamic> json) =>
+      _$DriverModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RemoteDriverModelToJson(this);
+  Map<String, dynamic> toJson() => _$DriverModelToJson(this);
 
-  
   DriverEntity toEntity() {
     return DriverEntity(
-      id: id ?? "",
-      country: country ?? "",
-      firstName: firstName ?? "",
-      lastName: lastName ?? "",
-      vehicleType: vehicleType ?? "",
-      vehicleNumber: vehicleNumber ?? "",
-      vehicleLicense: vehicleLicense ?? "",
-      nid: nId ?? "",
-      nidImg: nIdImg ?? "",
-      email: email ?? "",
-      gender: gender ?? "",
-      phone: phone ?? "",
-      photo: photo ?? "",
-      role: role ?? "",
-      createdAt: createdAt ?? "",
+      id: id ?? '',
+      firstName: firstName ?? '',
+      lastName: lastName ?? '',
+      contactInfo: ContactInfo(
+        country: country ?? '',
+        gender: gender ?? '',
+        email: email ?? '',
+        phone: phone ?? '',
+        photo: photo ?? '',
+      ),
+      vehicle: VehicleInfo(
+        type: vehicleType ?? '',
+        number: vehicleNumber ?? '',
+        license: vehicleLicense ?? '',
+      ),
+      identity: IdentityInfo(nid: nId ?? '', nidImg: nIdImg ?? ''),
+      meta: MetaInfo(role: role ?? '', createdAt: createdAt ?? ''),
     );
   }
 
-
-  factory RemoteDriverModel.fromEntity(DriverEntity entity) {
-    return RemoteDriverModel(
+  factory DriverModel.fromEntity(DriverEntity entity) {
+    return DriverModel(
       id: entity.id,
-      country: entity.country,
       firstName: entity.firstName,
       lastName: entity.lastName,
-      vehicleType: entity.vehicleType,
-      vehicleNumber: entity.vehicleNumber,
-      vehicleLicense: entity.vehicleLicense,
-      nId: entity.nid,
-      nIdImg: entity.nidImg,
-      email: entity.email,
-      gender: entity.gender,
-      phone: entity.phone,
-      photo: entity.photo,
-      role: entity.role,
-      createdAt: entity.createdAt,
+      country: entity.contactInfo.country,
+      gender: entity.contactInfo.gender,
+      email: entity.contactInfo.email,
+      phone: entity.contactInfo.phone,
+      photo: entity.contactInfo.photo,
+      vehicleType: entity.vehicle.type,
+      vehicleNumber: entity.vehicle.number,
+      vehicleLicense: entity.vehicle.license,
+      nId: entity.identity.nid,
+      nIdImg: entity.identity.nidImg,
+      role: entity.meta.role,
+      createdAt: entity.meta.createdAt,
     );
   }
 }

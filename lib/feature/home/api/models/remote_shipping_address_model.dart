@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/home/domain/entity/shipping_address_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/shipping_address_entity.dart';
 
 part 'remote_shipping_address_model.g.dart';
 

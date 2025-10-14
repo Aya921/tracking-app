@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/apply_use_case.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/get_all_countries_use_case.dart';

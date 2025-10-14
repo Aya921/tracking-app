@@ -4,7 +4,7 @@ import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 
 class VechicalInfoCard extends StatelessWidget {
     final DriverEntity driverEntity;
@@ -26,11 +26,11 @@ class VechicalInfoCard extends StatelessWidget {
                  style: getBoldStyle(color: AppColors.black,fontSize:context.setSp(FontSize.s18)),
                 ),
                 Text(
-                  driverEntity.vehicleType,
+                  driverEntity.vehicle.type,
                  style: getMediumStyle(color: AppColors.black,fontSize:context.setSp(FontSize.s14)),
                 ),
                 Text(
-                  driverEntity.vehicleNumber,
+                  driverEntity.vehicle.number,
                 style: getMediumStyle(color: AppColors.black,fontSize:context.setSp(FontSize.s14)),
                 ),
               ],

@@ -1,44 +1,44 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/common/entity/user_entity.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-part 'remote_user_model.g.dart';
+part 'user_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class RemoteUserModel {
- @JsonKey(name: JsonSerlizationConstants.id)
-String? id;
+class UserModel {
+  @JsonKey(name: JsonSerlizationConstants.id)
+  String? id;
 
-@JsonKey(name: JsonSerlizationConstants.firstName)
-String? firstName;
+  @JsonKey(name: JsonSerlizationConstants.firstName)
+  String? firstName;
 
-@JsonKey(name: JsonSerlizationConstants.lastName)
-String? lastName;
+  @JsonKey(name: JsonSerlizationConstants.lastName)
+  String? lastName;
 
-@JsonKey(name: JsonSerlizationConstants.email)
-String? email;
+  @JsonKey(name: JsonSerlizationConstants.email)
+  String? email;
 
-@JsonKey(name: JsonSerlizationConstants.gender)
-String? gender;
+  @JsonKey(name: JsonSerlizationConstants.gender)
+  String? gender;
 
-@JsonKey(name: JsonSerlizationConstants.phone)
-String? phone;
+  @JsonKey(name: JsonSerlizationConstants.phone)
+  String? phone;
 
-@JsonKey(name: JsonSerlizationConstants.photo)
-String? photo;
+  @JsonKey(name: JsonSerlizationConstants.photo)
+  String? photo;
 
-@JsonKey(name: JsonSerlizationConstants.passwordChangedAt)
-String? passwordChangedAt;
+  @JsonKey(name: JsonSerlizationConstants.passwordChangedAt)
+  String? passwordChangedAt;
 
-@JsonKey(name: JsonSerlizationConstants.passwordResetCode)
-String? passwordResetCode;
+  @JsonKey(name: JsonSerlizationConstants.passwordResetCode)
+  String? passwordResetCode;
 
-@JsonKey(name: JsonSerlizationConstants.passwordResetExpires)
-String? passwordResetExpires;
+  @JsonKey(name: JsonSerlizationConstants.passwordResetExpires)
+  String? passwordResetExpires;
 
-@JsonKey(name: JsonSerlizationConstants.resetCodeVerified)
-bool? resetCodeVerified;
+  @JsonKey(name: JsonSerlizationConstants.resetCodeVerified)
+  bool? resetCodeVerified;
 
-  RemoteUserModel({
+  UserModel({
     this.id,
     this.firstName,
     this.lastName,
@@ -52,14 +52,14 @@ bool? resetCodeVerified;
     this.resetCodeVerified,
   });
 
-  factory RemoteUserModel.fromJson(Map<String, dynamic> json) =>
-      _$RemoteUserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RemoteUserModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
-  static UserEntity toEntity(RemoteUserModel? model) {
+  static UserEntity toEntity(UserModel? model) {
     if (model == null) {
-      return  UserEntity(
+      return UserEntity(
         id: 'fake-user-id',
         firstName: 'Fake',
         lastName: 'User',
@@ -81,8 +81,8 @@ bool? resetCodeVerified;
     );
   }
 
-  factory RemoteUserModel.fromEntity(UserEntity entity) {
-    return RemoteUserModel(
+  factory UserModel.fromEntity(UserEntity entity) {
+    return UserModel(
       id: entity.id,
       firstName: entity.firstName,
       lastName: entity.lastName,

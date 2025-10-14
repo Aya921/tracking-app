@@ -1,7 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:tracking_app/feature/home/local/models/product_model_local.dart';
 
-import '../../../order/domain/entity/order_item_entity.dart';
+import '../../../../core/common/entity/order_entity/order_item_entity.dart';
 part 'order_item_local_model.g.dart';
 @embedded
 class OrderItemLocalModel {

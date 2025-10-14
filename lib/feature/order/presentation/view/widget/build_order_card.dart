@@ -5,7 +5,7 @@ import 'package:tracking_app/core/widgets/cache_image.dart';
 
 import '../../../../../core/theme/font_manger.dart';
 import '../../../../../core/theme/font_style_manger.dart';
-import '../../../domain/entity/order_entity.dart';
+import '../../../../../core/common/entity/order_entity/order_entity.dart';
 import 'build_address_card.dart';
 
 Widget buildOrderCard(OrderEntity order) {

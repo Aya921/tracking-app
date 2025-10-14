@@ -72,12 +72,11 @@ part 'apply_request.g.dart';
 
 @JsonSerializable()
 class ApplyRequest {
-
   final PersonalInfo? personalInfo;
 
   final LocationInfo? locationInfo;
 
-  final VehicleInfo? vehicleInfo;
+  final VehicleInfoModel? vehicleInfo;
 
   final AuthenticationInfo? authenticationInfo;
 

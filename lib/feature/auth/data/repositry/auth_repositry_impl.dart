@@ -5,7 +5,7 @@ import 'package:tracking_app/feature/auth/api/models/login/request/login_request
 import 'package:tracking_app/feature/auth/api/models/login/response/login_response.dart';
 import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 import '../../domain/repositry/auth_repositry.dart';
 

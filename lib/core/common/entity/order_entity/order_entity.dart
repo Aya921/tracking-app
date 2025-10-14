@@ -1,8 +1,8 @@
-import 'package:tracking_app/feature/order/domain/entity/order_info_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/payment_info_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/shipping_address_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/store_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/user_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/order_info_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/payment_info_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/shipping_address_entity.dart';
+import 'package:tracking_app/core/common/entity/order_entity/store_entity.dart';
+import 'package:tracking_app/core/common/entity/user_entity.dart';
 
 import 'order_item_entity.dart';
 

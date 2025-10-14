@@ -7,7 +7,7 @@ import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/widgets/cache_image.dart';
 
-import '../../../../order/domain/entity/order_item_entity.dart';
+import '../../../../../core/common/entity/order_entity/order_item_entity.dart';
 
 class OrderDetailsCard extends StatelessWidget {
   final OrderItemEntity orderItemEntity;
