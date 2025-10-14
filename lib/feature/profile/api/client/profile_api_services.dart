@@ -11,10 +11,7 @@ import 'package:tracking_app/feature/profile/api/models/get_logged_user_response
 
 import '../models/change_password_request.dart';
 import '../models/change_password_response.dart';
-
 part 'profile_api_services.g.dart';
-
-
 @RestApi(baseUrl: EndPointsConstants.baseUrl)
 @injectable
 abstract class ProfileApiServices {
@@ -24,17 +21,14 @@ abstract class ProfileApiServices {
   Future<GetLoggedUserResponse> getLoggedDriver();
   @GET(EndPointsConstants.logoutEndPoint)
   Future<GetLoggedUserResponse> logoutDriver();
-
   @PUT(EndPointsConstants.uploadDriverPhoto)
   @MultiPart()
   Future<String> uploadDriverPhoto(@Part(name: JsonSerlizationConstants.photo) File photo,);
-  
   @PUT(EndPointsConstants.editDriverProfile)
   Future<EditProfileResponse> editProfile(@Body() EditProfileRequest request);
   @PUT(EndPointsConstants.editDriverProfile)
   Future<EditProfileResponse> editVehicle
       (@Body() EditVehicleRequest request);
-
   @PATCH(EndPointsConstants.changePassword)
   Future<ChangePasswordResponse> changePassword(
       @Body() ChangePasswordRequest request,

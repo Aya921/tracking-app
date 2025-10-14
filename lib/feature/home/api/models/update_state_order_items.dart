@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/home/domain/entity/start_order_item_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/update_order_item_entity.dart';
 
 part 'update_state_order_items.g.dart';
 
@@ -30,8 +30,8 @@ class UpdateStateOrderItems {
 
   Map<String, dynamic> toJson() => _$UpdateStateOrderItemsToJson(this);
 
-  StartOrderItemEntity toEntity() {
-    return StartOrderItemEntity(
+  OrderItemResponseEntity toEntity() {
+    return OrderItemResponseEntity(
       product: product,
       price: price,
       quantity: quantity,
