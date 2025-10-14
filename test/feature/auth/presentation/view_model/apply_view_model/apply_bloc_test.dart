@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/auth_info.dart';
@@ -11,7 +14,7 @@ import 'package:tracking_app/feature/auth/api/models/apply/request/location_info
 import 'package:tracking_app/feature/auth/api/models/apply/request/personal_info.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/vehicle_info.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/time_zone.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 import 'package:tracking_app/feature/auth/domain/use_case/apply_use_case.dart';

@@ -93,7 +93,7 @@
 
 // }
 
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 
 class ProfileState {
   final DriverEntity? driver;

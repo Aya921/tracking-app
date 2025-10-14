@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/apply_request.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/auth_info.dart';
 import 'package:tracking_app/feature/auth/api/models/apply/request/location_info.dart';
@@ -13,7 +16,7 @@ import 'package:tracking_app/feature/auth/api/models/login/response/login_respon
 import 'package:tracking_app/feature/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:tracking_app/feature/auth/data/repositry/auth_repositry_impl.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/time_zone.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 import 'package:tracking_app/feature/auth/domain/repositry/auth_repositry.dart';

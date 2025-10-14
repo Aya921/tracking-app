@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 
 part 'driver_model.g.dart';
 

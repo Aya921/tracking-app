@@ -13,7 +13,7 @@ import 'package:tracking_app/core/theme/app_theme.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/core/validator/validator.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';

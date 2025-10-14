@@ -135,5 +135,6 @@
   "thanku": "Thank You!!",
   "orderCompleted": "The order delivered successfully",
   "done": "Done",
-  "orderPlacedSuccessfullyTitle": "The order placed successfully!"
+  "orderPlacedSuccessfullyTitle": "The order placed successfully!",
+  "noAccountDriverFound":"No Account driver Found Please try again"
 }

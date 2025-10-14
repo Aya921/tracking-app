@@ -5,6 +5,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_error/api_error.dart';
 import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
 import 'package:tracking_app/core/common/models/metadata_model.dart';
 import 'package:tracking_app/core/common/models/order_model/order_item_model.dart';
 import 'package:tracking_app/core/common/models/order_model/order_model.dart';
@@ -25,7 +28,7 @@ import 'package:tracking_app/feature/home/api/models/update_state_order_model.da
 import 'package:tracking_app/feature/home/api/models/update_state_response_model.dart';
 import 'package:tracking_app/feature/home/api/source/home_remote_data_source_imp.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_info_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_item_entity.dart';

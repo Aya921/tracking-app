@@ -3,7 +3,7 @@ import '../../api/models/login/request/login_request.dart';
 import '../../api/models/login/response/login_response.dart';
 import '../../api/models/apply/request/apply_request.dart';
 import '../entity/country_entity.dart';
-import '../../../../core/common/entity/driver_entity.dart';
+import '../../../../core/common/driver_entity/driver_entity.dart';
 import '../entity/vehicles_entity.dart';
 
 abstract interface class AuthRepositry{

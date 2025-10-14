@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 
 class PersonalInfoCard extends StatelessWidget {
   final DriverEntity driverEntity;

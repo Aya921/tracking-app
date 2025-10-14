@@ -11,7 +11,7 @@ import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_btn.dart';
 import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_field.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';

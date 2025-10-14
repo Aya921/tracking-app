@@ -6,7 +6,7 @@ import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/home/domain/enum/order_state_enum.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
@@ -15,7 +15,8 @@ import 'package:tracking_app/feature/home/presentaion/view_models/home_view_mode
 
 class CustumBtn extends StatelessWidget {
   final OrderEntity order;
-  CustumBtn({super.key, required this.order});
+  final DriverEntity? driver;
+  CustumBtn({super.key, required this.order, required this.driver});
   final HomeViewModel _homeViewModel = getIt.get<HomeViewModel>();
 
   @override
@@ -51,43 +52,25 @@ class CustumBtn extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              final fakeRemoteDataEntity = RemoteDataEntity(
-                const DriverEntity(
-                  id: "driver_123",
-                  firstName: "Omar",
-                  lastName: "Hassan",
-                  contactInfo: ContactInfo(
-                    country: "Egypt",
-                    gender: "male",
-                    email: "omar.hassan@example.com",
-                    phone: "+201000112233",
-                    photo: "driver-photo.png",
-                  ),
-                  vehicle: VehicleInfo(
-                    type: "Car",
-                    number: "EG-1234",
-                    license: "LIC-56789",
-                  ),
-                  identity: IdentityInfo(
-                    nid: "29812345678901",
-                    nidImg: "nid-photo.png",
-                  ),
-                  meta: MetaInfo(
-                    role: "driver",
-                    createdAt: "2025-01-01T10:00:00.000Z",
-                  ),
-                ),
+              if (driver != null) {
+               
+                final fakeRemoteDataEntity = RemoteDataEntity(
+                  driver!,
 
-                order.copyWith(
-                  orderInfoEntity: order.orderInfoEntity.copyWith(
-                    state: ApiOrderStates.inProgress.name,
+                  order.copyWith(
+                    orderInfoEntity: order.orderInfoEntity.copyWith(
+                      state: ApiOrderStates.inProgress.name,
+                    ),
                   ),
-                ),
-                "Accepted",
-              );
+                  "Accepted",  // will be see soon
+                );
 
-              _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));
-              // _homeViewModel.add(StartOrderEvent(order.id));
+                _homeViewModel.add(StartProgressEvnet(fakeRemoteDataEntity));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                   SnackBar(content: Text(context.loc.noAccountDriverFound)),
+                );
+              }
             },
             child: Text(
               context.loc.accept,

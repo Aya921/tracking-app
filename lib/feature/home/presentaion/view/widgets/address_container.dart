@@ -66,7 +66,9 @@ class AddressContainer extends StatelessWidget {
             },
             child: LayoutBuilder(
               builder: (context, size) {
-                return SizeProvider(
+                return 
+                
+                SizeProvider(
                   baseSize: const Size(311, 60),
                   width: size.maxWidth,
                   height: double.infinity,

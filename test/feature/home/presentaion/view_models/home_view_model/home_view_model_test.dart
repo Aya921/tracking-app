@@ -3,6 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/core/api_result/result.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/update_order_response_entity.dart';
 
 import 'package:tracking_app/feature/home/domain/usecase/add_data_to_remote.dart';
@@ -17,7 +20,7 @@ import 'package:tracking_app/feature/home/presentaion/view_models/home_view_mode
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_states.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_view_model.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_info_entity.dart';
 import 'package:tracking_app/core/common/entity/order_entity/order_item_entity.dart';

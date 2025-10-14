@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
-import 'package:tracking_app/core/common/entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/auth/domain/entity/vehicles_entity.dart';
 
 class ApplyStates extends Equatable{

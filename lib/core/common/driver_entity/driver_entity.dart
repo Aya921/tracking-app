@@ -1,4 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
+
 
 class DriverEntity extends Equatable {
   final String id;
@@ -52,45 +56,9 @@ class ContactInfo extends Equatable {
 }
 
 
-class VehicleInfo extends Equatable {
-  final String type;
-  final String number;
-  final String license;
-
-  const VehicleInfo({
-    required this.type,
-    required this.number,
-    required this.license,
-  });
-
-  @override
-  List<Object?> get props => [type, number, license];
-}
 
 
-class IdentityInfo extends Equatable {
-  final String nid;
-  final String nidImg;
-
-  const IdentityInfo({
-    required this.nid,
-    required this.nidImg,
-  });
-
-  @override
-  List<Object?> get props => [nid, nidImg];
-}
 
 
-class MetaInfo extends Equatable {
-  final String role;
-  final String createdAt;
 
-  const MetaInfo({
-    required this.role,
-    required this.createdAt,
-  });
 
-  @override
-  List<Object?> get props => [role, createdAt];
-}

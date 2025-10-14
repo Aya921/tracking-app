@@ -121,5 +121,6 @@
   "thanku": "شكرًا لك!!",
   "orderCompleted": "تم تسليم الطلب بنجاح",
   "done": "تم",
-  "orderPlacedSuccessfullyTitle": "تم تنفيذ طلبك بنجاح!"
+  "orderPlacedSuccessfullyTitle": "تم تنفيذ طلبك بنجاح!",
+  "noAccountDriverFound":"لا يوجد حساب برجاء المحاوله مره اخرى"
 }

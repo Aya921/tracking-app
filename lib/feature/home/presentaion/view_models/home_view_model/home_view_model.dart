@@ -137,6 +137,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   }
 
   void _getOrders(GetOrdersEvent event, Emitter<HomeStates> emit) async {
+    
     if (firtTime) {
       await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
       firtTime = false;
