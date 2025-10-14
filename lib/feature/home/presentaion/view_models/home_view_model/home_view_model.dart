@@ -34,7 +34,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     this._updateOrderStateUseCase,
     this._addDataToRemoteUseCase,
     this._getDataFromRemoteUseCase,
-  ) : super(HomeStates()) {
+  ) : super(const HomeStates()) {
     on<GetAllPaindingOrdersEvent>(_getAllPedningOrders);
     on<GetAllLocalOrdersEvent>(_getLocalOrders);
     on<GetOrdersEvent>(_getOrders);
@@ -150,7 +150,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
 
     switch (res) {
       case SucessResult<List<OrderEntity>?>():
-        _saveDataToLocalUseCase.saveDataToLocalStorage(res.sucessResult);
+        _saveDataToLocalUseCase.saveDataToLocalStorage(res.sucessResult);    //! ask here is that correct or should call _SuccessResult function here
         emit(
           state.copyWith(
             isLoading: false,
@@ -227,7 +227,6 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       case SucessResult<StartOrderResponseEntity>():
         emit(state.copyWith(orderStarted: true));
 
-      // await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
       case FailedResult<StartOrderResponseEntity>():
         emit(state.copyWith(errorMessage: res.errorMessage));
     }
