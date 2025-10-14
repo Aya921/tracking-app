@@ -82,7 +82,6 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: AppLocalizations.supportedLocales,
             locale: Locale(appLanguageConfig.selectedLocal),
             theme: AppTheme.lightTheme,
-
             onGenerateRoute: Routes.onGenerate,
           );
         },

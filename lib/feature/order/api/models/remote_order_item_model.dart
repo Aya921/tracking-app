@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_item_entity.dart';
 import 'package:tracking_app/feature/home/api/models/remote_product_model.dart';
+
+import '../../domain/entity/order_item_entity.dart';
 
 part 'remote_order_item_model.g.dart';
 

@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/home/data/source/home_local_data_source.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/local/models/order_local_model.dart';
 import 'package:collection/collection.dart';
 

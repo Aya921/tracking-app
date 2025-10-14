@@ -91,6 +91,39 @@
   "paymentMethod": "Payment method",
   "statusLabel": "Status :",
   "orderIdLabel": "Order ID :",
+
+
+  "floweryRider":"Flowery rider",
+  "processCompletedSuccessfully":"process completed successfully",
+  "noOrdersFound":"No Orders Found",
+  "unExpectedErrorfound":"unExpected Error found",
+   "flowerOrder": "Flower order",
+   "pickupAddress":"Pickup address",
+   "userAddress":"User address",
+   "egp":"EGP",
+   "reject":"Reject",
+   "accept":"Accept",
+    "orderDetailsTitle": "Order details",
+     "arrivedAtPickupPoint": "Arrived at Pickup point",
+     "startDeliver": "Start deliver",
+     "arrivedToUser": "Arrived to User",
+     "deliverToUser": "Deliver to the user",
+     "total": "Total",
+     "paymentMethod": "Payment method",
+     "statusLabel": "Status :",
+       "orderIdLabel": "Order ID :",
+      "orderDetails": "Order details ",
+    "myOrder": " My orders  ",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "recentOrders": "Recent orders",
+    "inProgress" : "InProgress",
+
+
+
+
+
+
   "update": "Update",
   "editProfileTitle": "Edit profile",
   "profileUpdated": "Profile updated successfully",

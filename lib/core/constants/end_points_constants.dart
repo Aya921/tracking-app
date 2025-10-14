@@ -25,4 +25,7 @@ static const String signinEndPoint="drivers/signin";
 
   // change password
   static const String changePassword = "drivers/change-password";
+
+  static const String getAllDriverOrders = "orders/driver-orders";
+
  }

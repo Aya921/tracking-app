@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_info_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_info_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/payment_info_entity.dart';
 import 'package:tracking_app/feature/home/local/models/product_model_local.dart';
 import 'package:tracking_app/feature/home/local/models/order_item_local_model.dart';

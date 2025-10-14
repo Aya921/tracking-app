@@ -5,8 +5,9 @@ import 'package:tracking_app/core/responsive/size_provider.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_item_entity.dart';
-import 'package:tracking_app/feature/home/presentaion/view/widgets/cache_image.dart';
+import 'package:tracking_app/core/widgets/cache_image.dart';
+
+import '../../../../order/domain/entity/order_item_entity.dart';
 
 class OrderDetailsCard extends StatelessWidget {
   final OrderItemEntity orderItemEntity;

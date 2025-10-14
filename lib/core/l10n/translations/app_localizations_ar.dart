@@ -270,6 +270,24 @@ class AppLocalizationsAr extends AppLocalizations {
   String get orderIdLabel => 'رقم الطلب :';
 
   @override
+  String get orderDetails => 'تفاصيل الطلب  ';
+
+  @override
+  String get myOrder => ' طلبي  ';
+
+  @override
+  String get completed => 'المكتمل';
+
+  @override
+  String get cancelled => 'الملغيs';
+
+  @override
+  String get recentOrders => 'الطلبات الاخيره';
+
+  @override
+  String get inProgress => 'قيد التقدم ';
+
+  @override
   String get editProfileTitle => 'تعديل الملف الشخصي';
 
   @override

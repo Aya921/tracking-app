@@ -8,7 +8,6 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/reset_passwo
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
-import 'package:tracking_app/feature/home/presentaion/view/page/order_details_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/thanks_page.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
@@ -16,12 +15,16 @@ import 'package:tracking_app/feature/profile/presentation/views/screens/edit_veh
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
+import '../../feature/order/domain/entity/order_entity.dart';
+
+import '../../feature/order/presentation/view/page/order_driver_details.dart';
 import '../../feature/profile/presentation/views/screens/change_password.dart';
 
 
 abstract class Routes {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
+
 
   static Route onGenerate(RouteSettings settings) {
     final url = Uri.parse(settings.name ?? '/');
@@ -105,12 +108,14 @@ abstract class Routes {
               return const ChangePasswordScreen();
             });
 
-      case AppRoute.orderDetails:
-        final orderId = settings.arguments as String;
+
+   
+      case AppRoute.orderDriverDetails:
+        final order = settings.arguments as OrderEntity;
         return MaterialPageRoute(
-            builder: (context) {
-              return OrderDetailsScreen(orderId: orderId);
-            },);
+          builder: (context) {
+            return OrderDriverDetails(order: order);
+          },);
 
       default:
         return MaterialPageRoute(

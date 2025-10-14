@@ -614,6 +614,42 @@ abstract class AppLocalizations {
   /// **'Order ID :'**
   String get orderIdLabel;
 
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order details '**
+  String get orderDetails;
+
+  /// No description provided for @myOrder.
+  ///
+  /// In en, this message translates to:
+  /// **' My orders  '**
+  String get myOrder;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @recentOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent orders'**
+  String get recentOrders;
+
+  /// No description provided for @inProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'InProgress'**
+  String get inProgress;
+
   /// No description provided for @editProfileTitle.
   ///
   /// In en, this message translates to:

@@ -1,12 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
 import 'package:tracking_app/feature/home/api/models/metadata_model.dart';
-import 'package:tracking_app/feature/home/api/models/remote_order_model.dart';
+import 'package:tracking_app/feature/order/api/models/remote_order_model.dart';
 
-part 'order_response_model.g.dart';
+
+part 'pending_order_response_model.g.dart';
 
 @JsonSerializable()
-class OrderResponse {
+class PendingOrderResponseModel {
   @JsonKey(name: JsonSerlizationConstants.message)
   String? message;
 
@@ -16,10 +17,10 @@ class OrderResponse {
   @JsonKey(name: JsonSerlizationConstants.orders) 
   List<RemoteOrderModel>? orders;
 
-  OrderResponse({this.message, this.metadata, this.orders});
+  PendingOrderResponseModel({this.message, this.metadata, this.orders});
 
-  factory OrderResponse.fromJson(Map<String, dynamic> json) =>
-      _$OrderResponseFromJson(json);
+  factory PendingOrderResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$PendingOrderResponseModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$OrderResponseToJson(this);
+  Map<String, dynamic> toJson() => _$PendingOrderResponseModelToJson(this);
 }

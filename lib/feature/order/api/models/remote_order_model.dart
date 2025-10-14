@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tracking_app/core/constants/json_serlization_constants.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
-import 'package:tracking_app/feature/home/api/models/remote_order_item_model.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/api/models/remote_order_item_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_shipping_address_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_store_model.dart';
 import 'package:tracking_app/feature/home/api/models/remote_user_model.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_info_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_info_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/payment_info_entity.dart';
 part 'remote_order_model.g.dart';
 

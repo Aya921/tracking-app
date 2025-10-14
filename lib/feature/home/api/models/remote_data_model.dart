@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
-import 'package:tracking_app/feature/home/api/models/remote_driver_model.dart';
-import 'package:tracking_app/feature/home/api/models/remote_order_model.dart';
+import 'package:tracking_app/feature/order/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/order/api/models/remote_driver_model.dart';
+import 'package:tracking_app/feature/order/api/models/remote_order_model.dart';
 part 'remote_data_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)

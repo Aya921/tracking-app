@@ -6,7 +6,7 @@ import 'package:tracking_app/core/responsive/size_provider.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/address_container.dart';
 import 'package:tracking_app/feature/home/presentaion/view/widgets/custum_btn.dart';
 

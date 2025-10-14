@@ -5,7 +5,7 @@ import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_manger.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
-import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
+import 'package:tracking_app/feature/order/domain/entity/order_entity.dart';
 
 class StatusContainer extends StatelessWidget {
   final OrderEntity order;

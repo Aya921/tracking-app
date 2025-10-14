@@ -19,7 +19,8 @@ class MetadataModel {
         this.limit,
     });
 
-    factory MetadataModel.fromJson(Map<String, dynamic> json) => _$MetadataModelFromJson(json);
+    factory MetadataModel.fromJson(Map<String, dynamic> json) =>
+        _$MetadataModelFromJson(json);
 
     Map<String, dynamic> toJson() => _$MetadataModelToJson(this);
 }
