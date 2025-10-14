@@ -17,6 +17,7 @@ static const String signinEndPoint="drivers/signin";
 
   // startState
   static const String startOrderEndPoint = "orders/start/";
+  static const String updateOrderEndPoint = "orders/state/";
 
 
   static const String uploadDriverPhoto = "drivers/upload-photo";

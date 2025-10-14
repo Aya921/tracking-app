@@ -290,4 +290,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateVehicleInformation => '✅ update Vehicle Information';
+
+  @override
+  String get thanku => 'Thank You!!';
+
+  @override
+  String get orderCompleted => 'The order delivered successfully';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get orderPlacedSuccessfullyTitle => 'The order placed successfully!';
 }

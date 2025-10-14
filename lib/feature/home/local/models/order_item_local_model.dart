@@ -1,7 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_item_entity.dart';
 import 'package:tracking_app/feature/home/local/models/product_model_local.dart';
-//part 'order_item_local_model.g.dart';
+part 'order_item_local_model.g.dart';
 @embedded
 class OrderItemLocalModel {
   late int price;

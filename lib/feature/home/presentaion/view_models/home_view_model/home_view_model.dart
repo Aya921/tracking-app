@@ -242,11 +242,11 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     );
     switch (res) {
       case SucessResult<OrderResponseEntity>():
-        emit(state.copyWith(updateState: true));
+        emit(state.copyWith(updateState: true,isLoading: false));
 
       // await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
       case FailedResult<OrderResponseEntity>():
-        emit(state.copyWith(errorMessage: res.errorMessage));
+        emit(state.copyWith(errorMessage: res.errorMessage,isLoading:false));
     }
   }
 

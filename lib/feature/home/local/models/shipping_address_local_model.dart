@@ -1,7 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:tracking_app/feature/home/domain/entity/shipping_address_entity.dart';
 
-//part 'shipping_address_local_model.g.dart';
+part 'shipping_address_local_model.g.dart';
 
 @embedded
 class ShippingAddressLocalModel {

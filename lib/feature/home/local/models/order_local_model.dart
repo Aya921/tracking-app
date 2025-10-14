@@ -11,7 +11,7 @@ import 'package:tracking_app/feature/home/local/models/user_local_model.dart';
 part 'order_local_model.g.dart';
 
 @Collection()
-@embedded
+
 class OrderLocalModel {
   
   String get id => orderId;

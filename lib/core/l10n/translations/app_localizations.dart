@@ -655,6 +655,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'✅ update Vehicle Information'**
   String get updateVehicleInformation;
+
+  /// No description provided for @thanku.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank You!!'**
+  String get thanku;
+
+  /// No description provided for @orderCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'The order delivered successfully'**
+  String get orderCompleted;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @orderPlacedSuccessfullyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The order placed successfully!'**
+  String get orderPlacedSuccessfullyTitle;
 }
 
 class _AppLocalizationsDelegate

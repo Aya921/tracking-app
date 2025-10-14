@@ -21,7 +21,7 @@ abstract class HomeApiService {
   Future<UpdateStateResponseModel> startOrder(@Path("orderId") String orderId);
 
 
-@PUT("${EndPointsConstants.startOrderEndPoint}{orderId}")
+@PUT("${EndPointsConstants.updateOrderEndPoint}{orderId}")
 Future<UpdateStateResponseModel> updateOrderState(
   @Path("orderId") String orderId,
   @Body() UpdateStateRequestModel newState,

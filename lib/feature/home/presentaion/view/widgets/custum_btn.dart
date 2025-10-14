@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
-import 'package:tracking_app/core/enums/address_type.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
@@ -10,6 +9,7 @@ import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
+import 'package:tracking_app/feature/home/domain/enum/order_state_enum.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_view_model.dart';
 
@@ -67,7 +67,7 @@ class CustumBtn extends StatelessWidget {
                   role: "driver",
                   createdAt: "2025-01-01T10:00:00.000Z",
                 ),
-                order.copyWith(orderInfoEntity: order.orderInfoEntity.copyWith(state: OrderStates.inProgress.name)),
+                order.copyWith(orderInfoEntity: order.orderInfoEntity.copyWith(state: ApiOrderStates.inProgress.name)),
                   'Accepted'
               );
 

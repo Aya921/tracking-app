@@ -57,4 +57,6 @@ abstract class Constants {
   static const String noImgSelected = "No image selected";
   static const String failedPickImg = "Failed to pick image";
   static const String maskedPass = "★★★★★★";
+
+  
 }
