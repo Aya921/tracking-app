@@ -1,0 +1,1 @@
+enum ApiOrderStates { inProgress, pending, canceled,completed }

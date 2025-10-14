@@ -1,5 +1,5 @@
-class StrartOrderRequestEntity {
+class UpdateOrderRequestEntity {
   final String orderState;
 
-  const StrartOrderRequestEntity(this.orderState);
+  const UpdateOrderRequestEntity(this.orderState);
 }

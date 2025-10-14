@@ -4,13 +4,14 @@ import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
-import 'package:tracking_app/feature/home/domain/entity/start_order_response_entity.dart';
+import 'package:tracking_app/feature/home/domain/entity/update_order_response_entity.dart';
 import 'package:tracking_app/feature/home/domain/usecase/add_data_to_remote.dart';
 import 'package:tracking_app/feature/home/domain/usecase/delete_local_order.dart';
 import 'package:tracking_app/feature/home/domain/usecase/get_all_pending_orders.dart';
 import 'package:tracking_app/feature/home/domain/usecase/get_all_saved_orders.dart';
 import 'package:tracking_app/feature/home/domain/usecase/get_data_from_remote.dart';
 import 'package:tracking_app/feature/home/domain/usecase/save_data_to_local.dart';
+import 'package:tracking_app/feature/home/domain/usecase/start_order_state.dart';
 import 'package:tracking_app/feature/home/domain/usecase/update_order_state.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_events.dart';
 import 'package:tracking_app/feature/home/presentaion/view_models/home_view_model/home_states.dart';
@@ -22,18 +23,21 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   final SaveDataToLocalUseCase _saveDataToLocalUseCase;
   final GetAllSavedOrdersUseCase _getAllSavedOrdersUseCase;
   final DeleteLocalOrderUseCase _deleteLocalOrderUseCase;
-  final UpdateOrderStateUseCase _updateOrderStateUseCase;
+  final StartOrderStateUseCase _startOrderStateUseCase;
   final AddDataToRemoteUseCase _addDataToRemoteUseCase;
   final GetDataFromRemoteUseCase _getDataFromRemoteUseCase;
+  final UpdateOrderStateUseCase _updateOrderStateUseCase;
+
   bool firtTime = true;
   HomeViewModel(
     this._getAllPendingOrdersUseCase,
     this._saveDataToLocalUseCase,
     this._getAllSavedOrdersUseCase,
     this._deleteLocalOrderUseCase,
-    this._updateOrderStateUseCase,
+    this._startOrderStateUseCase,
     this._addDataToRemoteUseCase,
     this._getDataFromRemoteUseCase,
+    this._updateOrderStateUseCase,
   ) : super(HomeStates()) {
     on<GetAllPaindingOrdersEvent>(_getAllPedningOrders);
     on<GetAllLocalOrdersEvent>(_getLocalOrders);
@@ -46,6 +50,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     on<GetDataFromRemoteEvent>(_getDataFromRemote);
     on<CallUserEvent>(_callUser);
     on<WhatsAppUserEvent>(_openWhatsApp);
+    on<UpdateOrderEvent>(_updateOrderState);
   }
 
   // add to firebase
@@ -70,14 +75,14 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     switch (res) {
       case SucessResult<void>():
         emit(state.copyWith(addedToRemote: true)); //1
-        final startRes = await _updateOrderStateUseCase.startOrder(
+        final startRes = await _startOrderStateUseCase.startOrder(
           event.remoteDataEntity.orderEntity.id,
         );
 
         // final startRes = FailedResult<StartOrderResponseEntity>("error in start order ");   to test if error happend
 
         switch (startRes) {
-          case SucessResult<StartOrderResponseEntity>():
+          case SucessResult<OrderResponseEntity>():
             emit(state.copyWith(orderStarted: true)); //2
 
             final ordersRes = await _getAllPendingOrdersUseCase
@@ -110,7 +115,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
                 );
             }
 
-          case FailedResult<StartOrderResponseEntity>():
+          case FailedResult<OrderResponseEntity>():
             emit(
               state.copyWith(
                 isLoading: false,
@@ -144,7 +149,6 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     GetAllPaindingOrdersEvent event,
     Emitter emit,
   ) async {
-   
     emit(state.copyWith(isLoading: true));
     final res = await _getAllPendingOrdersUseCase.getAllPendingOrders();
 
@@ -173,7 +177,6 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     GetAllLocalOrdersEvent event,
     Emitter emit,
   ) async {
-   
     final res = await _getAllSavedOrdersUseCase.getAllSavedOrders();
     switch (res) {
       case SucessResult<List<OrderEntity>?>():
@@ -199,7 +202,6 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     DeleteOrderLocalyEvent event,
     Emitter emit,
   ) async {
-   
     final res = await _deleteLocalOrderUseCase.deleteOrder(event.orderId);
 
     switch (res) {
@@ -222,14 +224,29 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   }
 
   Future<void> _startOrder(StartOrderEvent event, Emitter emit) async {
-    final res = await _updateOrderStateUseCase.startOrder(event.orderId);
+    final res = await _startOrderStateUseCase.startOrder(event.orderId);
     switch (res) {
-      case SucessResult<StartOrderResponseEntity>():
+      case SucessResult<OrderResponseEntity>():
         emit(state.copyWith(orderStarted: true));
 
       // await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
-      case FailedResult<StartOrderResponseEntity>():
+      case FailedResult<OrderResponseEntity>():
         emit(state.copyWith(errorMessage: res.errorMessage));
+    }
+  }
+
+  Future<void> _updateOrderState(UpdateOrderEvent event, Emitter emit) async {
+    final res = await _updateOrderStateUseCase.updateOrderState(
+      event.req,
+      event.orderId,
+    );
+    switch (res) {
+      case SucessResult<OrderResponseEntity>():
+        emit(state.copyWith(updateState: true,isLoading: false));
+
+      // await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
+      case FailedResult<OrderResponseEntity>():
+        emit(state.copyWith(errorMessage: res.errorMessage,isLoading:false));
     }
   }
 
@@ -244,8 +261,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       case SucessResult<void>():
         emit(state.copyWith(addedToRemote: true));
       case FailedResult<void>():
-       emit(state.copyWith(errorMessage: res.errorMessage));
-      
+        emit(state.copyWith(errorMessage: res.errorMessage));
     }
   }
 
@@ -258,16 +274,21 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       onData: (data) {
         switch (data) {
           case SucessResult<RemoteDataEntity>():
-            return state.copyWith(remoteData: data.sucessResult,isLoading:false);
+            return state.copyWith(
+              remoteData: data.sucessResult,
+              isLoading: false,
+            );
           case FailedResult<RemoteDataEntity>():
-            return state.copyWith(errorMessage: data.errorMessage,isLoading:false);
+            return state.copyWith(
+              errorMessage: data.errorMessage,
+              isLoading: false,
+            );
         }
       },
     );
   }
 
-  Future<void> _callUser(
-      CallUserEvent event, Emitter<HomeStates> emit) async {
+  Future<void> _callUser(CallUserEvent event, Emitter<HomeStates> emit) async {
     final Uri uri = Uri(scheme: 'tel', path: "0${event.phoneNumber}");
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -277,7 +298,9 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   }
 
   Future<void> _openWhatsApp(
-      WhatsAppUserEvent event, Emitter<HomeStates> emit) async {
+    WhatsAppUserEvent event,
+    Emitter<HomeStates> emit,
+  ) async {
     final phone = event.phoneNumber.startsWith("0")
         ? "2${event.phoneNumber.substring(1)}"
         : event.phoneNumber;
@@ -292,5 +315,4 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       emit(state.copyWith(errorMessage: Constants.whatsAppError));
     }
   }
-
 }

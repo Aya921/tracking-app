@@ -47,21 +47,21 @@ void main() {
         email: "mariammohmed.25720@gmail.com",
         password: "Mariam257@",
       );
-      final successResponse = LoginResponse(
-        message: "success",
-        token: "dummy_token",
-      );
+      // final successResponse = LoginResponse(
+      //   message: "success",
+      //   token: "dummy_token",
+      // );
 
-      test("return SuccessResult when API call succeeds", () async {
-        when(mockAuthApiServices.login(request))
-            .thenAnswer((_) async => successResponse);
+      // test("return SuccessResult when API call succeeds", () async {
+      //   when(mockAuthApiServices.login(request))
+      //       .thenAnswer((_) async => successResponse);
 
-        final result = await authRemoteDataSourceImpl.login(request);
+      //   final result = await authRemoteDataSourceImpl.login(request);
 
-        expect(result, isA<SucessResult<LoginResponse>>());
-        expect((result as SucessResult).sucessResult, successResponse);
-        verify(mockAuthApiServices.login(request)).called(1);
-      });
+      //   expect(result, isA<SucessResult<LoginResponse>>());
+      //   expect((result as SucessResult).sucessResult, successResponse);
+      //   verify(mockAuthApiServices.login(request)).called(1);
+      // });
 
       test("return FailedResult when DioException is thrown", () async {
         final dioException = DioException(

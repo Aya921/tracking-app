@@ -1,10 +1,10 @@
-class StartOrderItemEntity {
+class OrderItemResponseEntity {
   String product;
   int price;
   int quantity;
   String id;
 
-  StartOrderItemEntity({
+  OrderItemResponseEntity({
     required this.product,
     required this.price,
     required this.quantity,

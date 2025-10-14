@@ -9,6 +9,7 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/order_details_screen.dart';
+import 'package:tracking_app/feature/home/presentaion/view/page/thanks_page.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
@@ -39,6 +40,11 @@ abstract class Routes {
       case (AppRoute.onBoarding):
         return MaterialPageRoute(
           builder: (context) => const OnBoarddingScreen(),
+        );
+      case (AppRoute.thanksPage):
+        final orderId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) =>  ThanksPage(orderId: orderId,),
         );
 
       case AppRoute.forgetPasswordScreen:
