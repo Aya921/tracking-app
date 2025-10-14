@@ -47,10 +47,10 @@ void main() {
         email: "mariammohmed.25720@gmail.com",
         password: "Mariam257@",
       );
-      final successResponse = LoginResponse(
-        message: "success",
-        token: "dummy_token",
-      );
+      // final successResponse = LoginResponse(
+      //   message: "success",
+      //   token: "dummy_token",
+      // );
 
       // test("return SuccessResult when API call succeeds", () async {
       //   when(mockAuthApiServices.login(request))
