@@ -26,7 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late DriverEntity? driverEntity;
+  DriverEntity? driverEntity;
   final HomeViewModel _homeViewModel = getIt<HomeViewModel>();
   final ProfileBloc _profileBloc = getIt<ProfileBloc>();
 
@@ -73,8 +73,12 @@ class _HomePageState extends State<HomePage> {
                     BlocListener<ProfileBloc, ProfileState>(
                       listener: (context, state) {
                         if (state.driver != null) {
-                  
-                          driverEntity = state.driver;
+                          setState(() {
+                             driverEntity = state.driver;
+                          });
+                         
+
+                         
                         }
                         if (state.errorMessage != null) {
                           ScaffoldMessenger.of(context).showSnackBar(
