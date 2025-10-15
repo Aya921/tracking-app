@@ -69,7 +69,10 @@ abstract class Routes {
         return MaterialPageRoute(
           builder: (context) => ResetPasswordScreen(email: email),
         );
-
+      case AppRoute.pickUpScreen:
+        return MaterialPageRoute(
+          builder: (context) =>const  PickUpLocationScreen(),
+        );
       case AppRoute.approveScreen:
         return MaterialPageRoute(
           builder: (context) {
