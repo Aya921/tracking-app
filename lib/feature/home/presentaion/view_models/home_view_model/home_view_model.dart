@@ -64,8 +64,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   Future<void> _startOrderProcess(
     StartProgressEvnet event,
     Emitter<HomeStates> emit,
-  )
-  async {
+  ) async {
     emit(state.copyWith(isLoading: true));
 
     final res = await _addDataToRemoteUseCase.addDateToRemote(
@@ -104,6 +103,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
                     remoteData: event.remoteDataEntity,
                   ),
                 );
+                emit(state.copyWith(processCompleted: false));
 
               case FailedResult<List<OrderEntity>?>():
                 emit(
@@ -138,7 +138,6 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
   }
 
   void _getOrders(GetOrdersEvent event, Emitter<HomeStates> emit) async {
-    
     if (firtTime) {
       await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
       firtTime = false;
@@ -156,7 +155,9 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
 
     switch (res) {
       case SucessResult<List<OrderEntity>?>():
-        _saveDataToLocalUseCase.saveDataToLocalStorage(res.sucessResult);    //! ask here is that correct or should call _SuccessResult function here
+        _saveDataToLocalUseCase.saveDataToLocalStorage(
+          res.sucessResult,
+        ); //! ask here is that correct or should call _SuccessResult function here
         emit(
           state.copyWith(
             isLoading: false,
@@ -244,11 +245,11 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
     );
     switch (res) {
       case SucessResult<OrderResponseEntity>():
-        emit(state.copyWith(updateState: true,isLoading: false));
+        emit(state.copyWith(updateState: true, isLoading: false));
 
       // await _getAllPedningOrders(GetAllPaindingOrdersEvent(), emit);
       case FailedResult<OrderResponseEntity>():
-        emit(state.copyWith(errorMessage: res.errorMessage,isLoading:false));
+        emit(state.copyWith(errorMessage: res.errorMessage, isLoading: false));
     }
   }
 
@@ -276,6 +277,7 @@ class HomeViewModel extends Bloc<HomeEvents, HomeStates> {
       onData: (data) {
         switch (data) {
           case SucessResult<RemoteDataEntity>():
+           
             return state.copyWith(
               remoteData: data.sucessResult,
               isLoading: false,

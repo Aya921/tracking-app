@@ -90,7 +90,7 @@ class _ThanksPageState extends State<ThanksPage> {
                 ),
               );
             }
-            return Text(context.loc.unExpectedErrorfound);
+            return const CommonLoading();
           },
         ),
       ),

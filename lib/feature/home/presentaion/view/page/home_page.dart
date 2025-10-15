@@ -74,11 +74,8 @@ class _HomePageState extends State<HomePage> {
                       listener: (context, state) {
                         if (state.driver != null) {
                           setState(() {
-                             driverEntity = state.driver;
+                            driverEntity = state.driver;
                           });
-                         
-
-                         
                         }
                         if (state.errorMessage != null) {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -90,11 +87,13 @@ class _HomePageState extends State<HomePage> {
                     BlocListener<HomeViewModel, HomeStates>(
                       listener: (context, state) {
                         if (state.processCompleted == true) {
-                          Navigator.pushNamed(
+                         
+                          Navigator.pushReplacementNamed(
                             context,
                             AppRoute.orderDetails,
                             arguments: state.remoteData!.orderEntity.id,
                           );
+                         
                         }
                         if (state.errorMessage != null) {
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -8,9 +8,9 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/reset_passwo
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
+import 'package:tracking_app/feature/home/presentaion/view/page/thanks_page.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
-import 'package:tracking_app/feature/pick_location/presentation/view/screens/pick_up_location_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
@@ -34,6 +34,14 @@ abstract class Routes {
         return MaterialPageRoute(
           builder: (context) {
             return const AppSection();
+          },
+        );
+      case AppRoute.thanksPage:
+       final orderId = settings.arguments as String;
+        return MaterialPageRoute(
+
+          builder: (context) {
+            return  ThanksPage(orderId:orderId ,);
           },
         );
 
