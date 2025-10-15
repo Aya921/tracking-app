@@ -44,8 +44,10 @@
   "vehicleNumber": "رقم المركبة",
   "vehicleNumberRequired": "مطلوب رقم المركبة",
   "vehicleLicense": "رخصة القيادة",
+
   "uploadLicense": "ارفع صورة الرخصة",
   "uploadNid": "ارفع صورة البطاقة",
+
   "email": "الإيميل",
   "phone": "رقم التليفون",
   "nid": "رقم البطاقة",
@@ -54,9 +56,11 @@
   "rePassword": "تأكيد كلمة المرور",
   "passwordTooShort": "الحد الأدنى ٦ حروف",
   "passwordNotMatch": "كلمة المرور غير متطابقة",
+
   "gender": "النوع",
   "female": "أنثى",
   "male": "ذكر",
+
   "continueBtn": "متابعة",
   "pleaseUploadBothImages": "من فضلك قم برفع الصورتين",
   "required": "مطلوب",

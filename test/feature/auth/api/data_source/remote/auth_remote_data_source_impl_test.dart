@@ -22,73 +22,72 @@ import 'package:tracking_app/feature/auth/domain/entity/country_entity.dart';
 
 import 'auth_remote_data_source_impl_test.mocks.dart';
 import 'package:flutter/services.dart';
-
-@GenerateMocks([AuthApiServices, AssetBundle])
+@GenerateMocks([AuthApiServices,AssetBundle])
 void main() {
   late MockAuthApiServices mockAuthApiServices;
   late AuthRemoteDataSourceImpl authRemoteDataSourceImpl;
   late MockAssetBundle mockAssetBundle;
   TestWidgetsFlutterBinding.ensureInitialized();
 
+
   setUp(() async {
     // إنشاء فايل مؤقت لكل test
 
     mockAuthApiServices = MockAuthApiServices();
     authRemoteDataSourceImpl = AuthRemoteDataSourceImpl(mockAuthApiServices);
-    mockAssetBundle = MockAssetBundle();
-    provideDummy<Result<List<CountryEntity>>>(
-      FailedResult("Dummy Error in countries"),
-    );
+    mockAssetBundle=MockAssetBundle();
+    provideDummy<Result<LoginResponse>>(FailedResult("Dummy Error  in Login"));
+    provideDummy<Result<List<CountryEntity>>>(FailedResult("Dummy Error in countries"));
   });
+
+
 
   group("AuthRemoteDataSourceImpl Tests", () {
     group("Login", () {
-      final request = LoginRequest(
+      final requestLogin = LoginRequest(
         email: "mariammohmed.25720@gmail.com",
         password: "Mariam257@",
       );
-      // final successResponse = LoginResponse(
-      //   message: "success",
-      //   token: "dummy_token",
-      // );
+      final successResponseLogin = LoginResponse(
+        message: "success",
+        token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQwNDIyY2RkODkzN2UwNTczZWUwNmMiLCJpYXQiOjE3NTg1NTIyNzF9.PHzemBMcIvQJN2J0NWtzPU5q3JdGq1mXiISTq25qMpY",
+      );
+      test("return SuccessResult when API call succeeds", () async {
+        when(mockAuthApiServices.login(requestLogin))
+            .thenAnswer((_) async => successResponseLogin);
 
-      // test("return SuccessResult when API call succeeds", () async {
-      //   when(mockAuthApiServices.login(request))
-      //       .thenAnswer((_) async => successResponse);
+        final result = await authRemoteDataSourceImpl.login(requestLogin);
 
-      //   final result = await authRemoteDataSourceImpl.login(request);
-
-      //   expect(result, isA<SucessResult<LoginResponse>>());
-      //   expect((result as SucessResult).sucessResult, successResponse);
-      //   verify(mockAuthApiServices.login(request)).called(1);
-      // });
+        expect(result, isA<Result<LoginResponse>>());
+        expect((result as SucessResult).sucessResult, successResponseLogin);
+        verify(mockAuthApiServices.login(requestLogin)).called(1);
+      });
 
       test("return FailedResult when DioException is thrown", () async {
         final dioException = DioException(
           requestOptions: RequestOptions(path: "/"),
           type: DioExceptionType.connectionTimeout,
         );
-        when(mockAuthApiServices.login(request)).thenThrow(dioException);
+        when(mockAuthApiServices.login(requestLogin)).thenThrow(dioException);
 
-        final result = await authRemoteDataSourceImpl.login(request);
+        final result = await authRemoteDataSourceImpl.login(requestLogin);
 
         expect(result, isA<FailedResult<LoginResponse>>());
-        expect(
-          (result as FailedResult).errorMessage,
-          "ServerFailure with Api Server",
-        );
-        verify(mockAuthApiServices.login(request)).called(1);
+        expect((result as FailedResult).errorMessage,
+            "ServerFailure with Api Server");
+        verify(mockAuthApiServices.login(requestLogin)).called(1);
       });
 
       test("return FailedResult when generic Exception is thrown", () async {
         final exception = Exception("Unexpected error");
-        when(mockAuthApiServices.login(request)).thenThrow(exception);
+        when(mockAuthApiServices.login(requestLogin)).thenThrow(exception);
 
-        final result = await authRemoteDataSourceImpl.login(request);
+        final result = await authRemoteDataSourceImpl.login(requestLogin);
 
         expect(result, isA<FailedResult<LoginResponse>>());
         expect((result as FailedResult).errorMessage, exception.toString());
-        verify(mockAuthApiServices.login(request)).called(1);
+        verify(mockAuthApiServices.login(requestLogin)).called(1);
       });
     });
 
@@ -96,13 +95,10 @@ void main() {
       const email = "test11@gmail.com";
 
       test("return SuccessResult when OTP is sent", () async {
-        final fakeResponse = ForgetPasswordResponse(
-          info: "OTP sent to your email",
-          message: "success",
-        );
-        when(
-          mockAuthApiServices.forgetPassword({"email": email}),
-        ).thenAnswer((_) async => fakeResponse);
+        final fakeResponse =
+            ForgetPasswordResponse(info: "OTP sent to your email", message: "success");
+        when(mockAuthApiServices.forgetPassword({"email": email}))
+            .thenAnswer((_) async => fakeResponse);
 
         final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
@@ -113,19 +109,15 @@ void main() {
 
       test("return FailedResult when API returns error", () async {
         final fakeResponse = ForgetPasswordResponse(
-          error: "There is no account with this email address $email",
-        );
-        when(
-          mockAuthApiServices.forgetPassword({"email": email}),
-        ).thenAnswer((_) async => fakeResponse);
+            error: "There is no account with this email address $email");
+        when(mockAuthApiServices.forgetPassword({"email": email}))
+            .thenAnswer((_) async => fakeResponse);
 
         final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
         expect(result, isA<FailedResult<String>>());
-        expect(
-          (result as FailedResult).errorMessage,
-          "There is no account with this email address $email",
-        );
+        expect((result as FailedResult).errorMessage,
+            "There is no account with this email address $email");
         verify(mockAuthApiServices.forgetPassword(any)).called(1);
       });
 
@@ -146,25 +138,20 @@ void main() {
         final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
         expect(result, isA<FailedResult<String>>());
-        expect(
-          (result as FailedResult).errorMessage,
-          "There is no account with this email address $email",
-        );
+        expect((result as FailedResult).errorMessage,
+            "There is no account with this email address $email");
         verify(mockAuthApiServices.forgetPassword(any)).called(1);
       });
 
       test("return FailedResult when generic Exception is thrown", () async {
-        when(
-          mockAuthApiServices.forgetPassword(any),
-        ).thenThrow(Exception("Unexpected error"));
+        when(mockAuthApiServices.forgetPassword(any))
+            .thenThrow(Exception("Unexpected error"));
 
         final result = await authRemoteDataSourceImpl.forgetPassword(email);
 
         expect(result, isA<FailedResult<String>>());
-        expect(
-          (result as FailedResult).errorMessage,
-          Exception("Unexpected error").toString(),
-        );
+        expect((result as FailedResult).errorMessage,
+            Exception("Unexpected error").toString());
         verify(mockAuthApiServices.forgetPassword(any)).called(1);
       });
     });
@@ -174,25 +161,20 @@ void main() {
 
       test("return SuccessResult when code is valid", () async {
         final fakeResponse = {"status": "Code verified successfully"};
-        when(
-          mockAuthApiServices.verifyResetCode({"resetCode": code}),
-        ).thenAnswer((_) async => fakeResponse);
+        when(mockAuthApiServices.verifyResetCode({"resetCode": code}))
+            .thenAnswer((_) async => fakeResponse);
 
         final result = await authRemoteDataSourceImpl.verifyResetCode(code);
 
         expect(result, isA<SucessResult<String>>());
-        expect(
-          (result as SucessResult).sucessResult,
-          "Code verified successfully",
-        );
+        expect((result as SucessResult).sucessResult, "Code verified successfully");
         verify(mockAuthApiServices.verifyResetCode(any)).called(1);
       });
 
       test("return FailedResult when API returns error", () async {
         final fakeResponse = {"error": "Invalid reset code"};
-        when(
-          mockAuthApiServices.verifyResetCode({"resetCode": code}),
-        ).thenAnswer((_) async => fakeResponse);
+        when(mockAuthApiServices.verifyResetCode({"resetCode": code}))
+            .thenAnswer((_) async => fakeResponse);
 
         final result = await authRemoteDataSourceImpl.verifyResetCode(code);
 
@@ -226,42 +208,29 @@ void main() {
       const newPassword = "12345678";
 
       test("return SuccessResult when reset is successful", () async {
-        final fakeResponse = ResetPasswordResponse(
-          message: "Password reset successfully",
-        );
-        when(
-          mockAuthApiServices.resetPassword({
-            "email": email,
-            "newPassword": newPassword,
-          }),
-        ).thenAnswer((_) async => fakeResponse);
+        final fakeResponse =
+            ResetPasswordResponse(message: "Password reset successfully");
+        when(mockAuthApiServices
+                .resetPassword({"email": email, "newPassword": newPassword}))
+            .thenAnswer((_) async => fakeResponse);
 
-        final result = await authRemoteDataSourceImpl.resetPassword(
-          email,
-          newPassword,
-        );
+        final result =
+            await authRemoteDataSourceImpl.resetPassword(email, newPassword);
 
         expect(result, isA<SucessResult<String>>());
-        expect(
-          (result as SucessResult).sucessResult,
-          "Password reset successfully",
-        );
+        expect((result as SucessResult).sucessResult,
+            "Password reset successfully");
         verify(mockAuthApiServices.resetPassword(any)).called(1);
       });
 
       test("return FailedResult when API returns error", () async {
         final fakeResponse = ResetPasswordResponse(error: "Invalid request");
-        when(
-          mockAuthApiServices.resetPassword({
-            "email": email,
-            "newPassword": newPassword,
-          }),
-        ).thenAnswer((_) async => fakeResponse);
+        when(mockAuthApiServices
+                .resetPassword({"email": email, "newPassword": newPassword}))
+            .thenAnswer((_) async => fakeResponse);
 
-        final result = await authRemoteDataSourceImpl.resetPassword(
-          email,
-          newPassword,
-        );
+        final result =
+            await authRemoteDataSourceImpl.resetPassword(email, newPassword);
 
         expect(result, isA<FailedResult<String>>());
         expect((result as FailedResult).errorMessage, "Invalid request");
@@ -280,85 +249,67 @@ void main() {
         );
         when(mockAuthApiServices.resetPassword(any)).thenThrow(dioError);
 
-        final result = await authRemoteDataSourceImpl.resetPassword(
-          email,
-          newPassword,
-        );
+        final result =
+            await authRemoteDataSourceImpl.resetPassword(email, newPassword);
 
         expect(result, isA<FailedResult<String>>());
         expect((result as FailedResult).errorMessage, "Invalid request");
         verify(mockAuthApiServices.resetPassword(any)).called(1);
       });
     });
-    group("get vehicles", () {
-      final successResponse = AllVehiclesResponse(
-        message: "success",
-        metadata: Metadata(
+    group("get vehicles",(){
+      final successResponse=AllVehiclesResponse(
+        message: "success",metadata: Metadata(
           currentPage: 1,
           totalPages: 1,
           limit: 40,
-          totalItems: 7,
-        ),
+          totalItems: 7
+      ),
         vehicles: [
           Vehicles(
-            type: "Motor Cycle",
+type: "Motor Cycle",
             speed: 90,
             id: "676b63c99f3884b3405c149b",
-            image:
-                "https://flower.elevateegy.com/uploads/3be99805-65e0-4f05-9e98-4ccfb0b2ca5f-Chopper.png",
+            image: "https://flower.elevateegy.com/uploads/3be99805-65e0-4f05-9e98-4ccfb0b2ca5f-Chopper.png",
             createdAt: DateTime.parse("2024-12-25T01:45:45.397Z").toString(),
             updatedAt: DateTime.parse("2024-12-25T01:45:45.397Z").toString(),
-          ),
-        ],
+          )
+        ]
       );
       test(
-        "return SuccessResult when API call succeeds when get vehicles",
-        () async {
-          when(
-            mockAuthApiServices.getAllVehicles(),
-          ).thenAnswer((_) async => successResponse);
+          "return SuccessResult when API call succeeds when get vehicles", () async {
+        when(mockAuthApiServices.getAllVehicles()).thenAnswer((
+            _) async => successResponse);
 
-          final result = await authRemoteDataSourceImpl.getAllVehicles();
-          final vehicles = successResponse.vehicles
-              ?.map((e) => e.toEntity())
-              .toList();
-          expect(result, isA<SucessResult>());
+        final result = await authRemoteDataSourceImpl.getAllVehicles();
+        final vehicles=successResponse.vehicles?.map((e)=>e.toEntity()).toList();
+        expect(result, isA<SucessResult>());
 
-          expect((result as SucessResult).sucessResult, vehicles);
-          verify(mockAuthApiServices.getAllVehicles()).called(1);
-        },
-      );
-      test(
-        "return FailedResult when API call failed when get vehicles on dioException",
-        () async {
-          final dioException = DioException(
-            requestOptions: RequestOptions(path: "/"),
-            type: DioExceptionType.connectionTimeout,
-          );
-          when(mockAuthApiServices.getAllVehicles()).thenThrow(dioException);
-          final result = await authRemoteDataSourceImpl.getAllVehicles();
-          expect(result, isA<FailedResult>());
-          expect(
-            (result as FailedResult).errorMessage,
-            "ServerFailure with Api Server",
-          );
-          verify(mockAuthApiServices.getAllVehicles()).called(1);
-        },
-      );
-      test(
-        "return FailedResult when API call failed when get vehicles on exception",
-        () async {
-          final exception = Exception("Throw Exception");
-          when(mockAuthApiServices.getAllVehicles()).thenThrow(exception);
-          final result = await authRemoteDataSourceImpl.getAllVehicles();
-          expect(result, isA<FailedResult>());
-          expect((result as FailedResult).errorMessage, exception.toString());
-          verify(mockAuthApiServices.getAllVehicles()).called(1);
-        },
-      );
+        expect((result as SucessResult).sucessResult, vehicles);
+        verify(mockAuthApiServices.getAllVehicles()).called(1);
+      });
+      test("return FailedResult when API call failed when get vehicles on dioException" , ()async{
+        final dioException=DioException(requestOptions: RequestOptions(
+          path: "/"
+        ),type: DioExceptionType.connectionTimeout);
+        when(mockAuthApiServices.getAllVehicles()).thenThrow(dioException);
+        final result=await authRemoteDataSourceImpl.getAllVehicles();
+        expect(result, isA<FailedResult>());
+        expect((result as FailedResult).errorMessage, "ServerFailure with Api Server");
+        verify(mockAuthApiServices.getAllVehicles()).called(1);
+        
+      });
+      test("return FailedResult when API call failed when get vehicles on exception", ()async{
+        final exception=Exception("Throw Exception");
+        when(mockAuthApiServices.getAllVehicles()).thenThrow(exception);
+        final result=await authRemoteDataSourceImpl.getAllVehicles();
+        expect(result, isA<FailedResult>());
+        expect((result as FailedResult).errorMessage, exception.toString());
+        verify(mockAuthApiServices.getAllVehicles()).called(1);
+      });
     });
-    group("get all countries", () {
-      const countriesJson = '''
+group("get all countries", (){
+   const countriesJson = '''
     [
        {
     "isoCode": "AF",
@@ -380,103 +331,24 @@ void main() {
   }
     ]
   ''';
-      // final List<CountryEntity> countries=[
-      //   const CountryEntity(isoCode: "AF", name: "Afghanistan", phoneCode: "93", flag: "🇦🇫", currency: "AFN",
-      //       latitude: "33.00000000", longitude: "65.00000000", timezones: [
-      //         Timezone(zoneName: "Asia/Kabul", gmtOffset: 16200, gmtOffsetName: "UTC+04:30", abbreviation: "AFT", tzName: "Afghanistan Time")
-      //       ])
-      // ];
-      test("Should return ApiSuccessResult when load json", () async {
-        when(
-          mockAssetBundle.loadString("assets/json/country.json"),
-        ).thenAnswer((_) async => countriesJson);
-        final result = await authRemoteDataSourceImpl.getCountries();
-        expect(result, isA<SucessResult>());
-        final List<CountryEntity> data =
-            ((result as SucessResult).sucessResult);
-        final d = data[0];
-        expect(d.name, "Afghanistan");
-        expect(d.phoneCode, "93");
-      });
-    });
-    //     group("Apply ", (){
-    //    late    File fakeFile;
-    //
-    //       setUpAll(() async {
-    //         final tempDir = Directory.systemTemp;
-    //         fakeFile = File('${tempDir.path}/fake_image.png');
-    //         await fakeFile.writeAsBytes(Uint8List.fromList([0, 1, 2, 3]));
-    //       });
-    // final body=ApplyRequest(
-    //   authenticationInfo: AuthenticationInfo(
-    //      password: "Mariam257@",rePassword: "Mariam257@"
-    //   ),
-    //   locationInfo: LocationInfo(
-    //     country: "Egypt"
-    //   ),
-    //   vehicleInfo: VehicleInfo(
-    //     vehicleNumber: "12228",
-    //     vehicleLicense: fakeFile
-    //       ,vehicleType: ""
-    //   ),
-    //   personalInfo: PersonalInfo(
-    //     lastName: "mohmed2",
-    //     firstName: "mariam1",phone: "+20101070082", gender: "female",
-    //     email: "mariammohmed55@gmail.com",nid: "12345678912345",
-    //       nidimg: fakeFile
-    //   )
-    // ).toFormData();
-    // final request = ApplyRequest(
-    //   authenticationInfo: AuthenticationInfo(
-    //     password: "Mariam257@",
-    //     rePassword: "Mariam257@",
-    //   ),
-    //   locationInfo: LocationInfo(country: "Egypt"),
-    //   vehicleInfo: VehicleInfo(
-    //     vehicleNumber: "12228",
-    //     vehicleLicense: fakeFile,
-    //     vehicleType: "676b31a45d05310ca82657ac",
-    //   ),
-    //   personalInfo: PersonalInfo(
-    //     lastName: "mohmed2",
-    //     firstName: "mariam1",
-    //     phone: "+20101070082",
-    //     gender: "female",
-    //     email: "mariammohmed55@gmail.com",
-    //     nid: "12345678912345",
-    //     nidimg: fakeFile,
-    //   ),
-    // );
-    // final successResponse=ApplyResponse(
-    //   message: "success",token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ5ODNlNGRkODkzN2UwNTczZmVhMjciLCJpYXQiOjE3NTkwODU1NDB9.HGJTNJltl0p87p8XKBjmefSZ7aSB0tv37fYOEjt5olI",
-    //   driver: Driver(
-    //       country: "Egypt",
-    //       firstName: "mariam1",
-    //       lastName: "mohmed2",
-    //       vehicleType: "676b31a45d05310ca82657ac",
-    //       vehicleNumber: "12221",
-    //       vehicleLicense: "fake_image.png",
-    //       nId: "12345678912345",
-    //       nIdImg: "fake_image.png",
-    //       email: "mariammohmed5@gmail.com",
-    //       gender: "female",
-    //       phone: "+20101070082",
-    //       photo: "default-profile.png",
-    //       role: "driver",
-    //       id: "68d983e4dd8937e0573fea27",
-    //       createdAt: "2025-09-28T18:52:20.452Z"
-    //   )
-    // );
-    // test("return SuccessResult when API call succeeds when sign up",
-    //         ()async{
-    //   when(mockAuthApiServices.apply(await body)).
-    //   thenAnswer((_)async=>successResponse);
-    //   final result=await authRemoteDataSourceImpl.apply(request);
-    //   expect(result, isA<SucessResult>());
-    //   expect((result as SucessResult).sucessResult, successResponse);
-    //         });
-    //
-    //     });
+  // final List<CountryEntity> countries=[
+  //   const CountryEntity(isoCode: "AF", name: "Afghanistan", phoneCode: "93", flag: "🇦🇫", currency: "AFN",
+  //       latitude: "33.00000000", longitude: "65.00000000", timezones: [
+  //         Timezone(zoneName: "Asia/Kabul", gmtOffset: 16200, gmtOffsetName: "UTC+04:30", abbreviation: "AFT", tzName: "Afghanistan Time")
+  //       ])
+  // ];
+  test("Should return ApiSuccessResult when load json", ()async{
+    when(mockAssetBundle.loadString("assets/json/country.json")).
+    thenAnswer((_)async=>countriesJson);
+    final result=await authRemoteDataSourceImpl.getCountries();
+    expect(result, isA<SucessResult>());
+   final  List<CountryEntity> data=((result as SucessResult).sucessResult);
+    final d=data[0];
+    expect(d.name,"Afghanistan");
+    expect(d.phoneCode,"93");
+  });
+});
+
     group("Apply ", () {
       late File fakeFile;
 
@@ -494,27 +366,28 @@ void main() {
         }
       });
 
+
+
       final successResponse = ApplyResponse(
-        message: "success",
-        token:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ5ODNlNGRkODkzN2UwNTczZmVhMjciLCJpYXQiOjE3NTkwODU1NDB9.HGJTNJltl0p87p8XKBjmefSZ7aSB0tv37fYOEjt5olI",
-        driver: Driver(
-          country: "Egypt",
-          firstName: "mariam1",
-          lastName: "mohmed2",
-          vehicleType: "676b31a45d05310ca82657ac",
-          vehicleNumber: "12221",
-          vehicleLicense: "fake_image.png",
-          nId: "12345678912345",
-          nIdImg: "fake_image.png",
-          email: "mariammohmed5@gmail.com",
-          gender: "female",
-          phone: "+20101070082",
-          photo: "default-profile.png",
-          role: "driver",
-          id: "68d983e4dd8937e0573fea27",
-          createdAt: "2025-09-28T18:52:20.452Z",
-        ),
+          message: "success",
+          token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQ5ODNlNGRkODkzN2UwNTczZmVhMjciLCJpYXQiOjE3NTkwODU1NDB9.HGJTNJltl0p87p8XKBjmefSZ7aSB0tv37fYOEjt5olI",
+          driver: Driver(
+              country: "Egypt",
+              firstName: "mariam1",
+              lastName: "mohmed2",
+              vehicleType: "676b31a45d05310ca82657ac",
+              vehicleNumber: "12221",
+              vehicleLicense: "fake_image.png",
+              nId: "12345678912345",
+              nIdImg: "fake_image.png",
+              email: "mariammohmed5@gmail.com",
+              gender: "female",
+              phone: "+20101070082",
+              photo: "default-profile.png",
+              role: "driver",
+              id: "68d983e4dd8937e0573fea27",
+              createdAt: "2025-09-28T18:52:20.452Z"
+          )
       );
       // Helper method to create the request body
       // Future<FormData> createRequestBody() async {
@@ -567,39 +440,32 @@ void main() {
           ),
         );
       }
+      test("return SuccessResult when API call succeeds when sign up", () async {
 
-      test(
-        "return SuccessResult when API call succeeds when sign up",
-        () async {
-          when(
-            mockAuthApiServices.apply(any),
-          ).thenAnswer((_) async => successResponse);
 
-          final request = createRequest();
-          final result = await authRemoteDataSourceImpl.apply(request);
-          expect(result, isA<SucessResult>());
+        when(mockAuthApiServices.apply(any))
+            .thenAnswer((_) async => successResponse);
 
-          verify(mockAuthApiServices.apply(any)).called(1);
-        },
-      );
-      test(
-        "return FailedResult when API call failed on dio Exception",
-        () async {
-          final dioException = DioException(
-            requestOptions: RequestOptions(path: ""),
-            type: DioExceptionType.receiveTimeout,
-          );
-          final request = createRequest();
-          when(mockAuthApiServices.apply(any)).thenThrow(dioException);
-          final result = await authRemoteDataSourceImpl.apply(request);
-          expect(result, isA<FailedResult>());
-          expect(
-            (result as FailedResult).errorMessage,
-            "receiveTimeout with Api Server",
-          );
-          verify(mockAuthApiServices.apply(any)).called(1);
-        },
-      );
+        final request = createRequest();
+        final result = await authRemoteDataSourceImpl.apply(request);
+        expect(result, isA<SucessResult>());
+
+        verify(mockAuthApiServices.apply(any)).called(1);
+
+     
+      });
+      test("return FailedResult when API call failed on dio Exception", ()async{
+      final dioException=DioException(requestOptions: RequestOptions
+        (
+        path: ""
+      ),type: DioExceptionType.receiveTimeout);
+      final request=createRequest();
+        when(mockAuthApiServices.apply(any)).thenThrow(dioException);
+        final result=await authRemoteDataSourceImpl.apply(request);
+        expect(result, isA<FailedResult>());
+        expect((result as FailedResult).errorMessage, "receiveTimeout with Api Server");
+        verify(mockAuthApiServices.apply(any)).called(1);
+      });
     });
   });
 }

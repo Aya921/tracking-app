@@ -1,10 +1,10 @@
+
 class StoreEntity {
     String name;
     String image;
     String address;
     String phoneNumber;
     String latLong;
-
     StoreEntity({
         required this.name,
         required this.image,

@@ -22,5 +22,7 @@ abstract class AppRoute {
 
 
 
+  static const pickUpScreen="pickUpScreen";
+
 
 }

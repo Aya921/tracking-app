@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                     BlocListener<HomeViewModel, HomeStates>(
                       listener: (context, state) {
                         if (state.processCompleted == true) {
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamed(
                             context,
                             AppRoute.orderDetails,
                             arguments: state.remoteData!.orderEntity.id,

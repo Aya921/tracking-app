@@ -27,6 +27,7 @@ class ProductEntity {
 
     });
 
+
     String get firstImageUrl {
         if (images.isNotEmpty) {
             final fileName = images.first;
@@ -38,3 +39,6 @@ class ProductEntity {
         return '';
     }
 }
+
+
+

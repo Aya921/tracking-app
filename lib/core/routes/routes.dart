@@ -8,13 +8,14 @@ import 'package:tracking_app/feature/auth/presentation/view/screens/reset_passwo
 import 'package:tracking_app/feature/auth/presentation/view/screens/verify_reset_code_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/approve_screen.dart';
 import 'package:tracking_app/feature/home/presentaion/view/page/app_section.dart';
-import 'package:tracking_app/feature/home/presentaion/view/page/thanks_page.dart';
 import 'package:tracking_app/feature/onboarding/presentation/pages/onboarding_screen.dart';
 import 'package:tracking_app/feature/auth/presentation/view/screens/register_screen.dart';
+import 'package:tracking_app/feature/pick_location/presentation/view/screens/pick_up_location_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_vehicle_info.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/profile_screen.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
+import '../../feature/home/presentaion/view/page/order_details_screen.dart';
 import '../common/entity/order_entity/order_entity.dart';
 
 import '../../feature/order/presentation/view/page/order_driver_details.dart';
@@ -24,7 +25,6 @@ import '../../feature/profile/presentation/views/screens/change_password.dart';
 abstract class Routes {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-
 
   static Route onGenerate(RouteSettings settings) {
     final url = Uri.parse(settings.name ?? '/');
@@ -36,8 +36,6 @@ abstract class Routes {
             return const AppSection();
           },
         );
-    
-        
 
       case (AppRoute.loginRoute):
         return MaterialPageRoute(builder: (context) => const LoginScreen());
@@ -45,11 +43,6 @@ abstract class Routes {
       case (AppRoute.onBoarding):
         return MaterialPageRoute(
           builder: (context) => const OnBoarddingScreen(),
-        );
-      case (AppRoute.thanksPage):
-        final orderId = settings.arguments as String;
-        return MaterialPageRoute(
-          builder: (context) =>  ThanksPage(orderId: orderId,),
         );
 
       case AppRoute.forgetPasswordScreen:
@@ -110,8 +103,13 @@ abstract class Routes {
               return const ChangePasswordScreen();
             });
 
+      case AppRoute.orderDetails:
+        final orderId = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (context) {
+              return OrderDetailsScreen(orderId: orderId);
+            },);
 
-   
       case AppRoute.orderDriverDetails:
         final order = settings.arguments as OrderEntity;
         return MaterialPageRoute(

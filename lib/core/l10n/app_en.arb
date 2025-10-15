@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
   "noRouteFound": "No Route Found",
+
   "email": "Email",
   "pleaseEnterEmail": "Please enter your email associated with your account",
   "enterEmail": "Enter your email",
@@ -10,8 +11,11 @@
   "verify": "Verify",
   "didNotReceiveCode": "Didn't receive code?",
   "resend": "Resend",
+   "retry": "Retry",
   "success": "Success ✅",
   "error": "Error ❌",
+  "yourLocation": "Your Location",
+"loadingMap": "Loading map...",
   "resetPasswordTitle": "Reset password",
   "resetPasswordSubtitle": "Password must not be empty and must contain 6 characters with upper case letter and one number at least.",
   "newPassword": "New password",
@@ -20,43 +24,53 @@
   "confirm": "Confirm",
   "successReset": "Password reset successfully",
   "errorReset": "Something went wrong",
+
   "enterYourPassword": "Enter your Password",
   "password": "Password",
   "passwordTooShort": "Min 6 chars",
   "passwordNotMatch": "Passwords do not match",
+
   "login": "Login",
   "continueBtn": "Continue",
   "forgetPassword": "Forget Password",
   "rememberMe": "Remember Me",
   "successLogin": "✅ Success Login",
+
   "submitted": "Your application has been submitted!",
   "thankYou": "Thank you for providing your application, we will review your application and get back to you soon.",
+
   "flowery": "Flowery rider app",
   "apply": "Apply",
   "home": "Home",
   "orders": "Orders",
   "profile": "Profile",
   "welcomText": "Welcome to\nFlowery rider app",
+
   "welcome": "Welcome!!",
   "questionInRegister": "You want to be a delivery man?\nJoin our team",
   "country": "Country",
   "firstnameLabel": "First legal name",
   "secondnameLabel": "Second legal name",
+
   "vehicleType": "Vehicle Type",
   "vehicleTypeFieldError": "Please select vehicle type",
   "vehicleNumber": "Vehicle number",
   "vehicleNumberRequired": "Vehicle Number Required",
   "vehicleLicense": "Vehicle License",
   "uploadLicense": "Upload license photo",
+
+
   "phone": "Phone number",
   "nid": "ID number",
   "uploadNid": "Upload ID image",
+
   "rePassword": "Confirm password",
   "passwordTooShort": "Min 6 chars",
   "passwordNotMatch": "Passwords do not match",
   "gender": "Gender",
   "female": "Female",
   "male": "Male",
+
   "pleaseUploadBothImages": "Please upload both images",
   "required": "Required",
   "sucessApply": "sucessApply",
@@ -71,6 +85,7 @@
   "editProfile": "Edit profile",
   "vehicleNumberRequired": "Vehicle Number Required",
   "vehicleLicense": "Vehicle License",
+
   "update": "Update",
   "floweryRider": "Flowery rider",
   "processCompletedSuccessfully": "process completed successfully",

@@ -171,7 +171,8 @@ void main() {
       ),
     );
 
-    driverEntity = const DriverEntity(
+    driverEntity = const
+    DriverEntity(
       id: '1',
       firstName: 'Aya',
       lastName: 'Saber',

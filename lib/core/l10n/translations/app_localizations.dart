@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'Resend'**
   String get resend;
 
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
   /// No description provided for @success.
   ///
   /// In en, this message translates to:
@@ -169,6 +175,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error ❌'**
   String get error;
+
+  /// No description provided for @yourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Location'**
+  String get yourLocation;
+
+  /// No description provided for @loadingMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading map...'**
+  String get loadingMap;
 
   /// No description provided for @resetPasswordTitle.
   ///
@@ -715,6 +733,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The order placed successfully!'**
   String get orderPlacedSuccessfullyTitle;
+
+  /// No description provided for @noAccountDriverFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Account driver Found Please try again'**
+  String get noAccountDriverFound;
 }
 
 class _AppLocalizationsDelegate

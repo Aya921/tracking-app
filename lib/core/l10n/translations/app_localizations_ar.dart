@@ -40,10 +40,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resend => 'إعادة إرسال';
 
   @override
+  String get retry => 'Retry';
+
+  @override
   String get success => 'تم بنجاح :white_check_mark:';
 
   @override
   String get error => 'خطأ :x:';
+
+  @override
+  String get yourLocation => 'Your Location';
+
+  @override
+  String get loadingMap => 'Loading map...';
 
   @override
   String get resetPasswordTitle => 'إعادة تعيين كلمة المرور';
@@ -319,4 +328,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get orderPlacedSuccessfullyTitle => 'تم تنفيذ طلبك بنجاح!';
+
+  @override
+  String get noAccountDriverFound => 'لا يوجد حساب برجاء المحاوله مره اخرى';
 }

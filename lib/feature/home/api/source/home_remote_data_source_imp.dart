@@ -51,7 +51,8 @@ class HomeRemoteDataSourceImp implements HomeRemoteDataSource {
   }
 
   @override
-  Stream<Result<RemoteDataEntity>> getOrderFromRemote(String orderId) async* {
+  Stream<Result<RemoteDataEntity>>
+  getOrderFromRemote(String orderId) async* {
     try {
       final res = _homeFirebaseService.getDataFromRemote(orderId);
       await for (final data in res) {

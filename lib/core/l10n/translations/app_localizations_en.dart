@@ -40,10 +40,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resend => 'Resend';
 
   @override
+  String get retry => 'Retry';
+
+  @override
   String get success => 'Success ✅';
 
   @override
   String get error => 'Error ❌';
+
+  @override
+  String get yourLocation => 'Your Location';
+
+  @override
+  String get loadingMap => 'Loading map...';
 
   @override
   String get resetPasswordTitle => 'Reset password';
@@ -320,4 +329,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orderPlacedSuccessfullyTitle => 'The order placed successfully!';
+
+  @override
+  String get noAccountDriverFound => 'No Account driver Found Please try again';
 }
