@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'Resend'**
   String get resend;
 
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
   /// No description provided for @success.
   ///
   /// In en, this message translates to:
@@ -169,6 +175,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error ❌'**
   String get error;
+
+  /// No description provided for @yourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Location'**
+  String get yourLocation;
 
   /// No description provided for @loadingMap.
   ///

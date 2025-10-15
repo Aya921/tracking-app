@@ -38,6 +38,8 @@ abstract class AppWidgetsKeys {
   static const String sharedPrefrenceKeyLanguage = "appLanguage";
   static const String homeKey = "nav_home";
   static const String profileKey = "nav_profile";
+  static const String phoneKey = "phone_key";
+  static const String whatsAppKey = "WhatsApp_key";
   static const String orderkey = "nav_orders";
   static const String stackKey1 = "stack1";
   static const String alignKey1 = "align1";

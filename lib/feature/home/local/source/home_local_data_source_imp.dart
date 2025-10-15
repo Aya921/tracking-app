@@ -4,7 +4,7 @@ import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/feature/home/data/source/home_local_data_source.dart';
 import 'package:tracking_app/feature/home/domain/entity/order_entity.dart';
 import 'package:tracking_app/feature/home/local/models/order_local_model.dart';
-import 'package:collection/collection.dart';
+//import 'package:collection/collection.dart';
 
 @Injectable(as: HomeLocalDataSource)
 class HomeLocalDataSourceImp implements HomeLocalDataSource {
@@ -14,7 +14,8 @@ class HomeLocalDataSourceImp implements HomeLocalDataSource {
   Future<Result<void>> saveDataToLocalStorage(List<OrderEntity>? orders) async {
     try {
       final localModels =
-          orders?.map(OrderLocalModel.toLocalModel).toList() ?? [];
+          orders?.map(OrderLocalModel.toLocalModel).
+          toList() ?? [];
       await _isar.write((isar) async {
         isar.orderLocalModels.clear();
         isar.orderLocalModels.putAll(localModels);
@@ -40,14 +41,12 @@ class HomeLocalDataSourceImp implements HomeLocalDataSource {
   Future<Result<void>> deleteOrder(String orderId) async {
     try {
       final orders = _isar.orderLocalModels.where().findAll();
-      final target = orders.firstWhereOrNull((e) => e.orderId == orderId);
+      final target = orders.firstWhere((e) => e.orderId == orderId);
 
-      if (target != null) {
-        await _isar.write((isar) async {
-          isar.orderLocalModels.delete(target.id);
-        });
-      }
-      return SucessResult(null);
+      await _isar.write((isar) async {
+        isar.orderLocalModels.delete(target.id);
+      });
+          return SucessResult(null);
     } catch (e) {
       return FailedResult(e.toString());
     }

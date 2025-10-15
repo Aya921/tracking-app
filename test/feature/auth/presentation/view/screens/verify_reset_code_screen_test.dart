@@ -45,7 +45,8 @@ void main() {
       baseSize: const Size(375, 812),
       height: 812,
       width: 375,
-      child: MaterialApp(
+      child:
+      MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         onGenerateRoute: (settings) {

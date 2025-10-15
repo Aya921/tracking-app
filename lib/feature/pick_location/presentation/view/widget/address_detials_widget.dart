@@ -8,6 +8,7 @@ import 'package:tracking_app/core/theme/app_colors.dart';
 import 'package:tracking_app/core/theme/font_style_manger.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
 
+import '../../../../../core/constants/app_widgets_keys.dart';
 import '../../../../../core/enums/address_type.dart';
 
 class AddressDetialsWidget extends StatelessWidget {
@@ -127,6 +128,7 @@ class AddressDetialsWidget extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: onPressedPhone,
+                      key: const Key(AppWidgetsKeys.phoneKey),
                       icon: const Icon(
                         CupertinoIcons.phone,
                         color: AppColors.pink,
@@ -134,6 +136,8 @@ class AddressDetialsWidget extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: onPressedWhatsApp,
+                      key: const Key(AppWidgetsKeys.whatsAppKey),
+
                       icon: const Icon(
                         FontAwesomeIcons.whatsapp,
                         color: AppColors.pink,

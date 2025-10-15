@@ -11,9 +11,10 @@
   "verify": "Verify",
   "didNotReceiveCode": "Didn't receive code?",
   "resend": "Resend",
-
+   "retry": "Retry",
   "success": "Success ✅",
   "error": "Error ❌",
+  "yourLocation": "Your Location",
 "loadingMap": "Loading map...",
   "resetPasswordTitle": "Reset password",
   "resetPasswordSubtitle": "Password must not be empty and must contain 6 characters with upper case letter and one number at least.",

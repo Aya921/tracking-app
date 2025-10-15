@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart' hide Marker;
 import 'package:provider/provider.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/enums/address_type.dart';
+import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/feature/home/domain/entity/remote_data_entity.dart';
 import 'package:tracking_app/feature/pick_location/presentation/view/widget/address_detials_widget.dart';
@@ -14,6 +15,8 @@ import '../widget/custom_map.dart';
 import '../widget/custom_pop_icon.dart';
 import 'package:tracking_app/core/assets_manager/assets_manger.dart';
 import 'package:tracking_app/core/theme/app_colors.dart';
+
+
 class PickUpLocationScreen extends StatefulWidget {
   final RemoteDataEntity? remoteDataEntity;
   final bool? isStore;
@@ -61,8 +64,8 @@ return
 
 
             if (provider.isLoading) {
-              return  Scaffold(
-                body: Center(
+              return
+                Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -75,29 +78,28 @@ return
                     //  Text(context.loc.loadingMap),
                     ],
                   ),
-                ),
-              );
+                )
+              ;
             }
 
             if (provider.driverLocation == null) {
-              return Scaffold(
-                body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.location_off, size: 64, color: Colors.red),
-                      const SizedBox(height: 16),
-                      const Text('Unable to get your location'),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          provider.initMap(widget.remoteDataEntity!,
-                              widget.isStore!);
-                        },
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
+              return       Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.location_off, size: context.setHight(64),
+                        color: Colors.red),
+                     SizedBox(height: context.setHight(16)),
+                     Text(context.loc.error),
+                    SizedBox(height: context.setHight(16)),
+                    ElevatedButton(
+                      onPressed: () {
+                        provider.initMap(widget.remoteDataEntity!,
+                            widget.isStore!);
+                      },
+                      child:  Text(context.loc.retry),
+                    ),
+                  ],
                 ),
               );
             }
@@ -110,9 +112,28 @@ return
                       CustomMap(
                         driverLocation: provider.driverLocation!,
                         mapController: provider.controller,
-// markers: {
-//
-// },
+markers: {
+Marker(markerId:const  MarkerId("m1"),
+
+infoWindow:  InfoWindow(
+title: context.loc.yourLocation,
+  snippet: context.loc.yourLocation,
+
+),
+  position: provider.driverLocation!,
+  icon:  BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
+),
+  Marker(markerId:const  MarkerId("m2"),
+icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
+      infoWindow:  InfoWindow(
+        title:widget.isStore==true?context.loc.flowery:
+        "${widget.remoteDataEntity!.orderEntity.user.firstName} ${widget.remoteDataEntity!.orderEntity.user.lastName}",
+snippet: widget.isStore==true?context.loc.flowery:
+"${widget.remoteDataEntity!.orderEntity.user.firstName} ${widget.remoteDataEntity!.orderEntity.user.lastName}",
+      ),
+      position: provider.driverLocation!
+  ),
+},
                         polylines:
                         {
                           Polyline(
@@ -143,7 +164,7 @@ return
                         top: 20,
                         left: 10,
                         child: CustomPopIcon(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () => Navigator.of(context).pop(true),
                         ),
                       ),
 
@@ -158,6 +179,7 @@ return
                       AddressDetialsWidget(
                           remoteDataEntity: widget.remoteDataEntity!,
                           addressType: AddressType.store,
+
                           isPickedAddress: true,
                         onPressedPhone: () {
                             provider.homeViewModel.add(CallUserEvent(widget.remoteDataEntity!.orderEntity.store.phoneNumber));
@@ -235,7 +257,6 @@ return
       ),
     );
   }
-
   @override
   void dispose() {
     // Clean up if needed

@@ -40,10 +40,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resend => 'Resend';
 
   @override
+  String get retry => 'Retry';
+
+  @override
   String get success => 'Success ✅';
 
   @override
   String get error => 'Error ❌';
+
+  @override
+  String get yourLocation => 'Your Location';
 
   @override
   String get loadingMap => 'Loading map...';

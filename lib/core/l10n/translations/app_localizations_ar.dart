@@ -40,10 +40,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resend => 'إعادة إرسال';
 
   @override
+  String get retry => 'اعادة المحاولة ';
+
+  @override
   String get success => 'تم بنجاح :white_check_mark:';
 
   @override
   String get error => 'خطأ :x:';
+
+  @override
+  String get yourLocation => 'موقعك';
 
   @override
   String get loadingMap => 'تحميل الخريطة ...';
