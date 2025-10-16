@@ -134,6 +134,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: context.setHight(20)),
                       ElevatedButton(
+                        style:ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 14
+                          )
+                        ) ,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             context.read<LoginBloc>().add(

@@ -25,8 +25,8 @@ import 'package:tracking_app/core/theme/app_colors.dart';
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          // shape: RoundedRectangleBorder(
-          //   borderRadius:BorderRadius.circular(20)),
+
+
           backgroundColor: AppColors.pink[50],
           foregroundColor: AppColors.white,
           textStyle: GoogleFonts.roboto(

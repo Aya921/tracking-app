@@ -19,8 +19,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginStates> {
       final result = await useCase.login(event.request);
       switch (result) {
         case SucessResult<LoginResponse>():
-      final    token = result.sucessResult.token;
-
 
           emit(
             state.copyWith(
@@ -28,9 +26,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginStates> {
               loginResponse: result.sucessResult,
             ),
           );
-          if ( token != null) {
+          final    token = result.sucessResult.token;
+          if (token != null) {
             await UserLocalStorageImpl().saveToken(token);
-            print("token====================>$token");
           }
           if(state.rememberMe==true){
             await UserLocalStorageImpl().saveLoging(token!);

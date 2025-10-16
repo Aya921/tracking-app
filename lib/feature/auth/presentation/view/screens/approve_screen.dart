@@ -75,6 +75,9 @@ class ApproveScreen extends StatelessWidget {
                            AppRoute.loginRoute);
                       },
                       style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)
+                        ),
                         padding: EdgeInsets.symmetric(
                           vertical: context.setHight(12),
                         ),
