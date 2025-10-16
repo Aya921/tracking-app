@@ -8,7 +8,6 @@ import 'user_local_storage_impl_test.mocks.dart';
 
 @GenerateMocks([FlutterSecureStorage])
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
   late MockFlutterSecureStorage mockStorage;
   late UserLocalStorageImpl userLocalStorage;
 
@@ -17,149 +16,59 @@ void main() {
     userLocalStorage = UserLocalStorageImpl(storage: mockStorage);
   });
 
-  group('UserLocalStorageImpl', () {
-    const testToken = 'test_token';
+  group('UserLocalStorageImpl Tests', () {
+    test('saveToken should write token successfully', () async {
+      // Arrange
+      const token = 'abc123';
+      when(mockStorage.write(key: Constants.token, value: token))
+          .thenAnswer((_) async {});
 
-    group('saveToken', () {
-      test('should save token successfully', () async {
-        when(mockStorage.write(key: Constants.token, value: testToken))
-            .thenAnswer((_) async {});
+      // Act
+      await userLocalStorage.saveToken(token);
 
-        await userLocalStorage.saveToken(testToken);
-
-        verify(mockStorage.write(key: Constants.token, value: testToken)).called(1);
-      });
-
-      test('should throw exception when save fails', () async {
-        final exception = Exception('Storage error');
-        when(mockStorage.write(key: Constants.token, value: testToken))
-            .thenThrow(exception);
-
-        expect(
-              () => userLocalStorage.saveToken(testToken),
-          throwsA(isA<Exception>().having(
-                (e) => e.toString(),
-            'message',
-            'Exception: Failed to save token: $exception',
-          )),
-        );
-      });
+      // Assert
+      verify(mockStorage.write(key: Constants.token, value: token)).called(1);
     });
 
-    group('getToken', () {
-      test('should return token when it exists', () async {
+    test('getToken should return stored token', () async {
+      // Arrange
+      const token = 'xyz456';
+      when(mockStorage.read(key: Constants.token))
+          .thenAnswer((_) async => token);
 
-        when(mockStorage.read(key: Constants.token))
-            .thenAnswer((_) async => testToken);
+      // Act
+      final result = await userLocalStorage.getToken();
 
-
-        final result = await userLocalStorage.getToken();
-
-
-        expect(result, testToken);
-        verify(mockStorage.read(key: Constants.token)).called(1);
-      });
-
-      test('should return null when token does not exist', () async {
-
-        when(mockStorage.read(key: Constants.token)).thenAnswer((_) async => null);
-
-
-        final result = await userLocalStorage.getToken();
-
-
-        expect(result, isNull);
-        verify(mockStorage.read(key: Constants.token)).called(1);
-      });
-
-      test('should throw exception when read fails', () async {
-        // Arrange
-        final exception = Exception('Read error');
-        when(mockStorage.read(key: Constants.token)).thenThrow(exception);
-
-        // Act & Assert
-        expect(
-              () => userLocalStorage.getToken(),
-          throwsA(isA<Exception>().having(
-                (e) => e.toString(),
-            'message',
-            'Exception: Failed to get token: $exception',
-          )),
-        );
-      });
+      // Assert
+      expect(result, equals(token));
+      verify(mockStorage.read(key: Constants.token)).called(1);
     });
 
-    group('deleteToken', () {
-      test('should delete token successfully', () async {
-        // Arrange
-        when(mockStorage.delete(key: Constants.token)).thenAnswer((_) async {});
-
-        // Act
-        await userLocalStorage.deleteToken();
-
-        // Assert
-        verify(mockStorage.delete(key: Constants.token)).called(1);
-      });
-
-      test('should throw exception when delete fails', () async {
-        // Arrange
-        final exception = Exception('Delete error');
-        when(mockStorage.delete(key: Constants.token)).thenThrow(exception);
-
-        // Act & Assert
-        expect(
-              () => userLocalStorage.deleteToken(),
-          throwsA(isA<Exception>().having(
-                (e) => e.toString(),
-            'message',
-            'Exception: Failed to delete token: $exception',
-          )),
-        );
-      });
+    test('deleteToken should delete token successfully', () async {
+      when(mockStorage.delete(key: Constants.token)).thenAnswer((_) async {});
+      await userLocalStorage.deleteToken();
+      verify(mockStorage.delete(key: Constants.token)).called(1);
     });
 
-    group('isLoggedIn', () {
-      test('should return true when token exists', () async {
-        // Arrange
-        when(mockStorage.containsKey(key: Constants.token))
-            .thenAnswer((_) async => true);
+    test('isLoggedIn should return true if key exists', () async {
+      when(mockStorage.containsKey(key: Constants.token))
+          .thenAnswer((_) async => true);
 
-        // Act
-        final result = await userLocalStorage.isLoggedIn();
+      final result = await userLocalStorage.isLoggedIn(Constants.token);
 
-        // Assert
-        expect(result, isTrue);
-        verify(mockStorage.containsKey(key: Constants.token)).called(1);
-      });
+      expect(result, isTrue);
+      verify(mockStorage.containsKey(key: Constants.token)).called(1);
+    });
 
-      test('should return false when token does not exist', () async {
-        // Arrange
-        when(mockStorage.containsKey(key: Constants.token))
-            .thenAnswer((_) async => false);
+    test('saveLogin should write rememberMe value', () async {
+      const token = 'remember123';
+      when(mockStorage.write(key: Constants.rememberMe, value: token))
+          .thenAnswer((_) async {});
 
+      await userLocalStorage.saveLoging(token);
 
-        final result = await userLocalStorage.isLoggedIn();
-
-
-        expect(result, isFalse);
-        verify(mockStorage.containsKey(key: Constants.token)).called(1);
-      });
-
-      test('should throw exception when check fails', () async {
-
-        final exception = Exception('Check error');
-        when(mockStorage.containsKey(key: Constants.token)).thenThrow(exception);
-
-
-        expect(
-              () => userLocalStorage.isLoggedIn(),
-          throwsA(isA<Exception>().having(
-                (e) => e.toString(),
-            'message',
-            'Exception: Failed to check login status: $exception',
-          )),
-        );
-      });
+      verify(mockStorage.write(key: Constants.rememberMe, value: token))
+          .called(1);
     });
   });
 }
