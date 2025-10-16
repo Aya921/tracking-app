@@ -26,7 +26,7 @@ class OrderDriverResponse {
 
   OrderDriverEntity toEntity() {
     return OrderDriverEntity(
-      orders: orders!.map((order) => order.toEntity()).toList(),
+      orders: orders!.map((order) => order.toEntity()).toList(), pagination: null,
     );
   }
 }
