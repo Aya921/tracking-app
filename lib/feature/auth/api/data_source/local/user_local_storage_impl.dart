@@ -15,6 +15,13 @@ class UserLocalStorageImpl {
       throw Exception('${Constants.failedToSaveToken}: $e');
     }
   }
+  Future<void> saveLoging(String token) async {
+    try {
+      await storage.write(key: Constants.rememberMe, value: token);
+    } catch (e) {
+      throw Exception('${Constants.failedToSaveToken}: $e');
+    }
+  }
   Future<String?> getToken() async {
     try {
       return await storage.read(key: Constants.token);
@@ -31,9 +38,9 @@ class UserLocalStorageImpl {
     }
   }
 
-  Future<bool> isLoggedIn() async {
+  Future<bool> isLoggedIn(String key) async {
     try {
-      return await storage.containsKey(key: Constants.token);
+      return await storage.containsKey(key:key);
     } catch (e) {
       throw Exception('${Constants.failedToCheckLoginStatus}: $e');
     }

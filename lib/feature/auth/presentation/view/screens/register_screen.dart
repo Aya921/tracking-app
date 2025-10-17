@@ -62,7 +62,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
   Future<File?> _pickImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
+      source: ImageSource.camera,
       imageQuality: 80,
     );
 
@@ -133,7 +133,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
             ScaffoldMessenger.of(
               context,
             ).showSnackBar(SnackBar(content: Text(state.applyErrorMessage!)));
-            Navigator.of(context).pushNamed(AppRoute.loginRoute);
+
           }
         },
         builder: (context, state) {
@@ -311,9 +311,7 @@ class _ApplyScreenState extends State<ApplyScreen> {
                           labelText: context.loc.phone,
                           border: const OutlineInputBorder(),
                         ),
-                        validator: (val) => val == null || val.isEmpty
-                            ? context.loc.required
-                            : null,
+                        validator: Validator.validatePhoneNumber,
                       ),
                       SizedBox(height: sh * 0.02),
 
@@ -363,18 +361,11 @@ class _ApplyScreenState extends State<ApplyScreen> {
                         controller: confirmPasswordCtrl,
                         obscureText: true,
                         decoration: InputDecoration(
-                          labelText: context.loc.resetPasswordSubtitle,
+                          labelText: context.loc.confirmPassword,
                           border: const OutlineInputBorder(),
                         ),
-                        validator: (val) {
-                          if (val != passwordCtrl.text) {
-                            return context.loc.passwordNotMatch;
-                          }
-                          if (val != null && val.length < 6) {
-                            return context.loc.passwordTooShort;
-                          }
-                          return null;
-                        },
+                        validator: (val) =>Validator.validateConfirmPassword
+                          (val, passwordCtrl.text),
                       ),
                       SizedBox(height: sh * 0.02),
 

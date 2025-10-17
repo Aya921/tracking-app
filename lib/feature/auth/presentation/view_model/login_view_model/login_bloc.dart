@@ -12,17 +12,15 @@ import '../../../domain/use_case/login_use_case.dart';
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginStates> {
   final LoginUseCase useCase;
-  String? token;
+
   LoginBloc(this.useCase) : super(const LoginStates()) {
     on<GetLoginEvent>((event, emit) async {
       emit(state.copyWith(requestState: RequestState.loading));
       final result = await useCase.login(event.request);
       switch (result) {
         case SucessResult<LoginResponse>():
-          token = result.sucessResult.token;
-          if (state.rememberMe && token != null) {
-            await UserLocalStorageImpl().saveToken(token!);
-          }
+      final    token = result.sucessResult.token;
+
 
           emit(
             state.copyWith(
@@ -30,6 +28,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginStates> {
               loginResponse: result.sucessResult,
             ),
           );
+          if ( token != null) {
+            await UserLocalStorageImpl().saveToken(token);
+            print("token====================>$token");
+          }
+          if(state.rememberMe==true){
+            await UserLocalStorageImpl().saveLoging(token!);
+          }
         case FailedResult<LoginResponse>():
           emit(
             state.copyWith(
@@ -40,7 +45,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginStates> {
       }
     });
     on<RememberMeEvent>((event, emit) async {
+
       emit(state.copyWith(rememberMe: event.isLoggedIn));
     });
   }
 }
+
+
