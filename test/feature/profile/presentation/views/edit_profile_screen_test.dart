@@ -4,11 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/identity_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/meta_info_entity.dart';
+import 'package:tracking_app/core/common/driver_entity/vechical_info_entity.dart';
 import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';
-import 'package:tracking_app/feature/auth/domain/entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/views/screens/edit_profile_screen.dart';
 
@@ -20,21 +23,30 @@ void main() {
 
   const fakeUser = DriverEntity(
     id: '111',
-    country: 'Egypt',
     firstName: 'Rana',
     lastName: 'Gebril',
-    vehicleType: 'car',
-    vehicleNumber: '1234',
-    vehicleLicense: '',
-    nid: '7894561231234',
-    nidImg: '',
-    email: 'rana@gmail.com',
-    gender: 'female',
-    phone: '01234567891',
-    photo: '',
-    role: '',
-    createdAt: '',
+    contactInfo: ContactInfo(
+      country: 'Egypt',
+      gender: 'female',
+      email: 'rana@gmail.com',
+      phone: '01234567891',
+      photo: '',
+    ),
+    vehicle: VehicleInfo(
+      type: 'car',
+      number: '1234',
+      license: '',
+    ),
+    identity: IdentityInfo(
+      nid: '7894561231234',
+      nidImg: '',
+    ),
+    meta: MetaInfo(
+      role: '',
+      createdAt: '',
+    ),
   );
+
 
   setUp(() {
     mockEditProfileBloc = MockEditProfileBloc();

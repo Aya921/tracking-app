@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:tracking_app/config/app_language_config/app_language_config.dart';
 import 'package:tracking_app/config/di/di.dart';
 import 'package:tracking_app/core/constants/constants.dart';
-import 'package:tracking_app/core/helper/shared_pref_helper.dart';
 import 'package:tracking_app/core/l10n/translations/app_localizations.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
 import 'package:tracking_app/core/responsive/size_provider.dart';

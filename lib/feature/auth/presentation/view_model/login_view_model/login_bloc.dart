@@ -30,7 +30,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginStates> {
           );
           if ( token != null) {
             await UserLocalStorageImpl().saveToken(token);
-            print("token====================>$token");
           }
           if(state.rememberMe==true){
             await UserLocalStorageImpl().saveLoging(token!);
