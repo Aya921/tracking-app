@@ -5,16 +5,17 @@ import '../../domain/entity/national_id_info_entity.dart';
 part 'nid_info.g.dart';
 
 @JsonSerializable()
-class NationalIdInfo {
+class NationalIdInfo1 {
   @JsonKey(name: JsonSerlizationConstants.nid)
   final String? nId;
   @JsonKey(name: JsonSerlizationConstants.nidImg)
   final String? nIdImg;
 
-  NationalIdInfo({this.nId, this.nIdImg});
+  NationalIdInfo1({this.nId, this.nIdImg});
 
-  factory NationalIdInfo.fromJson(Map<String, dynamic> json) => _$NationalIdInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$NationalIdInfoToJson(this);
+  factory NationalIdInfo1.fromJson(Map<String, dynamic>
+  json) => _$NationalIdInfo1FromJson(json);
+  Map<String, dynamic> toJson() => _$NationalIdInfo1ToJson(this);
 
   NationalIdInfoEntity toEntity() {
     return NationalIdInfoEntity(

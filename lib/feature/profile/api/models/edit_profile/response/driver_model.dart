@@ -8,14 +8,14 @@ import 'package:tracking_app/feature/profile/domain/entity/driver_all_info_entit
 part 'driver_model.g.dart';
 
 @JsonSerializable()
-class DriverModel {
-  final DriverInfo? info;
-  final DriverContactInfo? contact;
-  final VehicleInfo? vehicle;
-  final LocationInfo? location;
-  final NationalIdInfo? nid;
+class DriverModel1 {
+  final DriverInfo1? info;
+  final DriverContactInfo1? contact;
+  final VehicleInfo1? vehicle;
+  final LocationInfo1? location;
+  final NationalIdInfo1? nid;
 
-  DriverModel({
+  DriverModel1({
     this.info,
     this.contact,
     this.vehicle,
@@ -23,13 +23,13 @@ class DriverModel {
     this.nid,
   });
 
-  factory DriverModel.fromJson(Map<String, dynamic> json) {
-    return DriverModel(
-      info: DriverInfo.fromJson(json),
-      contact: DriverContactInfo.fromJson(json),
-      vehicle: VehicleInfo.fromJson(json),
-      location: LocationInfo.fromJson(json),
-      nid: NationalIdInfo.fromJson(json),
+  factory DriverModel1.fromJson(Map<String, dynamic> json) {
+    return DriverModel1(
+      info: DriverInfo1.fromJson(json),
+      contact: DriverContactInfo1.fromJson(json),
+      vehicle: VehicleInfo1.fromJson(json),
+      location: LocationInfo1.fromJson(json),
+      nid: NationalIdInfo1.fromJson(json),
     );
   }
 

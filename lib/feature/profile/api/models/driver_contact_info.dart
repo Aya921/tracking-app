@@ -5,16 +5,17 @@ import '../../domain/entity/driver_contact_info_entity.dart';
 part 'driver_contact_info.g.dart';
 
 @JsonSerializable()
-class DriverContactInfo {
+class DriverContactInfo1 {
   @JsonKey(name: JsonSerlizationConstants.email)
   final String? email;
   @JsonKey(name: JsonSerlizationConstants.phone)
   final String? phone;
 
-  DriverContactInfo({this.email, this.phone});
+  DriverContactInfo1({this.email, this.phone});
 
-  factory DriverContactInfo.fromJson(Map<String, dynamic> json) => _$DriverContactInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$DriverContactInfoToJson(this);
+  factory DriverContactInfo1.fromJson(Map<String, dynamic> json)
+  => _$DriverContactInfo1FromJson(json);
+  Map<String, dynamic> toJson() => _$DriverContactInfo1ToJson(this);
 
   DriverContactInfoEntity toEntity() {
     return DriverContactInfoEntity(

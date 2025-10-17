@@ -5,7 +5,7 @@ import '../../domain/entity/vehicle_info_entity.dart';
 part 'vehicle_info.g.dart';
 
 @JsonSerializable()
-class VehicleInfo {
+class VehicleInfo1 {
   @JsonKey(name: JsonSerlizationConstants.vehicleType)
   final String? vehicleType;
   @JsonKey(name: JsonSerlizationConstants.vehicleNumber)
@@ -13,10 +13,11 @@ class VehicleInfo {
   @JsonKey(name: JsonSerlizationConstants.vehicleLicense)
   final String? vehicleLicense;
 
-  VehicleInfo({this.vehicleType, this.vehicleNumber, this.vehicleLicense});
+  VehicleInfo1({this.vehicleType, this.vehicleNumber, this.vehicleLicense});
 
-  factory VehicleInfo.fromJson(Map<String, dynamic> json) => _$VehicleInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$VehicleInfoToJson(this);
+  factory VehicleInfo1.fromJson(Map<String, dynamic> json) =>
+      _$VehicleInfo1FromJson(json);
+  Map<String, dynamic> toJson() => _$VehicleInfo1ToJson(this);
 
   VehicleInfoEntity toEntity() {
     return VehicleInfoEntity(

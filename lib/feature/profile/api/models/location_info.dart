@@ -5,15 +5,16 @@ import '../../domain/entity/location_info_entity.dart';
 part 'location_info.g.dart';
 
 @JsonSerializable()
-class LocationInfo {
+class LocationInfo1 {
   @JsonKey(name: JsonSerlizationConstants.country)
   final String? country;
   @JsonKey(name: JsonSerlizationConstants.createdAt)
   final String? createdAt;
-  LocationInfo({this.country, this.createdAt});
+  LocationInfo1({this.country, this.createdAt});
 
-  factory LocationInfo.fromJson(Map<String, dynamic> json) => _$LocationInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$LocationInfoToJson(this);
+  factory LocationInfo1.fromJson(Map<String, dynamic> json) =>
+      _$LocationInfo1FromJson(json);
+  Map<String, dynamic> toJson() => _$LocationInfo1ToJson(this);
 
   LocationInfoEntity toEntity() {
     return LocationInfoEntity(

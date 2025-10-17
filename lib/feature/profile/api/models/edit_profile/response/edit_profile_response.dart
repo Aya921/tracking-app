@@ -9,7 +9,7 @@ class EditProfileResponse {
   @JsonKey(name: JsonSerlizationConstants.message)
   final String? message;
   @JsonKey(name: JsonSerlizationConstants.driver)
-  final DriverModel? driver;
+  final DriverModel1? driver;
 
   EditProfileResponse({
     this.message,

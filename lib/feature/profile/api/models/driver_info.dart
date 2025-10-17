@@ -5,7 +5,7 @@ import '../../domain/entity/driver_info_entity.dart';
 part 'driver_info.g.dart';
 
 @JsonSerializable()
-class DriverInfo {
+class DriverInfo1 {
   @JsonKey(name: JsonSerlizationConstants.id)
   final String? id;
   @JsonKey(name: JsonSerlizationConstants.firstName)
@@ -20,7 +20,7 @@ class DriverInfo {
   final String? role;
 
 
-  DriverInfo({
+  DriverInfo1({
     this.id,
     this.firstName,
     this.lastName,
@@ -29,8 +29,9 @@ class DriverInfo {
     this.role,
   });
 
-  factory DriverInfo.fromJson(Map<String, dynamic> json) => _$DriverInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$DriverInfoToJson(this);
+  factory DriverInfo1.fromJson(Map<String, dynamic> json) =>
+      _$DriverInfo1FromJson(json);
+  Map<String, dynamic> toJson() => _$DriverInfo1ToJson(this);
 
   DriverInfoEntity toEntity() {
     return DriverInfoEntity(

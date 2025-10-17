@@ -113,6 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     // ==== Profile Photo ====
                     ProfilePhotoSection(
                       photoUrl: widget.user.contactInfo.photo,
+                      key:  const Key(AppWidgetsKeys.profilePhoto),
                       selectedPhoto: state.selectedPhoto,
                       onPickPhoto: () {
                         context.read<EditProfileBloc>().add(
@@ -195,7 +196,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SizedBox(height: context.setHight(15)),
 
                     // ==== Gender ====
-                    GenderSection(selectedGender: _selectedGender),
+                    GenderSection(
+                        key:  const Key(AppWidgetsKeys.genderSection),
+                        selectedGender: _selectedGender),
                     SizedBox(height: context.setHight(20)),
 
                     // ==== Submit Button ====
