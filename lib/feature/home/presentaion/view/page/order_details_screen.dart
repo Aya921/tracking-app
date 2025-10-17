@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tracking_app/config/di/di.dart';
+import 'package:tracking_app/core/constants/app_widgets_keys.dart';
 import 'package:tracking_app/core/enums/address_type.dart';
 import 'package:tracking_app/core/extensions/app_localization_extenstion.dart';
 import 'package:tracking_app/core/responsive/size_helper_extension.dart';
@@ -91,6 +92,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        key: const Key(AppWidgetsKeys.orderDetailsAppBar),
         title: Text(context.loc.orderDetailsTitle),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
@@ -107,7 +109,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
             if (state.errorMessage != null) {
               ScaffoldMessenger.of(
                 context,
-              ).showSnackBar(SnackBar(content: Text(state.errorMessage!)));
+              ).showSnackBar(SnackBar(
+                  key: const Key(AppWidgetsKeys.orderDetailsErrorSnackBar),
+                  content: Text(state.errorMessage!)));
             }
              if (state.remoteData != null) {
               if (state.remoteData!.orderDeliveryStatus == "delivered") {
@@ -137,6 +141,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 Padding(
                   padding: EdgeInsets.all(context.setHight(15)),
                   child: StepIndicator(
+                    key: const Key(AppWidgetsKeys.orderDetailsStepIndicator),
                     currentStep: currentStep,
                     stepsLength: buttonLabels.length,
                   ),
@@ -147,7 +152,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        StatusContainer(order: order),
+                        StatusContainer(
+                          key: const Key(AppWidgetsKeys.orderDetailsStatusContainer),
+                            order: order),
                         SizedBox(height: context.setHight(15)),
 
                         // Pickup Address
@@ -215,11 +222,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           ),
                         ),
                         ListView.builder(
+                          key: const Key(AppWidgetsKeys.orderDetailsOrderItemsList),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: order.orderItems.length,
                           itemBuilder: (context, index) {
                             return OrderDetailsCard(
+                              key: const Key(AppWidgetsKeys.orderDetailsCard),
                               orderItemEntity: order.orderItems[index],
                             );
                           },
@@ -227,6 +236,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         SizedBox(height: context.setHight(15)),
 
                         TotalAndPaymentContainer(
+                          key: const Key(AppWidgetsKeys.orderDetailsTotalContainer),
                           containerName: context.loc.total,
                           containerValue:
                               "${context.loc.egp} ${order.orderInfoEntity.totalPrice.toString()}",
@@ -234,6 +244,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         SizedBox(height: context.setHight(15)),
 
                         TotalAndPaymentContainer(
+                          key: const Key(AppWidgetsKeys.orderDetailsPaymentContainer),
                           containerName: context.loc.paymentMethod,
                           containerValue: order.paymentInfoEntity.paymentType,
                         ),
@@ -241,6 +252,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         SizedBox(height: context.setHight(25)),
 
                         ElevatedButton(
+                          key: const Key(AppWidgetsKeys.orderDetailsNextButton),
                           style: ElevatedButton.styleFrom(
                             textStyle: getMediumStyle(
                               color: AppColors.white,

@@ -69,4 +69,15 @@ abstract class AppWidgetsKeys {
   static const photoStack = "photoStack";
   static const photoAvatar = "photoAvatar";
   static const photoSelectIcon = "photoSelectIcon";
+
+  // order details
+  static const orderDetailsAppBar = 'orderDetailsAppBar';
+  static const orderDetailsErrorSnackBar = 'orderDetailsErrorSnackBar';
+  static const orderDetailsStepIndicator = 'orderDetailsStepIndicator';
+  static const orderDetailsStatusContainer = 'orderDetailsStatusContainer';
+  static const orderDetailsOrderItemsList = 'orderDetailsOrderItemsList';
+  static const orderDetailsCard = 'orderDetailsCard';
+  static const orderDetailsTotalContainer = 'orderDetailsTotalContainer';
+  static const orderDetailsPaymentContainer = 'orderDetailsPaymentContainer';
+  static const orderDetailsNextButton = 'orderDetailsNextButton';
 }
