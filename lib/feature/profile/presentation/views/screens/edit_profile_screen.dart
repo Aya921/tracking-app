@@ -112,6 +112,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     // ==== Profile Photo ====
                     ProfilePhotoSection(
+                      key:  const Key(AppWidgetsKeys.profilePhoto),
                       photoUrl: widget.user.photo,
                       selectedPhoto: state.selectedPhoto,
                       onPickPhoto: () {
@@ -195,7 +196,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SizedBox(height: context.setHight(15)),
 
                     // ==== Gender ====
-                    GenderSection(selectedGender: _selectedGender),
+                    GenderSection(
+                        key:  const Key(AppWidgetsKeys.genderSection),
+                        selectedGender: _selectedGender),
                     SizedBox(height: context.setHight(20)),
 
                     // ==== Submit Button ====
