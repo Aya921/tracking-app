@@ -93,15 +93,17 @@
 
 // }
 
+import 'package:equatable/equatable.dart';
 import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 
-class ProfileState {
+class ProfileState extends Equatable{
   final DriverEntity? driver;
   final bool isLoading;
   final String? errorMessage;
   final bool? loggedOut;
 
-  const ProfileState({this.driver, this.isLoading = true, this.errorMessage,this.loggedOut});
+  const ProfileState({this.driver, this.isLoading = true,
+    this.errorMessage,this.loggedOut});
 
   ProfileState copyWith({
     DriverEntity? driver,
@@ -116,4 +118,10 @@ class ProfileState {
       loggedOut: loggedOut
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props =>[
+    driver,isLoading,errorMessage,loggedOut
+  ];
 }

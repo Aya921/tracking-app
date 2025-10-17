@@ -49,7 +49,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       case SucessResult<void>():
       await  UserLocalStorageImpl().deleteToken();
         emit(
-          state.copyWith(isLoading: false, loggedOut: true, errorMessage: null),
+          state.copyWith(isLoading: false, loggedOut: true,
+              errorMessage: null),
         );
       case FailedResult<void>():
         emit(

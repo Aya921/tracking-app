@@ -17,11 +17,9 @@ import 'login_bloc_test.mocks.dart';
 void main() {
   late MockLoginUseCase mockLoginUseCase;
   late LoginBloc bloc;
-late MockUserLocalStorageImpl userLocalStorageImpl;
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(() {
     mockLoginUseCase = MockLoginUseCase();
-    userLocalStorageImpl=MockUserLocalStorageImpl();
     bloc = LoginBloc(mockLoginUseCase);
     provideDummy<Result<LoginResponse>>(FailedResult("Dummy Error"));
   });
@@ -29,11 +27,11 @@ late MockUserLocalStorageImpl userLocalStorageImpl;
     email: "mariammohmed.25720@gmail.com",
     password: "Mariam257@",
   );
-  final successResponse = LoginResponse(
-    message: "success",
-    token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQwNDIyY2RkODkzN2UwNTczZWUwNmMiLCJpYXQiOjE3NTg1NTIyNzF9.PHzemBMcIvQJN2J0NWtzPU5q3JdGq1mXiISTq25qMpY",
-  );
+  // final successResponse = LoginResponse(
+  //   message: "success",
+  //   token:
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXIiOiI2OGQwNDIyY2RkODkzN2UwNTczZWUwNmMiLCJpYXQiOjE3NTg1NTIyNzF9.PHzemBMcIvQJN2J0NWtzPU5q3JdGq1mXiISTq25qMpY",
+  // );
   group("Login Event", () {
 
 

@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tracking_app/core/api_error/api_error.dart';
 import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/safe_api_call/safe_api_call.dart';
 import 'package:tracking_app/feature/profile/api/models/change_password_request.dart';
@@ -25,7 +27,12 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
    
       return SucessResult(driverEntity);
     } catch (e) {
-      return FailedResult(e.toString());
+      if(e is DioException){
+        return FailedResult(ServerFailure.fromDioError(e).errorMessage);
+      }else{
+        return FailedResult(e.toString());
+      }
+
     }
   }
   
@@ -36,7 +43,11 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
       return SucessResult(null);
     } catch (e) {
-      return FailedResult(e.toString());
+     if(e is DioException){
+       return FailedResult(ServerFailure.fromDioError(e).errorMessage);
+     }else{
+       return FailedResult(e.toString());
+     }
     }
   
   

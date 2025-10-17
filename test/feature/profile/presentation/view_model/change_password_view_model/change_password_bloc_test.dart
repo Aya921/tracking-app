@@ -17,7 +17,8 @@ void main() {
   late ChangePasswordBloc changePasswordBloc;
   setUp((){
     mockGetChangePasswordUseCase=MockChangePasswordUseCase();
-    changePasswordBloc=ChangePasswordBloc(mockGetChangePasswordUseCase);
+    changePasswordBloc=ChangePasswordBloc(
+        mockGetChangePasswordUseCase);
     provideDummy<Result<ChangePasswordResponse>>(
         FailedResult<ChangePasswordResponse>("Dummy Error")
     );

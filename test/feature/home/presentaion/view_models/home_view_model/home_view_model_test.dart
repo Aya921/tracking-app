@@ -779,16 +779,16 @@ void main() {
       blocTest<HomeViewModel, HomeStates>(
         "emits correct states when all succeed",
         build: () {
-        homeViewModel = HomeViewModel(
-            mockGetAllPendingOrdersUseCase,
-            mockSaveDataToLocalUseCase,
-            mockGetAllSavedOrdersUseCase,
-            mockDeleteLocalOrderUseCase,
-            mockStartOrderStateUseCase,
-            mockAddDataToRemoteUseCase,
-            mockGetDataFromRemoteUseCase,
-            mockUpdateOrderStateUseCase
-      
+          homeViewModel = HomeViewModel(
+              mockGetAllPendingOrdersUseCase,
+              mockSaveDataToLocalUseCase,
+              mockGetAllSavedOrdersUseCase,
+              mockDeleteLocalOrderUseCase,
+              mockStartOrderStateUseCase,
+              mockAddDataToRemoteUseCase,
+              mockGetDataFromRemoteUseCase,
+              mockUpdateOrderStateUseCase
+
           );
           final mockResult = SucessResult<void>(null);
           provideDummy<Result<void>>(mockResult);
@@ -822,9 +822,10 @@ void main() {
         },
         act: (bloc) => bloc.add(StartProgressEvnet(remoteDataEntity)),
         expect: () => [
-           const HomeStates(isLoading: true),
-           const HomeStates(addedToRemote: true),
-           const HomeStates(orderStarted: true, addedToRemote: true),
+          const HomeStates(isLoading: true),
+          const HomeStates(addedToRemote: true),
+          const HomeStates(orderStarted: true,
+              addedToRemote: true),
           HomeStates(
             isLoading: true,
             processCompleted: true,
@@ -833,22 +834,30 @@ void main() {
             orders: [order],
             remoteData: remoteDataEntity,
           ),
+          HomeStates(
+        isLoading: true,
+        processCompleted: false,
+        orderStarted: true,
+        addedToRemote: true,
+        orders: [order],
+        remoteData: remoteDataEntity,
+          )
         ],
       );
 
       blocTest<HomeViewModel, HomeStates>(
         "emits add to remote true(first level) then failed when updare order state then should emit add order to remote =true and start order =false with error message ",
         build: () {
-        homeViewModel = HomeViewModel(
-            mockGetAllPendingOrdersUseCase,
-            mockSaveDataToLocalUseCase,
-            mockGetAllSavedOrdersUseCase,
-            mockDeleteLocalOrderUseCase,
-            mockStartOrderStateUseCase,
-            mockAddDataToRemoteUseCase,
-            mockGetDataFromRemoteUseCase,
-            mockUpdateOrderStateUseCase
-      
+          homeViewModel = HomeViewModel(
+              mockGetAllPendingOrdersUseCase,
+              mockSaveDataToLocalUseCase,
+              mockGetAllSavedOrdersUseCase,
+              mockDeleteLocalOrderUseCase,
+              mockStartOrderStateUseCase,
+              mockAddDataToRemoteUseCase,
+              mockGetDataFromRemoteUseCase,
+              mockUpdateOrderStateUseCase
+
           );
           final mockResult = SucessResult<void>(null);
           provideDummy<Result<void>>(mockResult);
@@ -882,16 +891,16 @@ void main() {
       blocTest<HomeViewModel, HomeStates>(
         "emits add to remote true(first level) and startOrder in api end point=true (secondLevel) then failed when get pending order from api order state then should emit proccessComplete=false with error message",
         build: () {
-        homeViewModel = HomeViewModel(
-            mockGetAllPendingOrdersUseCase,
-            mockSaveDataToLocalUseCase,
-            mockGetAllSavedOrdersUseCase,
-            mockDeleteLocalOrderUseCase,
-            mockStartOrderStateUseCase,
-            mockAddDataToRemoteUseCase,
-            mockGetDataFromRemoteUseCase,
-            mockUpdateOrderStateUseCase
-      
+          homeViewModel = HomeViewModel(
+              mockGetAllPendingOrdersUseCase,
+              mockSaveDataToLocalUseCase,
+              mockGetAllSavedOrdersUseCase,
+              mockDeleteLocalOrderUseCase,
+              mockStartOrderStateUseCase,
+              mockAddDataToRemoteUseCase,
+              mockGetDataFromRemoteUseCase,
+              mockUpdateOrderStateUseCase
+
           );
           final mockResult = SucessResult<void>(null);
           provideDummy<Result<void>>(mockResult);
@@ -928,7 +937,7 @@ void main() {
             isLoading: false,
             processCompleted: false,
             errorMessage:
-                "Order started but refreshing orders failed. Please reload.",
+            "Order started but refreshing orders failed. Please reload.",
             orderStarted: true,
             addedToRemote: true,
           ),
@@ -938,16 +947,16 @@ void main() {
       blocTest<HomeViewModel, HomeStates>(
         "emits add to remote = false then it should emite add to remote=false only",
         build: () {
-        homeViewModel = HomeViewModel(
-            mockGetAllPendingOrdersUseCase,
-            mockSaveDataToLocalUseCase,
-            mockGetAllSavedOrdersUseCase,
-            mockDeleteLocalOrderUseCase,
-            mockStartOrderStateUseCase,
-            mockAddDataToRemoteUseCase,
-            mockGetDataFromRemoteUseCase,
-            mockUpdateOrderStateUseCase
-      
+          homeViewModel = HomeViewModel(
+              mockGetAllPendingOrdersUseCase,
+              mockSaveDataToLocalUseCase,
+              mockGetAllSavedOrdersUseCase,
+              mockDeleteLocalOrderUseCase,
+              mockStartOrderStateUseCase,
+              mockAddDataToRemoteUseCase,
+              mockGetDataFromRemoteUseCase,
+              mockUpdateOrderStateUseCase
+
           );
           final mockResult = FailedResult<void>("error");
           provideDummy<Result<void>>(mockResult);
