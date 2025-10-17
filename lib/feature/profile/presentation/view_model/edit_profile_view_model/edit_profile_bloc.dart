@@ -7,10 +7,8 @@ import 'package:tracking_app/core/api_result/result.dart';
 import 'package:tracking_app/core/constants/constants.dart';
 import 'package:tracking_app/core/request_state/request_state.dart';
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
-import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_vehicle_request.dart';
 import 'package:tracking_app/feature/profile/domain/entity/edit_profile_entity.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/edit_profile_use_case.dart';
-import 'package:tracking_app/feature/profile/domain/use_case/edit_vehicle_use_case.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/upload_driver_photo_use_case.dart';
 
 part 'edit_profile_event.dart';
@@ -20,39 +18,39 @@ part 'edit_profile_state.dart';
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   final UploadDriverPhotoUseCase _uploadDriverPhotoUseCase;
   final EditProfileUseCase _editProfileUseCase;
-  final EditVehicleUseCase _editVehicleUseCase;
+  //final EditVehicleUseCase _editVehicleUseCase;
   final ImagePicker _picker = ImagePicker();
   EditProfileBloc(this._uploadDriverPhotoUseCase,
-      this._editProfileUseCase,this._editVehicleUseCase)
+      this._editProfileUseCase)
     : super(const EditProfileState()) {
     on<UploadDriverPhotoEvent>(_uploadDriverPhoto);
     on<EditBtnSubmitEvent>(_editBtnSubmitEvent);
     on<PickImageEvent>(_onPickImage);
-    on<EditVehicleBtnSubmitEvent>(_editVehicle);
+    // on<EditVehicleBtnSubmitEvent>(_editVehicle);
   }
 
-  Future<void> _editVehicle(
-      EditVehicleBtnSubmitEvent event,
-      Emitter<EditProfileState> emit,
-      ) async {
-    emit(state.copyWith(editVehicleRequestState: RequestState.loading));
-    final result = await _editVehicleUseCase.editVehicle(
-        event.request);
-
-    switch (result) {
-
-      case SucessResult<EditProfileEntity>():
-    emit(state.copyWith(
-      editVehicleRequestState: RequestState.success,
-      editedVehicleInfo: result.sucessResult
-    ));
-      case FailedResult<EditProfileEntity>():
-        emit(state.copyWith(
-            editVehicleRequestState: RequestState.error,
-         editVehicleErrorMessage: result.errorMessage
-        ));
-    }
-  }
+  // Future<void> _editVehicle(
+  //     EditVehicleBtnSubmitEvent event,
+  //     Emitter<EditProfileState> emit,
+  //     ) async {
+  //   emit(state.copyWith(editVehicleRequestState: RequestState.loading));
+  //   final result = await _editVehicleUseCase.editVehicle(
+  //       event.request);
+  //
+  //   switch (result) {
+  //
+  //     case SucessResult<EditProfileEntity>():
+  //   emit(state.copyWith(
+  //     editVehicleRequestState: RequestState.success,
+  //     editedVehicleInfo: result.sucessResult
+  //   ));
+  //     case FailedResult<EditProfileEntity>():
+  //       emit(state.copyWith(
+  //           editVehicleRequestState: RequestState.error,
+  //        editVehicleErrorMessage: result.errorMessage
+  //       ));
+  //   }
+  // }
   Future<void> _uploadDriverPhoto(
     UploadDriverPhotoEvent event,
     Emitter<EditProfileState> emit,

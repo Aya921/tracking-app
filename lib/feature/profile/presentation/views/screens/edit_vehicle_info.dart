@@ -17,7 +17,6 @@ import 'package:tracking_app/feature/auth/presentation/view/widgets/custom_txt_f
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_bloc.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_event.dart';
 import 'package:tracking_app/feature/auth/presentation/view_model/apply_view_model/apply_states.dart';
-import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_vehicle_request.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
 import 'package:tracking_app/feature/profile/presentation/views/widgets/load_image.dart';
 
@@ -189,14 +188,12 @@ class _EditVehicleInfoState extends State<EditVehicleInfo> {
                     child: CustomBtn(
                       bg: AppColors.midGray,
                       onPressed: () {
-                        final request = EditVehicleRequest(
-                          vehicleNumber: vehicleNumber.text,
-                          vehicleType: vehicleType,
-                          vehicleLicense: vehicleLicense!.path
-                        );
-                        context.read<EditProfileBloc>().add(
-                         EditVehicleBtnSubmitEvent(request)
-                        );
+                        // final request = EditVehicleRequest(
+                        //   vehicleNumber: vehicleNumber.text,
+                        //   vehicleType: vehicleType,
+                        //   vehicleLicense: vehicleLicense!.path
+                        // );
+
                       },
                       txt: context.loc.update,
                     ),

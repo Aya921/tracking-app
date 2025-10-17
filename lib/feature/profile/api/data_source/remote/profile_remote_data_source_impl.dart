@@ -9,7 +9,6 @@ import 'package:tracking_app/feature/profile/api/models/change_password_response
 import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_profile_request.dart';
 import 'package:tracking_app/core/common/driver_entity/driver_entity.dart';
 import 'package:tracking_app/feature/profile/api/client/profile_api_services.dart';
-import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edit_vehicle_request.dart';
 import 'package:tracking_app/feature/profile/data/data_source/profile_remote_data_source.dart';
 import 'package:tracking_app/feature/profile/domain/entity/edit_profile_entity.dart';
 
@@ -78,14 +77,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   
   }
 
-  @override
-  Future<Result<EditProfileEntity>> editVehicle(EditVehicleRequest request) {
-  return safeCall(()async{
-    final response=await _profileApiServices.editVehicle(request);
-    return response.toEntity();
-  });
 
-  }
  
 }
 

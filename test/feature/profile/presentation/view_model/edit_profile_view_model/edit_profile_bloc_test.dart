@@ -9,30 +9,28 @@ import 'package:tracking_app/feature/profile/api/models/edit_profile/request/edi
 import 'package:tracking_app/feature/profile/domain/entity/driver_info_entity.dart';
 import 'package:tracking_app/feature/profile/domain/entity/edit_profile_entity.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/edit_profile_use_case.dart';
-import 'package:tracking_app/feature/profile/domain/use_case/edit_vehicle_use_case.dart';
 import 'package:tracking_app/feature/profile/domain/use_case/upload_driver_photo_use_case.dart';
 import 'package:tracking_app/feature/profile/presentation/view_model/edit_profile_view_model/edit_profile_bloc.dart';
 
 import 'edit_profile_bloc_test.mocks.dart';
 
-@GenerateMocks([UploadDriverPhotoUseCase,EditProfileUseCase,EditVehicleUseCase])
+@GenerateMocks([UploadDriverPhotoUseCase,EditProfileUseCase])
 void main() {
   provideDummy<Result<EditProfileEntity>>(FailedResult("Dummy Error"));
   provideDummy<Result<String>>(SucessResult<String>("success"));
   late MockUploadDriverPhotoUseCase mockUploadDriverPhotoUseCase;
   late MockEditProfileUseCase mockEditProfileUseCase;
-  late MockEditVehicleUseCase mockEditVehicleUseCase;
   late EditProfileBloc bloc;
 
   setUp(() {
     mockUploadDriverPhotoUseCase = MockUploadDriverPhotoUseCase();
     mockEditProfileUseCase = MockEditProfileUseCase();
-    mockEditVehicleUseCase = MockEditVehicleUseCase();
+
 
     bloc = EditProfileBloc(
       mockUploadDriverPhotoUseCase,
       mockEditProfileUseCase,
-      mockEditVehicleUseCase,
+
     );
   });
 

@@ -17,13 +17,13 @@ class EditBtnSubmitEvent extends EditProfileEvent{
   @override
   List<Object?> get props => [request];
 }
-class EditVehicleBtnSubmitEvent extends EditProfileEvent{
-  final EditVehicleRequest request;
-  EditVehicleBtnSubmitEvent(this.request);
-
-  @override
-  List<Object?> get props => [request];
-}
+// class EditVehicleBtnSubmitEvent extends EditProfileEvent{
+//   final EditVehicleRequest request;
+//   EditVehicleBtnSubmitEvent(this.request);
+//
+//   @override
+//   List<Object?> get props => [request];
+// }
 
 class PickImageEvent extends EditProfileEvent {
   final ImageSource source;
